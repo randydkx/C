@@ -61,9 +61,9 @@ int main(){
     string s1 = "what's your name?my name is TOM, HOwdo you do ? Fine , thanks.";
     cout << "your 第一个出现的位置 " << s1.find("your") << endl;    
     // 从指定位置开始查找，如果查找失败将会返回string::npos
-    cout << s1.find("your",16) << endl;
+    cout << "查找失败时find的返回值：" << s1.find("your",16) << endl;
     assert(s1.find("your",16) == string::npos);
-    cout << s1.find_first_of("your") << endl;
+    cout << "查找成功时string的返回值： " << s1.find_first_of("your") << endl;
 
     /**
      * @brief 字符串删除
@@ -104,5 +104,10 @@ int main(){
     cout << "交换之前: " << string1 << " " << string2 << endl;
     string1.swap(string2);
     cout << "交换之后： " << string1 << " " << string2 << endl;
+    
+    int int1 = 10, int2 = 20;
+    swap( int1 ,int2 );
+    cout << "交换之后的int值：" << int1 << " " << int2 <<endl;
+
     
 }
