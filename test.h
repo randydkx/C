@@ -4,3 +4,4 @@
 
 struct node;
 void function(int a);
+bool function_for_find_if();

@@ -2,12 +2,13 @@
 #include <algorithm>
 #include <string>
 #include<vector>
-// 链表
 #include<list>
 #include<map>
 #include<set>
+#include<iterator>
 #include<iomanip>
 #include<unordered_map>
+#include<queue> 
 #include"test.h"
 
 using namespace std;
@@ -22,6 +23,9 @@ struct node{
         return this->x < a.x;
     }
 };
+bool cmp(int& x,int& y){
+    return x > y;
+}
 
 
 int main()
@@ -178,4 +182,43 @@ int main()
     }
     cout << set2.size() << endl;
 
+    // 使用greater实现最小堆
+    priority_queue<int,vector<int>,greater<int> > q;
+    q.push(1);
+    q.push(-1);
+    cout<<"首元素："<<q.top()<<endl;
+
+    vector<int> v6 = {1,2,3,4,5};
+
+    sort(v6.begin(),v6.end(),cmp);
+    for (int i=0;i<v6.size();i++){
+        cout<<v6[i]<<endl;
+    }
+
+    // 使用vector测试查找功能
+    vector<char> forsearch={'1','2','3','4'};
+    
+    vector<char>::iterator it = find(forsearch.begin(),forsearch.end(),'1');
+    if(it != forsearch.end()){
+        cout << *it << endl;
+    }
+    // 排序，将最小的四个元素移到开头的位置并且将其排序，排序的复杂度是O(n*log(m)),m:头部有序的长度
+    int to_sort[] = {9,8,7,6,5,4,3,2,1,0};
+    vector<int> to_sort_vector;
+    for(int i=0;i<10;i++){
+        to_sort_vector.push_back(to_sort[i]);
+    }
+    partial_sort(to_sort_vector.begin(),to_sort_vector.begin()+4,to_sort_vector.end());
+    for(auto &x : to_sort_vector){
+        printf("%d ",x);
+    }
+
+    cout<<endl;
+
+    // 使用nth_element将第n大的元素移动到第n的位置，保证第n个元素之前的比n小，之后得都比n大
+    // 使用cmp比较器使得在n之前的更大
+    nth_element(to_sort_vector.begin(),to_sort_vector.begin()+6,to_sort_vector.end(),cmp);
+    for(auto x: to_sort_vector){
+        cout<<x<<" ";
+    }
 }
