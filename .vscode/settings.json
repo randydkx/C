@@ -8,7 +8,8 @@
         "utility": "cpp",
         "vector": "cpp",
         "set": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "list": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",

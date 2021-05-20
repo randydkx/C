@@ -1,0 +1,30 @@
+mktexpk --mfmode / --bdpi 600 --mag 1+123/600 --dpi 723 gbk54
+mktexpk --mfmode / --bdpi 600 --mag 1+123/600 --dpi 723 gbk54
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi/BI
+mktextfm KaiTi
+mktextfm KaiTi/B
+mktextfm KaiTi
+mktextfm KaiTi/I
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm KaiTi
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong/BI
+mktextfm Fangsong
+mktextfm Fangsong/B
+mktextfm Fangsong
+mktextfm Fangsong/I
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong
+mktextfm Fangsong

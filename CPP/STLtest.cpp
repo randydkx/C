@@ -172,7 +172,8 @@ int main()
     set1.insert({1,2,34});
     // insert的返回值第一个表示的是插入数据的迭代器，第二个表示的是是否插入成功
     // 单重集合可能会插入失败（有相同的键）
-    auto result =  set1.insert(234);
+    // 或者在c++11中使用auto关键字
+    pair<set<int>::iterator,bool> result =  set1.insert(234);
     
     if ( set1.insert(12).second ){
         cout << "成功插入一条数据" << endl;
