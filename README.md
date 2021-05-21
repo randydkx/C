@@ -1,6 +1,7 @@
 ## 文件目录结构如下所示  
 其中CPP为测试C++代码，HPC_P{i}为高性能计算作业，使用latex编辑  
 其次就是一些latex的参考文档  
+```
 .  
 ├── CPP  
 │   ├── C++STL-base-and-application  
@@ -52,5 +53,5 @@
 │   ├── amsthdoc（没什么用）.pdf  
 │   └── 孙一凡老师LaTeX教学.rar  
 └── README.md  
-  
+```
 10 directories, 57 files  
