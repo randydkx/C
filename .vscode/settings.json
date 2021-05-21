@@ -13,6 +13,7 @@
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -std=c++17 && $dir$fileNameWithoutExt",
+        // "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -std=c++11 && $dir$fileNameWithoutExt",
+        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && $dir$fileNameWithoutExt",
     }
 }
