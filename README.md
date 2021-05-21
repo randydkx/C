@@ -4,6 +4,7 @@
 │   ├── C++STL-base-and-application.cpp
 │   ├── Demo1
 │   │   ├── CMakeCache.txt
+│   │   ├── CMakeFiles
 │   │   ├── CMakeLists.txt
 │   │   ├── Demo
 │   │   ├── Makefile
@@ -24,8 +25,6 @@
 │   ├── test.h
 │   └── test.out.dSYM
 │       └── Contents
-│           ├── Info.plist
-│           └── Resources
 ├── HPC_P1
 │   ├── document.pdf
 │   ├── document.tex
@@ -38,11 +37,11 @@
 │   ├── result3.png
 │   ├── result4.png
 │   └── result5.png
-├── Latex�\233��\205�
-│   ├── A\ Survey\ of\ Free\ Math\ Fonts\ for\ TEX\ and\ LATEX.pdf
+├── Latex相关
+│   ├── A Survey of Free Math Fonts for TEX and LATEX.pdf
 │   ├── Compain_HigherMath.pdf
 │   ├── LaTeXMathematicalSymbols.pdf
-│   ├── Latex中�\226\207使�\224��\211\213�\206\214
+│   ├── Latex中文使用手册
 │   │   ├── appen1.pdf
 │   │   ├── appen2.pdf
 │   │   ├── appen3.pdf
@@ -57,14 +56,14 @@
 │   │   ├── chap7.pdf
 │   │   ├── chap8.pdf
 │   │   └── chap9.pdf
-│   ├── Latex中�\226\207使�\224��\211\213�\206\214.rar
+│   ├── Latex中文使用手册.rar
 │   ├── MathintoLaTex.pdf
 │   ├── Mathmode.pdf
-│   ├── Mathsymbols_TEX\ Cookbook.pdf
-│   ├── The\ LaTeX\ Mathematics\ Companion.pdf
+│   ├── Mathsymbols_TEX Cookbook.pdf
+│   ├── The LaTeX Mathematics Companion.pdf
 │   ├── amsldoc.pdf
-│   ├── amsthdoc�\210没�\200�\210�\224��\211.pdf
-│   └── �\231�\200�\207��\200\201�\210LaTeX�\225\231学.rar
+│   ├── amsthdoc（没什么用）.pdf
+│   └── 孙一凡老师LaTeX教学.rar
 └── README.md
 
 10 directories, 57 files
