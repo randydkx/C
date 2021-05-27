@@ -6,7 +6,7 @@ void Hello(void);
 
 int main(int argc, char* argv[]) {
     /* Get number of thread from command line */
-    int thread_count = 10;
+    int thread_count = strtol(argv[1],NULL,10);
 
 # pragma omp parallel num_threads(thread_count)
     Hello();
