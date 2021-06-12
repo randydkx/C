@@ -2,6 +2,7 @@
 build/
 Python/深度学习入门与实践/picture
 Python/深度学习入门与实践/model
+Python/深度学习入门与实践/data
 
 # CMake files
 CMakeLists.txt.user
