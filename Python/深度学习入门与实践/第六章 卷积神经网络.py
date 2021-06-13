@@ -1,6 +1,7 @@
 import enum
 from operator import le
 from os import EX_UNAVAILABLE, initgroups
+from hiddenlayer import canvas
 import numpy as np
 from numpy.testing._private.utils import break_cycles
 import pandas as pd
@@ -363,3 +364,79 @@ val_data_loader = Data.DataLoader(val_data,batch_size=32,shuffle=True)
 
 print("验证集样本数：",len(train_data.targets))
 print("测试集样本数量：",len(val_data.targets))
+
+# 将一个batch数据可视化
+
+# for step ,(b_x,b_y) in enumerate(train_data_loader):
+#     if step > 0:
+#         break
+#     mean = np.array([0.485,0.456,0.406])
+#     std = np.array([0.229,0.224,0.225])
+#     plt.figure(figsize=(12,6))
+#     for index in range(len(b_y)):
+#         plt.subplot(4,8,index+1)
+#         image = b_x[index,:,:,:].numpy().transpose((1,2,0))
+#         image = image * std + mean
+#         # 将小于等于0的设置成0，大于等于1的设置成1
+#         image = np.clip(image,0,1)
+#         plt.imshow(image)
+#         plt.title(b_y[index].data.numpy())
+#         plt.axis("off")
+#     plt.subplots_adjust(hspace=0.3)
+#     plt.show()
+
+import hiddenlayer as hl
+# 微调网络
+optimizer = torch.optim.Adam(myvggCNN.parameters(),lr=0.003)
+loss_func = nn.CrossEntropyLoss()
+history1 = hl.History()
+canvas1 = hl.Canvas()
+num_epochs = 1
+for epoch in range(num_epochs):
+        print('Epoch {}/{}'.format(epoch,num_epochs - 1))
+        print('-'*10)
+        #  每个epoch有两个训练阶段
+        train_loss_epoch = 0.0
+        train_corrects = 0
+        # 用于验证的数据，分别是验证集上的误差验证集上的正确数量和验证集的总数
+        val_loss_epoch = 0.0
+        val_corrects = 0
+        myvggCNN.train()
+        # 每个epoch对所有的batch进行训练或者测试
+        for step,(t_x,t_y) in enumerate(train_data_loader):
+            output = myvggCNN(t_x)
+            # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
+            pre_lab = torch.argmax(output,1)
+            loss = loss_func(output,t_y)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            train_loss_epoch += loss.item() * t_x.size(0)
+            train_corrects += torch.sum(pre_lab == t_y.data)
+        
+        # 计算一个epoch的训练损失
+        train_loss = train_loss_epoch / len(train_data.targets)
+        train_acc = train_corrects.double() / len(train_data.targets)
+
+        # model进入评估模式    
+        myvggCNN.eval()
+        for step,(val_x,val_y) in enumerate(val_data_loader):
+            output = myvggCNN(val_x)
+            # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
+            pre_lab = torch.argmax(output,1)
+            loss = loss_func(output,val_y)
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            val_loss_epoch += loss.item() * val_x.size(0)
+            val_corrects += torch.sum(pre_lab == val_y.data)
+        
+        # 计算一个epoch在验证集上的精度
+        val_loss = val_loss_epoch / len(val_data.targets)
+        val_acc = val_corrects.double() / len(val_data.targets)
+        history1.log(epoch,train_loss = train_loss,val_loss = val_loss,train_acc = train_acc.item(),val_acc = val_acc.item())
+        # 可视化网络的训练过程
+        with canvas1 : 
+            canvas1.draw_plot([history1['train_loss'],history1['val_loss']])
+            canvas1.draw_plot([history1['train_acc'],history1['val_acc']])
+            
