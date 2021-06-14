@@ -2,7 +2,9 @@ import enum
 from operator import le
 from os import EX_UNAVAILABLE, initgroups
 from hiddenlayer import canvas
+from nltk.corpus.reader import wordlist
 import numpy as np
+from numpy.core.numeric import Inf
 from numpy.testing._private.utils import break_cycles
 import pandas as pd
 from sklearn.metrics import accuracy_score,confusion_matrix,classification_report
@@ -387,56 +389,146 @@ print("测试集样本数量：",len(val_data.targets))
 
 import hiddenlayer as hl
 # 微调网络
-optimizer = torch.optim.Adam(myvggCNN.parameters(),lr=0.003)
-loss_func = nn.CrossEntropyLoss()
-history1 = hl.History()
-canvas1 = hl.Canvas()
-num_epochs = 1
-for epoch in range(num_epochs):
-        print('Epoch {}/{}'.format(epoch,num_epochs - 1))
-        print('-'*10)
-        #  每个epoch有两个训练阶段
-        train_loss_epoch = 0.0
-        train_corrects = 0
-        # 用于验证的数据，分别是验证集上的误差验证集上的正确数量和验证集的总数
-        val_loss_epoch = 0.0
-        val_corrects = 0
-        myvggCNN.train()
-        # 每个epoch对所有的batch进行训练或者测试
-        for step,(t_x,t_y) in enumerate(train_data_loader):
-            output = myvggCNN(t_x)
-            # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
-            pre_lab = torch.argmax(output,1)
-            loss = loss_func(output,t_y)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            train_loss_epoch += loss.item() * t_x.size(0)
-            train_corrects += torch.sum(pre_lab == t_y.data)
+# optimizer = torch.optim.Adam(myvggCNN.parameters(),lr=0.003)
+# loss_func = nn.CrossEntropyLoss()
+# history1 = hl.History()
+# canvas1 = hl.Canvas()
+# num_epochs = 1
+# for epoch in range(num_epochs):
+#         print('Epoch {}/{}'.format(epoch,num_epochs - 1))
+#         print('-'*10)
+#         #  每个epoch有两个训练阶段
+#         train_loss_epoch = 0.0
+#         train_corrects = 0
+#         # 用于验证的数据，分别是验证集上的误差验证集上的正确数量和验证集的总数
+#         val_loss_epoch = 0.0
+#         val_corrects = 0
+#         myvggCNN.train()
+#         # 每个epoch对所有的batch进行训练或者测试
+#         for step,(t_x,t_y) in enumerate(train_data_loader):
+#             output = myvggCNN(t_x)
+#             # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
+#             pre_lab = torch.argmax(output,1)
+#             loss = loss_func(output,t_y)
+#             optimizer.zero_grad()
+#             loss.backward()
+#             optimizer.step()
+#             train_loss_epoch += loss.item() * t_x.size(0)
+#             train_corrects += torch.sum(pre_lab == t_y.data)
         
-        # 计算一个epoch的训练损失
-        train_loss = train_loss_epoch / len(train_data.targets)
-        train_acc = train_corrects.double() / len(train_data.targets)
+#         # 计算一个epoch的训练损失
+#         train_loss = train_loss_epoch / len(train_data.targets)
+#         train_acc = train_corrects.double() / len(train_data.targets)
 
-        # model进入评估模式    
-        myvggCNN.eval()
-        for step,(val_x,val_y) in enumerate(val_data_loader):
-            output = myvggCNN(val_x)
-            # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
-            pre_lab = torch.argmax(output,1)
-            loss = loss_func(output,val_y)
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            val_loss_epoch += loss.item() * val_x.size(0)
-            val_corrects += torch.sum(pre_lab == val_y.data)
+#         # model进入评估模式    
+#         myvggCNN.eval()
+#         for step,(val_x,val_y) in enumerate(val_data_loader):
+#             output = myvggCNN(val_x)
+#             # 按照每行根据输出计算最大的一个值对应的索引，即是函数的预测类别
+#             pre_lab = torch.argmax(output,1)
+#             loss = loss_func(output,val_y)
+#             optimizer.zero_grad()
+#             loss.backward()
+#             optimizer.step()
+#             val_loss_epoch += loss.item() * val_x.size(0)
+#             val_corrects += torch.sum(pre_lab == val_y.data)
         
-        # 计算一个epoch在验证集上的精度
-        val_loss = val_loss_epoch / len(val_data.targets)
-        val_acc = val_corrects.double() / len(val_data.targets)
-        history1.log(epoch,train_loss = train_loss,val_loss = val_loss,train_acc = train_acc.item(),val_acc = val_acc.item())
-        # 可视化网络的训练过程
-        with canvas1 : 
-            canvas1.draw_plot([history1['train_loss'],history1['val_loss']])
-            canvas1.draw_plot([history1['train_acc'],history1['val_acc']])
-            
+#         # 计算一个epoch在验证集上的精度
+#         val_loss = val_loss_epoch / len(val_data.targets)
+#         val_acc = val_corrects.double() / len(val_data.targets)
+#         history1.log(epoch,train_loss = train_loss,val_loss = val_loss,train_acc = train_acc.item(),val_acc = val_acc.item())
+#         # 可视化网络的训练过程
+#         with canvas1 : 
+#             canvas1.draw_plot([history1['train_loss'],history1['val_loss']])
+#             canvas1.draw_plot([history1['train_acc'],history1['val_acc']])
+
+
+# 卷积神经网络进行情感分析
+import re
+import string
+import nltk
+from torchtext import data
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+from wordcloud import WordCloud
+from torchtext.vocab import Vectors,GloVe
+data = pd.read_csv("data/imdb.csv")
+print(data.head())
+print(data.columns)
+test_data = data[data['type'] == 'test']
+test_text = np.array(test_data['review'])
+test_label = np.where(test_data['label'].values=='pos',1,0)
+train_data = data[data['type'] == 'test']
+train_text = np.array(train_data['review'])
+train_label = np.where(train_data['label'].values=='pos',1,0)
+print((len(train_text),len(train_label)))
+print((len(test_text),len(test_label)))
+
+# 对文本预处理，去除数字、标点、多余空格以及将字符全部变成小写
+def text_preprocess(text_data):
+    text_pre = []
+    for text1 in text_data:
+        # 去除指定字符<br/><br/>
+        text1 = re.sub("<br /><br />"," ",text1)
+        text1 = text1.lower()
+        text1 = re.sub("\d+","",text1)
+        text1 = text1.translate(str.maketrans("","",string.punctuation.replace("'","")))
+        text1 = text1.strip()
+        text_pre.append(text1)
+    return np.array(text_pre)
+train_text_pre = text_preprocess(train_text)
+test_text_pre = text_preprocess(test_text)
+
+# 删除文本中的停用词
+def stop_stem_word(datalist,stop_words):
+    datalist_pre = []
+    for text in datalist:
+        text_words = word_tokenize(text)
+        text_words = [word for word in text_words if not word in stop_words]
+        # 删除带有“‘”的词,把不含’的词放入表中
+        text_words = [word for word in text_words if len(re.findall("'",word))==0]
+        datalist_pre.append(text_words)
+    return np.array(datalist_pre)
+
+stop_words = stopwords.words("english")
+stop_words = set(stop_words)
+train_text_pre2 = stop_stem_word(train_text_pre,stop_words)
+test_text_pre2 = stop_stem_word(test_text_pre,stop_words)
+print(train_text_pre[10000])
+print("="*20)
+print(train_text_pre2[10000])
+
+# 将处理好的文本保存在csv文件中
+texts = [" ".join(words) for words in train_text_pre2]
+traindatasave = pd.DataFrame({"text":texts,"label":train_label})
+texts = [" ".join(words) for words in test_text_pre2]
+testdatasave = pd.DataFrame({"text":texts,"label":test_label})
+# traindatasave.to_csv("data/imdb_train.csv",index=False)
+# testdatasave.to_csv("data/imdb_test.csv",index=False)
+# 将训练数据转化成Dataframe
+traindata = pd.DataFrame({"train_text":train_text,"train_word":train_text_pre2,"train_label":train_label})
+train_word_num = [len(text) for text in train_text_pre2]
+traindata['train_word_num'] = train_word_num
+plt.figure(figsize=(8,5))
+plt.hist(train_word_num,bins = 100)
+plt.xlabel("number")
+plt.ylabel("count")
+# plt.show()
+
+# 生成词云
+plt.figure(figsize=(16,10))
+for type in np.unique(train_label):
+    text = np.array(traindata.train_word[traindata.train_label == type])
+    text = " ".join(np.concatenate(text))
+    plt.subplot(1,2,type+1)
+    wordcod = WordCloud(margin=5,width=1800,height=1000,max_words=500,min_font_size=5,background_color='white',max_font_size=250)
+    wordcod.generate_from_text(text)
+    plt.imshow(wordcod)
+    plt.axis("off")
+    if type == 0:
+        plt.title("negative")
+    else:
+        plt.title("positive")
+    plt.subplots_adjust(hspace=0.5)
+plt.show()
