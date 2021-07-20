@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    
+</head>
+
+<body>
+    <div id="data" name="data" style="height: 400px; width: 600px;"></div>
+</body>
+<script>
+    $(document).ready(function () {
+        setInterval("startRequest()", 1000);
+    });
+
+    function startRequest() {
+        $("#date").text((new Date()).toString());
+    }
+</script>
+</html>

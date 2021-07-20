@@ -3,7 +3,12 @@
 {% else %}
     Hello,Stranger!
 {%end if%}
-<html>
-<head>
-</head>
-</html>
+<ul>
+    {% for comment in comments%}
+        <li>{{comment}}</li>
+</ul>
+
+{% comment %} 使用宏 {% endcomment %}
+{% macro render_comment(comment)%}
+<li>{{comment}}</li>
+{%endmacro%}

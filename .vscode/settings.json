@@ -16,5 +16,5 @@
 
         "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && $dir$fileNameWithoutExt",
     },
-    "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python"
+    "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
 }

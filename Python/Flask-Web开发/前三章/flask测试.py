@@ -18,5 +18,10 @@ def function(name):
 def render(name):
     return render_template('index.html',name=name)
 
+# 自定义错误页面
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'),404
+
 if __name__ == '__main__':
     app.run()
