@@ -65,7 +65,7 @@
 
 第二类问题就是Inference问题，大致可以分为Decoding，Probability of Evidence，Filtering，Smoothing和Prediction五类问题。这里中Hidden Markov Model 05 Conclusion我们有非常详细的描述。详情可以关注Hidden Markov Model。
 
-\section{Kalman Filtering: Linear Gaussian Model}
+\section{Kalman Filtering: Linear Gaussian Model / linear Dynamic System}
 Filtering问题就是求$P(z_t|x_1,x_2,\cdots,x_t)$，实际上就是一个Marginal Posterior问题。对于Linear关系，Linear主要反映在相邻时刻的两个状态之间的转移关系，当前时刻的隐变量状态和观测状态之间的关系。描述如下所示：
 \begin{equation}
     \begin{split}

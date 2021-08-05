@@ -586,10 +586,10 @@ $$
 在本小节中，我们主要计算了三个推断问题，$P(v|h)$，$P(h|v)$，$P(v)$。计算结果如下所示：
 \begin{equation}
     \begin{split}
-    & P(v|h) = \prod_{l=1}^m P(v_l|h) = \left( \sigma\left(\sum_{j=1}^m w_{jl}h_j + \alpha_l\right) \right)^k\left(1-\sigma\left(\sum_{j=1}^m w_{jl}h_j + \alpha_l\right)\right)^{n-k} \\
+    & P(v|h) = \prod_{l=1}^m P(h_l|v) = \left( \sigma\left(\sum_{j=1}^m w_{jl}h_j + \alpha_l\right) \right)^k\left(1-\sigma\left(\sum_{j=1}^m w_{jl}h_j + \alpha_l\right)\right)^{n-k} \\
     & P(h|v) = \prod_{l=1}^m P(h_l|v) = \left( \sigma\left(\sum_{j=1}^n w_{lj}v_i + \beta_l\right) \right)^k\left(1-\sigma\left(\sum_{j=1}^n w_{lj}v_i + \beta_l\right)\right)^{m-k} \\
     & P(v)
-    =  \frac{1}{Z} \exp\left(\alpha^T v + \sum_{i=1}^m \mathrm{softplus} ( w_i^{T}v+\beta_i) \right) \\
+    =  \frac{1}{Z} \exp\left(\alpha^T v + \sum_{i=1}^m \mathrm{softplus} ( w_iv+\beta_i) \right) \\
     \end{split}
 \end{equation}
 

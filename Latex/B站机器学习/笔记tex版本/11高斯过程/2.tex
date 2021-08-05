@@ -52,7 +52,7 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
 \section{Recall Bayesian Linear Regression}
 首先，我们需要回顾一下Bayesian Linear Regression。
 
-1. 首先对于一个，参数符合的分布，$p(w|Data) = \mathcal{N}(w|\mu_w,\Sigma_w)$。其中，$\mu_w = \sigma^{-2}A^{-1}X^TY$，$\Sigma_w = A^{-1}$，其中，$A=\sigma^{-2}X^TX+\Sigma_p^{-1}$。从这一步我们就成功的得到了在已知Data的情况下，未知参数的分布形式。
+1. 首先对于一个贝叶斯线性回归来说，参数符合的分布$p(w|Data) = \mathcal{N}(w|\mu_w,\Sigma_w)$。其中，$\mu_w = \sigma^{-2}A^{-1}X^TY$，$\Sigma_w = A^{-1}$，其中，$A=\sigma^{-2}X^TX+\Sigma_p^{-1}$。从这一步我们就成功的得到了在已知Data的情况下，{\color{red}未知参数的分布形式}。
 
 2. 在给定一个新的未知数向量$X^\ast$的情况下，我们可以首先利用noise-free形式：$f(x) = w^Tx = x^Tw$，然后再求得noise形式：$y=f(x)+\epsilon$，而$\epsilon \sim \mathcal{N}(0,\sigma^2)$。来获得我们想要的prediction值。这样，我们就可以得到：
 \begin{gather}
@@ -77,13 +77,13 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
     p(f(x^\ast)|X,Y,x^\ast) \sim \mathcal{N}(\sigma^{-2}{\phi(x^\ast)}^T(A^{-1}\Phi(X)^TY),{\phi(x^\ast)}^TA^{-1}\phi(x^\ast))
 \end{equation}
 
-而其中，$A=\sigma^{-2}\Phi(X)^T\Phi(X) + \Sigma_p^{-1}$。但是，很快我们又将面临一个新的问题，也就是$A^{-1}$应该如何计算呢？这里我们需要使用到一个公式为，{\color{red} Woodbury Formula公式：
+而其中，$A=\sigma^{-2}\Phi(X)^T\Phi(X) + \Sigma_p^{-1}$。但是，很快我们又将面临一个新的问题，也就是$A^{-1}$应该如何计算呢？这里我们需要使用到一个公式为，{\color{red} Woodbury Formula公式（在矩阵含有一定结构时加速矩阵求逆）：
 \begin{equation}
     (A+UCV)^{-1} = A^{-1}-A^{-1}U(C^{-1}+VA^{-1}U)^{-1}VA^{-1}
 \end{equation}
 }
 
-所以，
+也可以通过如下变换的形式计算$A^{-1}$：
 \begin{gather}
     \nonumber A=\sigma^{-2}\Phi(X)^T\Phi(X) + \Sigma_p^{-1} \\
     A\Sigma_p=\sigma^{-2}\Phi(X)^T\Phi(X)\Sigma_p + I \\
@@ -96,7 +96,7 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
     \sigma^{-2}\phi(x^\ast)A^{-1}\Phi(X)^TY = \phi(x^\ast)\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y 
 \end{equation}
 
-而这个$\sigma^{-2}\phi(x^\ast)A^{-1}\Phi(X)^TY$正好就是$p(f(x^\ast)|X,Y,x^\ast)$'s Expectation。而这里的$\Sigma_p=p(w)$是一个先验$\sim \mathcal{N}(0,\Sigma_p)$，而$\sigma^2$为先验分布的噪声，$X^\ast$是一个new input，而{\color{red} $K = \Phi\Sigma_p\Phi^T$}。所以，使用类似的方法我们可以得到，$p(f(x^\ast)|X,Y,x^\ast)$'s Covarience为：$\phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast)$。所以：
+而这个$\sigma^{-2}\phi(x^\ast)A^{-1}\Phi(X)^TY$正好就是$p(f(x^\ast)|X,Y,x^\ast)$的期望（通过贝叶斯回归类比出来的正态分布中的期望）。而这里的$\Sigma_p=p(w)$是一个先验$\sim \mathcal{N}(0,\Sigma_p)$，而$\sigma^2$为先验分布的噪声，$X^\ast$是一个new input，而{\color{red} $K = \Phi\Sigma_p\Phi^T$}。所以，使用类似的方法我们可以得到，$p(f(x^\ast)|X,Y,x^\ast)$'s Covarience为：$\phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast)$。所以：
 \begin{equation}
     p(f(x^\ast)|X,Y,x^\ast) \sim \mathcal{N}(\phi(x^\ast)\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y , \phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast) )
 \end{equation}
@@ -108,7 +108,7 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
     \Phi\Sigma_p\phi(x^\ast) 
 \end{equation}
 
-我们再来谢谢这里的这个$\Phi$是个什么东西？
+这里的$\Phi_{N\times q}$表示的是经过变换之后的数据矩阵：
 \begin{equation}
     \Phi_{N\times q} = (\phi(x_1),\phi(x_2),\cdots,\phi(x_N))^T_{N\times q}
 \end{equation}
