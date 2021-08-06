@@ -40,7 +40,7 @@
 
 % \end{enumerate}
 
-\title{Linear Classification 06}
+\title{Linear Classification 06 Naive Bayes}
 \author{Chen Gong}
 \date{04 November 2019}
 
@@ -69,8 +69,8 @@
 朴素贝叶斯算法的优化目的即为：
 \begin{equation}
     \begin{split}
-        \hat{y} = & argmax_{y\in \{0,1\}}p(y|x) \\
-        = & argmax_{y\in \{0,1\}}p(x|y)p(y) \\
+        \hat{y} = & \arg\max_{y\in \{0,1\}}p(y|x) \\
+        = & \arg\max_{y\in \{0,1\}}p(x|y)p(y) \\
     \end{split}
 \end{equation}
 
@@ -79,7 +79,7 @@
     p(x|y) = \prod_{i=1}^Np(x_i|y)
 \end{equation}
 
-对于$p(y)$这个先验概率密度函数的确定，对于二分类问题，也就是$y\sim$Bernoulli Distribution，而对于多分类问题，先验概率为$y\sim$Categorial Distribution。而对于，$p(x|y) = \prod_{i=1}^Np(x_i|y)$。如果$x$是离散的，那么$x_i\sim$Categorial Distribution；如果$x$是连续的，那么$x_i\sim\mathcal{N}(\mu_j,\sigma^2)$。对于每一类都有一个高斯分布。
+对于$p(y)$这个先验概率密度函数的确定，对于二分类问题，也就是$y\sim$Bernoulli Distribution，而对于多分类问题，先验概率为$y\sim$Categorial Distribution。而对于，$p(x|y) = \prod_{i=1}^Np(x_i|y)$。如果$x$是离散的，那么$x_i|y\sim$Categorial Distribution；如果$x$是连续的，那么$x_i|y\sim\mathcal{N}(\mu_y,\Sigma^2_y)$。对于每一类都有一个高斯分布。
 
 而有关于$p(x|y)$用极大似然估计MLE，估计出来就行。因为分布的形式我们已经知道了，那么只要利用数据来进行学习，使用极大似然估计就可以得到想要的结果了。其实对于多分类的情况，Naive Bayes Classification和Guassian Discriminate Analysis很像的。
 

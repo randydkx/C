@@ -70,7 +70,7 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
     p(f(x^\ast)|X,Y,x^\ast) \sim \mathcal{N}({x^\ast}^T(\sigma^{2}A^{-1}X^TY),{x^\ast}^TA^{-1}x^\ast)
 \end{equation}
 
-而其中，$A = \sigma^{-2}X^TX+\Sigma_p^{-1}$，If $\phi:x\mapsto z$，$x\in \mathbb{R}^p$，$x\in\mathbb{R}^p$，$z\in\mathbb{R}^q$，$z=\phi(x)$(q>p)。这里的$\phi$是一个非线性转换。我们定义：$\Phi=(\phi(x_1),\phi(x_2),\cdots,\phi(x_N))^T_{N\times q}$。
+而其中，$A = \sigma^{-2}X^TX+\Sigma_p^{-1}$，If $\phi:x\mapsto z$，$x\in \mathbb{R}^p$，$z\in\mathbb{R}^q$，$z=\phi(x)(q>p)$。这里的$\phi$是一个非线性转换。我们定义：$\Phi=(\phi(x_1),\phi(x_2),\cdots,\phi(x_N))^T_{N\times q}$。
 
 转换之后为：$f(x) = \phi(x)^Tw$。那么，
 \begin{equation}
@@ -91,14 +91,17 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
     \nonumber \sigma^{-2}A^{-1}\Phi(X)^T = \Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}
 \end{gather}
 
-然后，两边同乘一个$\phi(x^\ast)$和$Y$就可以得到：
+然后，两边同乘一个$\phi(x^\ast)^T$和$Y$就可以得到：
 \begin{equation}
-    \sigma^{-2}\phi(x^\ast)A^{-1}\Phi(X)^TY = \phi(x^\ast)\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y 
+    \sigma^{-2}\phi(x^\ast)^TA^{-1}\Phi(X)^TY = \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y 
 \end{equation}
 
-而这个$\sigma^{-2}\phi(x^\ast)A^{-1}\Phi(X)^TY$正好就是$p(f(x^\ast)|X,Y,x^\ast)$的期望（通过贝叶斯回归类比出来的正态分布中的期望）。而这里的$\Sigma_p=p(w)$是一个先验$\sim \mathcal{N}(0,\Sigma_p)$，而$\sigma^2$为先验分布的噪声，$X^\ast$是一个new input，而{\color{red} $K = \Phi\Sigma_p\Phi^T$}。所以，使用类似的方法我们可以得到，$p(f(x^\ast)|X,Y,x^\ast)$'s Covarience为：$\phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast)$。所以：
+而这个$\sigma^{-2}\phi(x^\ast)^TA^{-1}\Phi(X)^TY$正好就是$p(f(x^\ast)|X,Y,x^\ast)$的期望（通过贝叶斯回归类比出来的正态分布中的期望）。而这里的$\Sigma_p=p(w)$是一个先验$\sim \mathcal{N}(0,\Sigma_p)$，而$\sigma^2$为先验分布的噪声，$x^\ast$是一个new input，而{\color{red} $K = \Phi\Sigma_p\Phi^T$}。所以，使用类似的方法我们可以得到，$p(f(x^\ast)|X,Y,x^\ast)$'s Covarience为：$\phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast)$。所以：
 \begin{equation}
-    p(f(x^\ast)|X,Y,x^\ast) \sim \mathcal{N}(\phi(x^\ast)\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y , \phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast) )
+    \begin{split}
+        p(f(x^\ast)|X,Y,x^\ast) \sim & \mathcal{N}(\phi(x^\ast)\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}Y , \\ 
+        & \phi(x^\ast)^T\Sigma_p\phi(x^\ast) - \phi(x^\ast)^T\Sigma_p\Phi(X)^T(K+\sigma^2I)^{-1}\Phi(X)\Sigma_p\phi(x^\ast) )    
+    \end{split}
 \end{equation}
 
 而大家注意观察一下，下面几个等式：
@@ -122,13 +125,13 @@ Gaussian Process在这里我们主要讲解的是Gaussian Process Regression。�
         K(x,x') 
         = & \phi(x)^T\Sigma_p^{\frac{1}{2}}\Sigma_p^{\frac{1}{2}}\phi(x') \\
         = & (\Sigma_p^{\frac{1}{2}}\phi(x))^T\cdot \Sigma_p^{\frac{1}{2}}\phi(x) \\
-        = & <\varphi(x),\varphi(x')>
+        = & \varphi(x)^T\varphi(x')
     \end{split}
 \end{equation}
 
 其中，$\varphi(x) = \Sigma_p^{\frac{1}{2}}\phi(x)$。那么，我们利用Kernel Trick可以有效的避免求$\phi(X)$，而是直接通过$K(x,x')$中包含的高维空间的转化。而{\color{red} Bayesian Linear Regression + Kernel Trick中就蕴含了一个Non-Linear Transformation inner product。}我们就可以将这个转换定义到一个核空间中，避免了直接来求这个复杂的转化。这也就是Kernel Trick。
 
-看到了这里，大家很容易会产生一个疑惑，那就是，好像这里的GPR并没有和GP有一毛钱的关系。而实际上这里的GPR有两种不同的思考角度，也就是两种View，而这两种View可以得到equal result：
+Gaussian Process Regression ，可以从两种视角去解释，而这两种视角可以得到equal result：
 
 1. Weight-Space view，也就是我们这一小节所讲的东西。指的就是那两个等式，$f(x) = \phi(x)^Tw$和$y=f(x)+\epsilon$。在这里我们的研究对象就是$w$，假设$w$的先验，需要求得$w$的后验，所以是从Weight-Space的角度分析的。
 

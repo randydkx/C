@@ -25,7 +25,7 @@
 %     \centering
 %     \includegraphics[width=.55\textwidth]{E.png}
 %     \caption{矩阵与列向量的乘法}
-%     \label{fig:my_label_1}
+%     
 % \end{figure}
 
 % \left\{
@@ -55,7 +55,7 @@
     \centering
     \includegraphics[width=.55\textwidth]{微信图片_20191223221952.png}
     \caption{数据分布举例}
-    \label{fig:my_label_1}
+    
 \end{figure}
 
 对于如上的数据分布来说，如果强行用单峰的Guassian Distribution来表示这个分布，显然是可以的。但是，很明显是不合适的。会造成较大的误差，不能较好的表示整个数据的分布特征。
@@ -72,7 +72,7 @@
     \centering
     \includegraphics[width=.65\textwidth]{微信图片_20191223223203.png}
     \caption{二维数据分布举例}
-    \label{fig:my_label_1}
+    
 \end{figure}
 
 \begin{equation}
@@ -84,7 +84,7 @@
     \right.
 \end{equation}
 
-这样写太麻烦了，我们可以直接写成$X \sim Z$，这里的$Z$就是一个离散的随机变量，它包含了$C_1,C_2,\cdots,C_N$的概率分布。$Z$其实就是看对应的样本$X$是属于哪一个高斯分布的概率。可以被我们写成：
+这样写太麻烦了，我们可以直接写成$X \sim Z$，这里的$Z$就是一个离散的随机变量，它包含了$C_1,C_2,\cdots,C_N$的概率分布，$Z$服从的是类别分布，其实就是看对应的样本$X$是属于哪一个高斯分布的概率。可以被我们写成：
 \begin{table}[H]
     \centering
     \begin{tabular}{c|cccc}
@@ -104,7 +104,7 @@
     \centering
     \includegraphics[width=.45\textwidth]{微信图片_20191223234640.png}
     \caption{GMM的概率图表达形式}
-    \label{fig:my_label_1}
+    
 \end{figure}
 
 我们根据一个离散的随机变量$Z$来选择是选取那个高斯分布，利用这个高斯分布$\mathcal{N}(\mu,\Sigma)$来采样得到我们想要的样本点。而且，离散随机变量$Z$符合一个离散分布$p = (p_1,p_2,\cdots,p_k)$。

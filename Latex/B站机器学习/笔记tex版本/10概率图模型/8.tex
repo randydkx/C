@@ -97,7 +97,7 @@
 
 下面第一步，我们把上面那个模型的设置写出来。所以，我们需要进行因式分解，我们用$\varphi(i)$来表示和$i$有关的部分。所以，我们可以将联合概率密度写为：
 \begin{equation}
-    p(a,b,c,d) = \frac{1}{Z} \varphi_a(a)\varphi_b(b)\varphi_c(c)\varphi_d(d)\cdot \varphi_{a,b}(a,b)\varphi_{b,c}(b,c)\varphi(b,d)(b,d)
+    p(a,b,c,d) = \frac{1}{Z} \varphi_a(a)\varphi_b(b)\varphi_c(c)\varphi_d(d)\cdot \varphi_{a,b}(a,b)\varphi_{b,c}(b,c)\varphi_{b,d}(b,d)
 \end{equation}
 
 我们要求$p(a) = \sum_{b,c,d}p(a,b,c,d)$和$p(b) = \sum_{a,c,d}p(a,b,c,d)$，其间一定会出现大量的重复计算。这个模型中有四个点，三条边，每条边都有两个方向，所以我们要求的是6个“积木”。我们来一步步的看看，如何可以得到想要的$p(a)$。

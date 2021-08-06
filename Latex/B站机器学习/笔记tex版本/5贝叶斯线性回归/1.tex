@@ -98,7 +98,7 @@
     w_{MAP} = argmax_w p(w|Data) = argmax_wp(Data|w)p(w) 
 \end{equation}
 
-那么假设$p(w)$符合一个高斯分布$\mathcal{N}(\mu_0,\Sigma_0)$时，这时是属于Ridge；而如果$p(w)$符合一个Laplace分布，这是就是Lasso。从概率的角度来思考和统计的角度来思想，我们其实获得的结果是一样的，这在Linear Regression中有证明。但是，我们只证明了Ridge的部分。
+那么假设$p(w)$符合一个高斯分布$\mathcal{N}(\mu_0,\Sigma_0)$时，这时是属于Ridge（具体在线性回章节有介绍，也就是正则化的最小二乘估计$\Leftrightarrow$先验服从高斯分布的极大后验估计）；而如果$p(w)$符合一个Laplace分布，这是就是Lasso。从概率的角度来思考和统计的角度来思想，我们其实获得的结果是一样的，这在Linear Regression中有证明。但是，我们只证明了Ridge的部分。
 
 \section{贝叶斯估计与频率派估计}
 其实在第一部分，我们讲的都是点估计，频率派估计的部分。因为在这些思路中，我们把参数$w$当成a unknown random variable。这实际上就是一个优化问题。而在Beyesian method中，认为$w$是一个随机变量，也就是一个分布，那么我们求的$w$不再是一个数了，而是一个分布。下面我们将要进行Bayes Linear Regression的部分。

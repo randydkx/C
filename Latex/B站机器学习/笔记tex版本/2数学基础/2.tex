@@ -26,9 +26,9 @@
 \maketitle
 本节的主要目的是从概率的角度来分析高斯分布，包括马氏距离和高斯分布的几何表示，以及高斯分布的局限性和解决的方法等等。对于多变量的高斯分布$X\sim \mathcal{N}(\mu,\Sigma)$，概率密度函数为：
 \begin{equation}
-    p(X)=\frac{1}{\sqrt{2\pi}^{\frac{p}{2}}|\Sigma|^{\frac{1}{2}}}exp\left\{ -\frac{1}{2}(X-\mu)^T\Sigma^{-1}(X-\mu) \right\}
+    p(x)=\frac{1}{(2\pi)^{\frac{p}{2}}|\Sigma|^{\frac{1}{2}}}exp\left\{ -\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu) \right\}
 \end{equation}
-其中，$X\in\mathbb{R}^p$，
+其中，$x\in\mathbb{R}^p$，
 \begin{equation}
     X=
     \begin{pmatrix}
@@ -48,7 +48,7 @@
 其中，$\Sigma$一般为正定矩阵或者为半正定矩阵。
 
 \section{什么是马氏距离}
-在高斯分布中，$(X-\mu)^T\Sigma^{-1}(X-\mu)$的计算结果是一个数，这个数被称为马氏距离。设$z_1=(z_{11}, z_{12})^T$，$z_1=(z_{21}, z_{22})^T$。那么$z_1$和$z_2$之间的马氏距离为，
+在高斯分布中，$\sqrt{(x-\mu)^T\Sigma^{-1}(x-\mu)}$的计算结果是一个数，这个数被称为马氏距离。设$z_1=(z_{11}, z_{12})^T$，$z_2=(z_{21}, z_{22})^T$。那么$z_1$和$z_2$之间的马氏距离的平方为：
 \begin{equation}
     (z_1-z_2)^T\Sigma^{-1}(z_1-z_2)=
     \begin{pmatrix}
@@ -63,12 +63,12 @@
 
 显然，当$\Sigma^{-1}=I$时，马氏距离等于欧式距离$ (z_1-z_2)^T\Sigma^{-1}(z_1-z_2)=(z_{11}-z_{12})^2+(z_{21}-z_{22})^2$。
 
-\section{对$(X-\mu)^T\Sigma^{-1}(X-\mu)$的值进行推导}
-由于$\Sigma$为实对称矩阵，那么可以对$\Sigma$进行特征分解，那么有$\Sigma = U\Lambda U^T$，并且$UU^T=U^TU=I$，所以$U^{-1}=U^T$，$\Lambda=diag(\lambda_i)\quad(i=1,2,\cdots,N)$，并且$U=(U_1,U_2,\cdots,U_p)_{p\times p}$。
+\section{对$(x-\mu)^T\Sigma^{-1}(x-\mu)$的值进行推导}
+由于$\Sigma$为实对称矩阵，那么可以对$\Sigma$进行特征分解，那么有$\Sigma = U\Lambda U^T$，并且$UU^T=U^TU=I$，所以$U^{-1}=U^T$，$\Lambda=diag(\lambda_i)\quad(i=1,2,\cdots,N)$，并且$U=(u_1,u_2,\cdots,u_p)_{p\times p}$。
 
 \begin{align}
     \Sigma = & U\Lambda U^T \\
-    = & (U_1,U_2,\cdots,U_p)
+    = & (u_1,u_2,\cdots,u_p)
     \begin{pmatrix}
         \lambda_1 & & & \\
         & \lambda_2 & & \\
@@ -76,19 +76,19 @@
         & & & \lambda_p \\
     \end{pmatrix}
     \begin{pmatrix}
-        U_1^T  \\
-        U_2^T  \\
+        u_1^T  \\
+        u_2^T  \\
         \vdots \\
-        U_p^T  \\
+        u_p^T  \\
     \end{pmatrix} \\
-     = & (U_1\lambda_1,U_2\lambda_2,\cdots,U_p\lambda_p)
+     = & (u_1\lambda_1,u_2\lambda_2,\cdots,u_p\lambda_p)
      \begin{pmatrix}
-        U_1^T  \\
-        U_2^T  \\
+        u_1^T  \\
+        u_2^T  \\
         \vdots \\
-        U_p^T  \\
+        u_p^T  \\
     \end{pmatrix} \\
-    = & \sum_{i=1}^{p}U_i\lambda_i U_i^T
+    = & \sum_{i=1}^{p}u_i\lambda_i u_i^T
 \end{align}
 
 而$\Sigma^{-1}$的求解过程如下所示：
@@ -99,22 +99,22 @@
 
 代入可以解得：
 \begin{equation}
-    \Sigma^{-1} = \sum_{i=1}^{p}U_i\frac{1}{\lambda_i} U_i^T
+    \Sigma^{-1} = \sum_{i=1}^{p}u_i\frac{1}{\lambda_i} u_i^T
 \end{equation}
 
 那么，
 \begin{align}
-    (X-\mu)^T\Sigma^{-1}(X-\mu) = & (X-\mu)^T\sum_{i=1}^{p}U_i\frac{1}{\lambda_i} U_i^T(X-\mu) \\
-    = & \sum_{i=1}^{p} (X-\mu)^TU_i\frac{1}{\lambda_i} U_i^T(X-\mu)
+    (x-\mu)^T\Sigma^{-1}(x-\mu) = & (x-\mu)^T\sum_{i=1}^{p}u_i\frac{1}{\lambda_i} u_i^T(x-\mu) \\
+    = & \sum_{i=1}^{p} (x-\mu)^Tu_i\frac{1}{\lambda_i} u_i^T(x-\mu)
 \end{align}
 
-令$y_i=(X-\mu)^TU_i$，这是一个典型的投影算法，其中$U_i$是特征值为$\lambda_i$的特征向量，那么
+令$y_i=(x-\mu)^Tu_i$，这是一个典型的投影算法，其中$u_i$是$\Sigma$的特征值为$\lambda_i$的特征向量，那么
 \begin{equation}
-    (X-\mu)^T\Sigma^{-1}(X-\mu) = \sum_{i=1}^{p} y_i\frac{1}{\lambda_i} y_i^T
+    (x-\mu)^T\Sigma^{-1}(x-\mu) = \sum_{i=1}^{p} y_i\frac{1}{\lambda_i} y_i^T=\sum_{i=1}^p\frac{y_i^2}{\lambda_i}
 \end{equation}
 
 \section{高斯分布的几何意义}
-如何令$p=2$，则有$\Delta = \frac{y_1^2}{\lambda_1} + \frac{y_2^2}{\lambda_2} $，这实际上就是一个椭圆，如果$\Delta$取不同的值，就会像等高线一样，一圈圈的环绕。而$y$实际上相当于先平移后投影(旋转)，那么最终的效果图画表示为：
+如何令$p=2$，则有$\Delta = \frac{y_1^2}{\lambda_1} + \frac{y_2^2}{\lambda_2} $，这实际上就是一个椭圆，如果$\Delta$取不同的值，就会像等高线一样，一圈圈的环绕，因为每一个$\Delta$都对应着一个二次型，即对应着概率密度函数的一个取值，同样的$\Delta$取值对应着同样的概率密度。那么最终的概率密度等高线表示为：
 \begin{figure}[H]
     \centering
     \includegraphics[width=.5\textwidth]{20191019203302.png}
@@ -122,7 +122,6 @@
     \label{fig:my_label_1}
 \end{figure}
 
-这里使用到了投影算子。
 
 \section{高斯分布中遇到的困难}
 \subsection{维度灾难(curse of dimension)}

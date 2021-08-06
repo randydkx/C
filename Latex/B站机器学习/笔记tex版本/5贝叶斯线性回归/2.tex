@@ -89,7 +89,7 @@
     p(w|Data) = p(w|X,Y) = \frac{p(w,Y|X)}{p(Y|X)} = \frac{p(Y|X,w)p(w)}{\int_w p(Y|X,w)p(w)dw}
 \end{equation}
 
-其中$p(Y|X,w)$是似然函数(likelihood function)，$p(w)$是一个先验函数(prior function)。实际这里省略了一个过程，$p(w,Y|X)=p(Y|X,w)p(w|X)$。但是很显然，$p(w|X)$中$X$与$w$之间并没有直接的联系。所以$p(w|X)=p(w)$。
+其中$p(Y|X,w)$是似然函数(likelihood function)，$p(w)$是一个先验函数(prior function)。实际这里省略了一个过程，$p(w,Y|X)=p(Y|X,w)p(w|X)$。但是很显然，$p(w|X)$中$X$与$w$之间并没有直接的联系（也就是说每个数据样本中的$x$都是从数据总体分布$p(x)$中抽样得到的，与先验分布无关）。所以$p(w|X)=p(w)$。
 
 似然函数的求解过程为：
 \begin{equation}
@@ -139,28 +139,28 @@
         \vdots \\
         y_i - w^Tx_i \\
     \end{bmatrix} \\
-    = & (Y^T - W^TX^T)(Y^T - W^TX^T)^T \\
-    = & (Y^T - W^TX^T)(Y - XW)
+    = & (Y^T - w^TX^T)(Y^T - w^TX^T)^T \\
+    = & (Y^T - w^TX^T)(Y - Xw)
     \end{split}
 \end{equation}
 
 所以，
 \begin{equation}
     \begin{split}
-        p(Y|X,w) = &  \frac{1}{(2\pi)^{\frac{N}{2}}\sigma^N} exp\left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^N(Y^T - W^TX^T)(Y - XW) \right\} \\
-        = &  \frac{1}{(2\pi)^{\frac{N}{2}}\sigma^N} exp\left\{ -\frac{1}{2}\sum_{i=1}^N(Y^T - W^TX^T)\sigma^{-2}I(Y - XW) \right\} \\
-        & p(Y|X,w) \sim \mathcal{N}(WX,\sigma^2I)
+        p(Y|X,w) = &  \frac{1}{(2\pi)^{\frac{N}{2}}\sigma^N} exp\left\{ -\frac{1}{2\sigma^2}\sum_{i=1}^N(Y^T - w^TX^T)(Y - Xw) \right\} \\
+        = &  \frac{1}{(2\pi)^{\frac{N}{2}}\sigma^N} exp\left\{ -\frac{1}{2}\sum_{i=1}^N(Y^T - w^TX^T)\sigma^{-2}I(Y - Xw) \right\} \\
+        & p(Y|X,w) \sim \mathcal{N}(Xw,\sigma^2I)
     \end{split}
 \end{equation}
 
 那么，将化简后的结果带入有：
 \begin{equation}
-    p(w|Data) \sim \mathcal{N}(\mu_w,\Sigma_w) \propto \mathcal{N}(WX,\sigma^2I) \mathcal{N}(0,\Sigma_p)
+    p(w|Data) \sim \mathcal{N}(\mu_w,\Sigma_w) \propto \mathcal{N}(Xw,\sigma^2I) \mathcal{N}(0,\Sigma_p)
 \end{equation}
 \begin{equation}
     \begin{split}
-        \mathcal{N}(WX,\sigma^2I) \mathcal{N}(0,\Sigma_p) \propto & exp\left\{ -\frac{1}{2}(Y-WX)^T\sigma^{-2}I(Y-WX) - \frac{1}{2} w^T\Sigma_p^{-1}w \right\}\\
-        = & exp\left\{ -\frac{1}{2\sigma^2}(Y^TY - 2Y^TXW + W^TX^TXW) - \frac{1}{2} W^T\Sigma_p^{-1}W \right\} \\
+        \mathcal{N}(Xw,\sigma^2I) \mathcal{N}(0,\Sigma_p) \propto & exp\left\{ -\frac{1}{2}(Y-Xw)^T\sigma^{-2}I(Y-Xw) - \frac{1}{2} w^T\Sigma_p^{-1}w \right\}\\
+        = & exp\left\{ -\frac{1}{2\sigma^2}(Y^TY - 2Y^TXw + w^TX^TXw) - \frac{1}{2} w^T\Sigma_p^{-1}w \right\} \\
     \end{split}
 \end{equation}
 
@@ -173,7 +173,7 @@
 
 常数部分已经不重要了，对于我们的求解来说没有任何的用处，所以，我们直接令它为$\triangle$。那么，我们类比一下就可以得到，
 \begin{equation}
-    x^T\Sigma^{-1}x = W^T\sigma^{-2}X^TXW+ W^T\Sigma_p^{-1}W
+    w^T\Sigma^{-1}_ww = w^T\left(\sigma^{-2}X^TX+ \Sigma_p^{-1}\right)W
 \end{equation}
 
 所以，我们可以得到$\Sigma_w^{-1}=\sigma^{-2}X^TX+\Sigma_p^{-1}$。并且，我们令$\Sigma_w^{-1}=A$。
@@ -186,26 +186,26 @@
     \mu = \sigma^{-2}(A^T)^{-1}X^TY 
 \end{gather}
 
-有因为，$\Sigma_w$是一个方差矩阵，那么他一定是对称的，所以$A^T=A$。于是
+又因为，$\Sigma_w$是一个协方差矩阵，那么他一定是对称的，所以$A^T=A$。于是
 \begin{equation}
-    \mu_m = \sigma^{-2}A^{-1}X^TY
+    \mu_w = \sigma^{-2}A^{-1}X^TY
 \end{equation}
 
 \section{小结}
 我们利用贝叶斯推断的方法来确定参数之间的分布，也就是确定$p(W|X,Y)$。我们使用Bayes的方法，确定为$p(W|X,Y)\propto p(Y|W,X)p(W)$。并且确定一个噪声分布$\varepsilon\sim\mathcal{N}(0,\sigma^2)$。那么，
 \begin{gather}
-    p(Y|W,X) \sim \mathcal{N}(W^TX,\sigma^2) \\
-    P(W) \sim \mathcal{N}(0,\Sigma_p)
+    p(Y|w,X) \sim \mathcal{N}(Xw,\sigma^2) \\
+    P(w) \sim \mathcal{N}(0,\Sigma_p)
 \end{gather}
 
 通过推导，我们可以得出，
 \begin{equation}
-    p(W|X,Y) \sim \mathcal{N}(\mu_w, \Sigma_w)
+    p(w|X,Y) \sim \mathcal{N}(\mu_w, \Sigma_w)
 \end{equation}
 
 其中，
 \begin{equation}
-    \Sigma_w^{-1}=\sigma^{-2}X^TX+\Sigma_p^{-1} \qquad \mu_m = \sigma^{-2}A^{-1}X^TY \qquad \Sigma_w^{-1}=A
+    \Sigma_w^{-1}=\sigma^{-2}X^TX+\Sigma_p^{-1} \qquad \mu_w = \sigma^{-2}A^{-1}X^TY \qquad \Sigma_w^{-1}=A
 \end{equation}
 
 

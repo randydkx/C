@@ -48,20 +48,15 @@
 
 \begin{document}
 \maketitle
-我们将$X$：Observed data；$Z$：Latent Variable + Parameters。那么$(X,Z)$为complete data。根据我们的贝叶斯分布公式，我们所要求的后验分布为：
+我们将$X$：Observed data；$Z$：Latent Variable + Parameters。那么$(X,Z)$为complete data。根据我们的贝叶斯分布公式：
 \begin{equation}
-    p(Z|X) = \frac{p(X,Z)}{p(X|Z)}
+    p(X) = \frac{p(X,Z)}{p(Z|X)}
 \end{equation}
 
-进行一些简单变换，我们可以得到：
-\begin{equation}
-    p(X|Z) = \frac{p(X,Z)}{p(Z|X)}
-\end{equation}
-
-在两边同时取对数我们可以得到：
+在两边同时取对数并且引入函数$q(Z)$我们可以得到：
 \begin{equation}
     \begin{split}
-        \log p(X|Z) = & \log \frac{p(X,Z)}{p(Z|X)} \\
+        \log p(X) = & \log \frac{p(X,Z)}{p(Z|X)} \\
         = & \log p(X,Z) - \log p(Z|X) \\
         = & \log\frac{p(X,Z)}{q(Z)} - \log \frac{p(Z|X)}{q(Z)} \\
     \end{split}
@@ -79,9 +74,9 @@
 
 $- \int_Z q(Z)\log\ \frac{p(Z|X)}{q(Z)}dZ$被称为$KL(q||p)$。这里的$KL(q||p) \geq 0$。
 
-由于我们求不出$p(Z|X)$，我们的目的是寻找一个$q(Z)$，使得$p(Z|X)$近似于$q(Z)$，也就是$KL(q||p)$越小越好。并且，$p(X)$是个定值，那么我们的目标变成了$argmax_{q(z)}\mathcal{L}(q)$。那么，我们理一下思路，我们想要求得一个$\widetilde{q}(Z) \approx p(Z|X)$。也就是
+由于我们求不出$p(Z|X)$，我们的目的是寻找一个$q(Z)$，使得$p(Z|X)$近似于$q(Z)$，也就是$KL(q||p)$越小越好。并且，$p(X)$是个定值，那么我们的目标变成了$\arg\max_{q(z)}\mathcal{L}(q)$。那么，我们理一下思路，我们想要求得一个$\widetilde{q}(Z) \approx p(Z|X)$。也就是
 \begin{equation}
-    \widetilde{q}(Z) = argmax_{q(z)} \mathcal{L}(q) \Rightarrow \widetilde{q}(Z) \approx p(Z|X)
+    \widetilde{q}(Z) = \arg\max_{q(z)} \mathcal{L}(q) \Rightarrow \widetilde{q}(Z) \approx p(Z|X)
 \end{equation}
 
 \section{模型求解}
@@ -103,7 +98,7 @@ $- \int_Z q(Z)\log\ \frac{p(Z|X)}{q(Z)}dZ$被称为$KL(q||p)$。这里的$KL(q||
         \int_Zq(Z)\log p(X,Z)dZ 
         = & \int_Z\prod_{i=1}^M q_i(z_i)\log p(X,Z)dZ \\
         = & \int_{z_j}q_j(z_j) \left[\int_{z_1}\int_{z_2}\cdots\int_{z_M} \prod_{i=1}^M q_i(z_i)\log p(X,Z)dz_1dz_2\cdots dz_M \right] dz_j \\
-        = & \int_{z_j}q_j(z_j) \mathbf{E}_{\prod_{i \neq j}^Mq_i(x_i)}\left[ \log p(X,Z) \right] dz_j
+        = & \int_{z_j}q_j(z_j) \mathbb{E}_{\prod_{i \neq j}^Mq_i(x_i)}\left[ \log p(X,Z) \right] dz_j
     \end{split}
 \end{equation}
 
@@ -133,7 +128,7 @@ $- \int_Z q(Z)\log\ \frac{p(Z|X)}{q(Z)}dZ$被称为$KL(q||p)$。这里的$KL(q||
 
 因为我们仅仅只关注第$j$项，其他的项都不关注。为了进一步表达计算，我们将：
 \begin{equation}
-    \mathbf{E}_{\prod_{i \neq j}^Mq_i(z_i)}\left[ \log p(X,Z) \right] = \log \hat{p}(X,z_j)
+    \mathbb{E}_{\prod_{i \neq j}^Mq_i(z_i)}\left[ \log p(X,Z) \right] = \log \hat{p}(X,z_j)
 \end{equation}
 
 那么(8)式可以写作：
@@ -144,10 +139,10 @@ $- \int_Z q(Z)\log\ \frac{p(Z|X)}{q(Z)}dZ$被称为$KL(q||p)$。这里的$KL(q||
 这里的$\hat{p}(X,z_j)$表示为一个相关的函数形式，假设具体参数未知。那么(7)式将等于(13)式减(11)式：
 
 \begin{equation}
-    \int_{z_j} q_j(z_j)\log q_i(z_i) dz_j - \int_{z_j}q_j(z_j) \log \hat{p}(X,z_j) dz_j + C = -KL(q_j || \hat{p}(x,z_j)) \leq 0
+    \int_{z_j} q_j(z_j)\log q_i(z_i) dz_j - \int_{z_j}q_j(z_j) \log \hat{p}(X,z_j) dz_j + C = -KL(q_j || \hat{p}(x,z_j)) + C
 \end{equation}
 
-$argmax_{q_j(z_j)}-KL(q_j || \hat{p}(x,z_j))$等价于$argmin_{q_j(z_j)}KL(q_j || \hat{p}(x,z_j))$。那么这个$KL(q_j || \hat{p}(x,z_j))$要如何进行优化呢？我们下一节将回归EM算法，并给出求解的过程。
+$\arg\max_{q_j(z_j)}-KL(q_j || \hat{p}(x,z_j))$等价于$\arg\min_{q_j(z_j)}KL(q_j || \hat{p}(x,z_j))$。那么这个$KL(q_j || \hat{p}(x,z_j))$要如何进行优化呢？我们下一节将回归EM算法，并给出求解的过程。
 
 
 

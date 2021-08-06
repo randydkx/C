@@ -56,7 +56,6 @@
     \centering
     \includegraphics[width=.55\textwidth]{微信图片_20191113104442.png}
     \caption{二分类问题模型图}
-    \label{fig:my_label_1}
 \end{figure}
 
 支持向量机模型可以被简要的描述为：$f(w) = w^Tx + b$。很显然这是一个判别模型。实际上，我们想一想就知道，这样的直线其实有很多的。但是紫色的那条虽然可以做到分类的效果，但是效果也太差了，没有什么鲁棒性，泛化能力并不行。显然，绿色的那条直线要更好一些。那么，SVM的基本思想可以被简要的概述为，找到一条最好的直线，离样本点距离足够的大。
@@ -67,12 +66,12 @@
 首先我们希望，把这些点的间隔分得越大越好，并且根据符号函数给不同的值相应的类别标号。那么，我们可以写做：
 \begin{equation}
     \begin{split}
-        & \max \ margin\ (w,b) \\
+        & \max_{w,b} \ margin\ (w,b) \\
         & s.t. 
         \left\{
         \begin{array}{ll}
-            w^T_ix+b>0 & y_i = +1 \\
-            w^T_ix+b<0 & y_i = -1 \\
+            w^Tx_i+b>0 & y_i = +1 \\
+            w^Tx_i+b<0 & y_i = -1 \\
         \end{array}
         \right.
     \end{split}
@@ -81,7 +80,7 @@
 由于$y_i$和$w^T_ix+b$是同号的，那么很显然有$y_i(w^T_ix+b)>0$，所以，模型被我们改写为：
 \begin{equation}
     \begin{split}
-        & \max \ margin\ (w,b) \\
+        & \max_{w,b} \ margin\ (w,b) \\
         & s.t.\quad y_i(w^T_ix+b)>0 \quad (i = 1,2,\cdots,N)
     \end{split}
 \end{equation}
@@ -94,12 +93,12 @@
 我们的希望是离超平面最近的点分得越开越好。离超平面最近的点就是$\min distance(w,b,x_i)$，这个是针对点$x_i (i=1,2,\cdots,n)$。然后就是分得越开越好，那么我们可以描述为$\max \min distance(w,b,x_i)$，这个是针对$w,b$进行优化的。那么我们可以把模型进一步改写为：
 \begin{equation}
     \begin{split}
-        & \max_{w,b} \min_{x_i\ i = 1,\cdots} \frac{1}{||w||}|w^Tx+b| \\
+        & \max_{w,b} \min_{x_i} \frac{1}{||w||}|w^Tx_i+b| \\
         & s.t.\quad y_i(w^T_ix+b)>0 \quad (i = 1,2,\cdots,N)
     \end{split}
 \end{equation}
 
-对于约束条件$y_i(w^T_ix+b)>0 \quad (i = 1,2,\cdots,N)$，很显然可以得到$\forall \gamma > 0$使得$s.t.\ \min y_i(w^T_ix+b)=\gamma$。这里很显然我们可以使用一个小技巧来做一些的调整，来使我们方便计算，我们可以把约束条件转换为$s.t.\ \min \frac{y_i(w^T_ix+b)}{z}=\frac{\gamma}{z}$。我们很显然可以看到，$w$和$b$之间是可以自由放缩的，那么就放缩到令$\frac{\gamma}{z}=1$，那么就有$\min y_i(w^T_ix+b)=1$。于是，模型可以化简为：
+对于约束条件$y_i(w^T_ix+b)>0 \quad (i = 1,2,\cdots,N)$，很显然可以得到$\exists \gamma > 0$使得$s.t.\ \min y_i(w^T_ix+b)=\gamma$。这里很显然我们可以使用一个小技巧来做一些的调整，来使我们方便计算，我们可以把约束条件转换为$s.t.\ \min \frac{y_i(w^T_ix+b)}{z}=\frac{\gamma}{z}$。我们很显然可以看到，$w$和$b$之间是可以自由放缩的，那么就放缩到令$\frac{\gamma}{z}=1$，那么就有$\min y_i(w^T_ix+b)=1$。于是，模型可以化简为：
 \begin{equation}
     \begin{split}
         & \max_{w,b} \frac{1}{||w||} \\
@@ -107,10 +106,10 @@
     \end{split}
 \end{equation}
 
-由于这个地方我们看最大化不是很爽，在优化问题中我们更希望求最小化的问题，所有进一步改写：
+将该优化问题进行等价变换：
 \begin{equation}
     \begin{split}
-        & \max_{w,b} \ \frac{1}{2} w^Tw \\
+        & \min_{w,b} \ \frac{1}{2} w^Tw \\
         & s.t. \quad y_i(w^T_ix+b)\geq 1 \quad (i = 1,2,\cdots,N)
     \end{split}
 \end{equation}
@@ -126,7 +125,7 @@
     \end{split}
 \end{equation}
 
-求解带约束的极值，显然需要采用拉格朗日数乘法，我们定义拉格朗日函数为：
+求解带约束的极值，显然需要采用拉格朗日乘子法，我们定义拉格朗日函数为：
 \begin{equation}
     \mathcal{L}(w,b,\lambda) = \frac{1}{2}w^Tw + \sum_{i=1}^N\lambda_i(1-y_i(w^Tx_i+b))
 \end{equation}
@@ -235,8 +234,7 @@ KKT条件可以描述为：
     \left\{
     \begin{array}{ll}
           \frac{\partial \mathcal{L}}{\partial w} = 0,\quad
-          \frac{\partial \mathcal{L}}{\partial b} = 0,\quad
-          \frac{\partial \mathcal{L}}{\partial \lambda} = 0 & \\
+          \frac{\partial \mathcal{L}}{\partial b} = 0 & \\
           \lambda_i(1-y_i(w^Tx_i+b)) = 0 & \\
           \lambda_i \geq 0 & \\
           1-y_i(w^Tx_i+b) \leq 0 

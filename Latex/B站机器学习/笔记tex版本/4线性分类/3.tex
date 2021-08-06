@@ -34,7 +34,7 @@
 % \end{array}
 % \right.
 
-\title{Linear classification 03}
+\title{Linear classification 03 LDA}
 \author{Chen Gong}
 \date{31 October 2019}
 
@@ -161,20 +161,17 @@
 为了方便求导，我们令$\mathcal{J}(w)=(w^TS_bw)(w^TS_ww)^{-1}$。
 \begin{equation}
     \begin{split}
-        \frac{\partial \mathcal{J}(w)}{\partial w} = 2S_bw(w^TS_ww)^{-1} + & (-1)(w^TS_bw)(w^TS_ww)^{-2}(2)S_ww = 0 \\
+        \frac{\partial \mathcal{J}(w)}{\partial w} = 2S_bw(w^TS_ww)^{-1} + & (-1)(w^TS_bw)(w^TS_ww)^{-2}\cdot 2S_ww = 0 \\
         S_bw(w^TS_ww)^{-1} = & (w^TS_bw)(w^TS_ww)^{-2}S_ww\\
     \end{split}
 \end{equation}
 
 显然，$w$的维度是$p\times 1$，$w^T$的维度是$1 \times p$，$S_w$的维度是$p\times p$，所以，$w^TS_ww$是一个实数，同理 可得，$w^TS_ww$是一个实数所以，可以得到
 \begin{equation}
-    \begin{split}
-        S_bw = & (w^TS_bw)(w^TS_ww)^{-1}S_ww \\
-        S_bw = & \frac{(w^TS_bw)}{(w^TS_ww)}S_ww
-    \end{split}
+        S_bw =  \frac{(w^TS_bw)}{(w^TS_ww)}S_ww
 \end{equation}
 
-我们主要是求得梯度的方向，大小不是很重要了。所以，我们可得
+我们主要是需要求$w$的方向，大小不是很重要了。并且根据我们的定义，$w^TS_bw$和$w^TS_ww$都是正的。所以，我们可得
 \begin{equation}
     w = \frac{(w^TS_bw)}{(w^TS_ww)}S_b^{-1}S_ww \propto S_b^{-1}S_ww
 \end{equation}
@@ -182,11 +179,11 @@
     S_ww =  (\Bar{X}_{c_1} - \Bar{X}_{c_2})(\Bar{X}_{c_1} - \Bar{X}_{c_2})^Tw
 \end{equation}
 
-而$(\Bar{X}_{c_1} - \Bar{X}_{c_2})^Tw$是一个实数，所以汇总可得
+而$(\Bar{X}_{c_1} - \Bar{X}_{c_2})^Tw$是一个实数，不会改变$w$的方向，所以汇总可得:
 \begin{equation}
     S_b^{-1}S_ww \propto S_w^{-1}(\Bar{X}_{c_1} - \Bar{X}_{c_2})
 \end{equation}
 
-那么，我们就可以求得梯度的方向为$S_w^{-1}(\Bar{X}_{c_1} - \Bar{X}_{c_2})$。如果，$S_w^{-1}$是一个各向同性的对角矩阵，那么$S^{-1}\propto I$。所以，$w\propto (\Bar{X}_{c_1} - \Bar{X}_{c_2})$。既然，求得了梯度的方向，其实梯度的大小就不重要的。
+那么，我们就可以求得$w$的方向为$S_w^{-1}(\Bar{X}_{c_1} - \Bar{X}_{c_2})$。如果，$S_w^{-1}$是一个各向同性的对角矩阵，那么$S^{-1}\propto I$。所以，$w\propto (\Bar{X}_{c_1} - \Bar{X}_{c_2})$。既然，求得了$w$的方向，其实$w$的大小就不重要的。
 
 \end{document}

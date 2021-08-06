@@ -18,7 +18,7 @@
 \allowdisplaybreaks
 \geometry{a4paper, scale=0.78}
 
-\title{Exponential Family Distribution 03}
+\title{Exponential Family Distribution 03 Property}
 \author{Chen Gong}
 \date{24 October 2019}
 
@@ -49,7 +49,7 @@
 下一步则是在$exp \{A(\eta)\}$中对$\eta$进行求导。
 \begin{equation}
     \begin{split}
-        \frac{\partial exp \{A(\eta)\}}{\partial \eta} = & exp \{A(\eta)\} \cdot A'(\eta) \\
+        \frac{\partial exp \{A(\eta)\}}{\partial \eta} = & \nabla_\eta A(\eta)exp \{A(\eta)\}  \\
         = & \frac{\partial}{\partial \eta}\int h(x)exp\left\{ \eta^T\varphi(x)\right\} dx \\
         = & \int \frac{\partial}{\partial \eta} h(x)exp\left\{ \eta^T\varphi(x)\right\} dx \\
         = & \int h(x)exp\left\{ \eta^T\varphi(x)\right\}\varphi(x) dx \\
@@ -58,17 +58,17 @@
 
 将等式的左边的$exp \{A(\eta)\} $移到等式的右边可得，
 \begin{gather}
-    A'(\eta) = \int h(x)exp\left\{ \eta^T\varphi(x) - A(\eta)\right\}\varphi(x) dx \\
-    A'(\eta) = \int p(x|\eta)\varphi(x)dx \\
-    A'(\eta) = \mathbb{E}_{x \sim p(x|\eta)}[\varphi(x)]
+    \nabla _{\eta}A(\eta) = \int h(x)exp\left\{ \eta^T\varphi(x) - A(\eta)\right\}\varphi(x) dx \\
+    \nabla _{\eta}A(\eta) = \int p(x|\eta)\varphi(x)dx \\
+    \nabla _{\eta}A(\eta) = \mathbb{E}_{x \sim p(x|\eta)}[\varphi(x)]
 \end{gather}
 
 其实通过同样的方法可以证明出，
 \begin{equation}
-    A''(\eta) = Var_{x \sim p(x|\eta)}[\varphi(x)]
+    \nabla{\eta}^2A(\eta) = Var_{x \sim p(x|\eta)}[\varphi(x)]
 \end{equation}
 
-又因为，方差总是恒大于等于零的，于是有$A''(\eta)\geq 0$。所以，由此得出$A(\eta)$是一个凸函数。并且，由$\mathbb{E}_{x \sim p(x|\eta)}[\varphi(x)]$和$Var_{x \sim p(x|\eta)}[\varphi(x)]$就可以成功的求解得到$A(\eta)$函数。那么我们做进一步思考，知道了$\mathbb{E}[x]$和$\mathbb{E}[x^2]$，我们就可以得到所有想要的信息。那么，
+又因为，协方差矩阵总是正定的矩阵，于是有$\nabla_{\eta}^2A(\eta)\succeq  0$。所以，由此得出$A(\eta)$是一个凸函数。并且，由$\mathbb{E}_{x \sim p(x|\eta)}[\varphi(x)]$和$Var_{x \sim p(x|\eta)}[\varphi(x)]$就可以成功的求解得到$A(\eta)$函数。那么我们做进一步思考，知道了$\mathbb{E}[x]$和$\mathbb{E}[x^2]$，我们就可以得到所有想要的信息。那么：
 \begin{equation}
     \mathbb{E}[\varphi(x)]
     =
@@ -83,18 +83,18 @@
 \begin{equation}
     \begin{split}
         \eta_{MLE} = & argmax \log \prod_{i=1}^N p(x_i|\eta) \\
-        = & argmax \sum_{i=1}^N\log p(x_i|q) \\
+        = & argmax \sum_{i=1}^N\log p(x_i|\eta) \\
         = & argmax \sum_{i=1}^N\log h(x_i) exp \left\{ \eta^T\varphi(x_i) - A(\eta) \right\} \\
-        = & argmax \sum_{i=1}^N\log h(x_i) + \sum_{i}^N\eta^T\varphi(x_i) - A(\eta) \\
+        = & argmax \sum_{i=1}^N\log h(x_i) + \sum_{i}^N\left(\eta^T\varphi(x_i) - A(\eta)\right) \\
     \end{split}
 \end{equation}
 \begin{gather}
-    \frac{\partial}{\partial \eta} \left\{ \sum_{i=1}^N\log h(x_i) + \sum_{i=1}^N\eta^T\varphi(x_i) - A(\eta) \right\} = 0 \\
-    \sum_{i=1}^N\varphi(x_i) = N A'(\eta) \\ 
-    A'(\eta) = \frac{1}{N}\sum_{i=1}^N\varphi(x_i)
+    \frac{\partial}{\partial \eta} \left\{ \sum_{i=1}^N\log h(x_i) + \sum_{i=1}^N\left(\eta^T\varphi(x_i) - A(\eta)\right) \right\} = 0 \\
+    \sum_{i=1}^N\varphi(x_i) = N \cdot \nabla_{\eta}A(\eta) \\ 
+    \nabla_{\eta}A(\eta) = \frac{1}{N}\sum_{i=1}^N\varphi(x_i)
 \end{gather}
 
-或者说，我们可以认为是：$A'(\eta_{MLE}) = \frac{1}{N}\sum_{i=1}^N\varphi(x_i)$。并且，$A'(\eta_{MLE})$是一个关于$\eta_{MLE}$的函数。那么反解，我们就可以得到$\eta_{MLE}=(A^{(-1)}(\eta))'$。所以我们要求$\eta_{MLE}$，我们只需要得到$\frac{1}{N}\sum_{i=1}^N\varphi(x_i)$即可。所以，$\varphi(x)$为一个充分统计量。
+或者说，我们可以认为是：$\nabla_{\eta}A(\eta_{MLE}) = \frac{1}{N}\sum_{i=1}^N\varphi(x_i)$。并且，$\nabla_{\eta}A(\eta_{MLE})$是一个关于$\eta_{MLE}$的函数。那么反解，我们就可以得到$\eta_{MLE}$。所以我们要求$\eta_{MLE}$，我们只需要得到$\frac{1}{N}\sum_{i=1}^N\varphi(x_i)$即可。所以，$\varphi(x)$为一个充分统计量。
 
 \section{总结}
 在本小节中，我们使用了极大似然估计和对数配分函数来推导了，充分统计量，这将帮助我们理解Exponential Distribution的性质。 

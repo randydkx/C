@@ -51,24 +51,24 @@
 
 \begin{document}
 \maketitle
-Expectation Maximization (EM)算法，中文名字叫做“期望最大”算法。是用来解决具有隐变量的混合模型的高斯分布。在比较简单的情况中，我们可以直接得出我们想要求得的参数的解析解，比如：MLE: $p(X|\theta)$。我们想要求解的结果就是：
+Expectation Maximization (EM)算法，是用来解决具有隐变量的模型的概率计算问题。在比较简单的情况中，我们可以直接得出我们想要求得的参数的解析解，比如：MLE: $p(X|\theta)$。我们想要求解的结果就是：
 \begin{equation}
     \theta_{MLE} = \arg\max_{\theta}\log p(X|\theta)
 \end{equation}
 
-其中，$\log p(X|\theta)$也被我们称为对数似然函数。一旦，问题变得复杂起来以后，就不是这么简单了，特别是引入了隐变量之后。
+然而一旦问题变得复杂起来以后，就不是这么简单了，特别是引入了隐变量之后。
 
 \section{EM算法简述}
 实际上，EM算法的描述也并不是很难，我们知道，通常我们想求的似然函数为$p(X|\theta)$。引入隐变量之后，原式就变成了：
 \begin{equation}
-    p(X|\theta) = \int p(X,Z|\theta)p(Z|X,\theta^{(t)})dZ \\
+    p(X|\theta) = \int \log p(X,Z|\theta)p(Z|X,\theta^{(t)})dZ \\
 \end{equation}
 
 EM算法是一种迭代的算法，我们的目标是求：
 \begin{equation}
     \begin{split}
         \theta^{(t+1)} = &\arg\max_{\theta} \int_Z
-        p(X,Z|\theta)p(Z|X,\theta^{(t)})dZ \\
+        \log p(X,Z|\theta)p(Z|X,\theta^{(t)})dZ \\
         = &\arg\max_{\theta} \mathbb{E}_{Z \sim p(Z|X,\theta^{(t)})}[\log p(X,Z|\theta)]
     \end{split}
 \end{equation}
@@ -78,7 +78,7 @@ EM算法是一种迭代的算法，我们的目标是求：
 \section{EM算法的收敛性}
 我们想要证的是当$\theta^{(t)} \longrightarrow \theta^{(t+1)}$时，有$\log p(X|\theta^{(t)}) \leq \log p(X|\theta^{(t+1)})$。这样才能说明我们的每次迭代都是有效的。
 \begin{equation}
-    \log p(X|\theta) = \log \frac{p(X,Z|\theta)}{ p(Z|X;\theta)} = \log p(X,Z|\theta) - \log p(Z|X;\theta)
+    \log p(X|\theta) = \log \frac{p(X,Z|\theta)}{ p(Z|X,\theta)} = \log p(X,Z|\theta) - \log p(Z|X,\theta)
 \end{equation}
 
 下一步，则是同时对两边求关于$p(Z|X,\theta^{(t)})$的期望。

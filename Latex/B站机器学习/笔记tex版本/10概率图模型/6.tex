@@ -56,7 +56,7 @@
 
 2. 条件概率：$p(x_A|x_B)$，令$x=x_A\cup x_B$。
 
-3. MAP Inference：也就是$\hat{z} = argmax_z\ p(z|x) \varpropto argmax \ p(x,z)$。因为，$p(z|x) = \frac{p(x,z)}{p(x)} \varpropto p(x,z)$，因为我们的目标是求一个最优的参数$z$，并不需要知道具体的数值是多少，只要知道谁大谁小就行，所以$p(x)$可以直接不看了。
+3. MAP Inference：也就是$\hat{z} = \arg\max_z\ p(z|x) \varpropto \arg\max \ p(x,z)$。因为$p(z|x) = \frac{p(x,z)}{p(x)} \varpropto p(x,z)$，我们的目标是求一个最优的参数$z$，并不需要知道具体的数值是多少，只要知道谁大谁小就行，所以$p(x)$可以直接不看了。
 
 现在我们知道了，Inference在求什么？下一步，我们要总结Inference有哪些方法。
 
@@ -77,7 +77,7 @@ Hidden Markov Model (HMM)算法将在后面的章节中做详细的描述，在�
 \end{figure}
 做一点概述性的描述。HMM的模型可视化为上图所示，其中$O$是隐变量，也就是我们的观测变量。
 
-我们主要考虑三个问题，在三个问题为Inference的问题。1. Evaluation，也就是求一个边缘密度$p(O) = \sum_I P(I,O)$。2. Learning，也就是寻找$\hat{\lambda}$。3. Decoding：$\hat{I} = argmax_I P(I|O)$，包括Vitebi Algorithm，这是一个动态规划算法。而隐马尔可夫模型实际上一种动态规划模型(Dynamic Bayesian Network)。
+我们主要考虑三个问题，在三个问题为Inference的问题。1. Evaluation，也就是求一个边缘密度$p(O) = \sum_I P(I,O)$。2. Learning，也就是寻找$\hat{\lambda}$。3. Decoding：$\hat{I} = \arg\max_I P(I|O)$，包括Vitebi Algorithm，这是一个动态规划算法。而隐马尔可夫模型实际上一种动态规划模型(Dynamic Bayesian Network)。
 
 
 

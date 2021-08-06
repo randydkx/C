@@ -76,7 +76,7 @@ M-step:
 
 前面我们已经证明了EM算法的收敛性了，也就是：
 \begin{equation}
-    \log P(X,Z|\theta^{(t+1)}) \geq \log P(X|\theta^{(t)})
+    \log P(X|\theta^{(t+1)}) \geq \log P(X|\theta^{(t)})
 \end{equation}
 
 收敛性告诉了我们算法确实是有效的，我们可以放心的去使用它。而大家会不会觉得这个公式的得来有点懵逼？懵逼就对了，那么下一步，我们的目标就是要推导出EM算法究竟是怎么来的，给出一个理论的证明。
@@ -117,7 +117,7 @@ M-step:
 
 那么，我们对下界进行优化，使下界尽可能的变大，就可以使目标函数不断的上升，那么我们可以得到：
 \begin{equation}
-    \hat{\theta} = \arg\max_{\theta} ELBO = \arg\max_{\theta} \int Q(Z)\log \frac{P(X,Z|\theta)}{Q(Z)}dZ
+    \hat{\theta} = \arg\max_{\theta} ELBO = \arg\min_{\theta} -\int Q(Z)\log \frac{P(X,Z|\theta)}{Q(Z)}dZ
 \end{equation}
 
 而这里的$Q(Z)$的分布我们怎么得到呢？这里我们就要来讲一讲EM算法的一个核心的理解了。首先我们给出这个理解的图示结果，再对这个图来进行讲解：
@@ -212,6 +212,6 @@ M-step:
 所以，从Jensen Inequality的角度，我们仍然可以得到EM算法的核心表达式。
 
 \section{小结}
-在最后，我们再来来梳理一下EM算法的实现思想。我们的目标是想使$P(X|\theta)$似然函数值最大。但是，很不幸，我们直接优化非常的难。所以，我们想到了一个优化下降的方法。对于，每一个$\theta^{(t)}$时，我们可以计算得到下界为：$\mathbb{E}_{Z\sim Q(Z)}\left[ \log \frac{P(X,Z|\theta)}{P(Z|X,\theta^{(t)})} \right]$，令这个值最大我们就得到了，想要求得的$\theta^{\theta^{(t+1)}}$。然后，按这个思路，不断的进行迭代。
+在最后，我们再来来梳理一下EM算法的实现思想。我们的目标是想使$P(X|\theta)$似然函数值最大。但是，很不幸，我们直接优化非常的难。所以，我们想到了一个优化下降的方法。对于，每一个$\theta^{(t)}$时，我们可以计算得到下界为：$\mathbb{E}_{Z\sim Q(Z)}\left[ \log \frac{P(X,Z|\theta)}{P(Z|X,\theta^{(t)})} \right]$，令这个值最大我们就得到了，想要求得的$\theta^{(t+1)}$。然后，按这个思路，不断的进行迭代。
 
 \end{document}

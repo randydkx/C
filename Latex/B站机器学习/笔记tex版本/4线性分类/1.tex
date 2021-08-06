@@ -17,7 +17,7 @@
 \usepackage{color}
 
 \geometry{a4paper, scale=0.78}
-\title{Linear Classification 01}
+\title{Linear Classification 01 Introduction}
 \author{Chen Gong}
 \date{29 October 2019}
 
@@ -61,12 +61,12 @@
 所谓硬分类，也就是$y\in [0,1]$，大致上可以分成线性判别分析，也就是Fisher判别分析和感知机这两类。
 
 \subsection{软分类}
-所谓硬分类，也就是$y\in \{0,1\}$，大致上可以分成生成式模型，Gaussian Distribution Analysis和著名的判别式模型，Logistic Regression。
+所谓硬分类，也就是$y\in \{0,1\}$，大致上可以分成生成式模型，Gaussian Discriminate Analysis和著名的判别式模型，Logistic Regression。
 \begin{equation}
     p(y|x)=\frac{p(x|y)p(y)}{p(x)} \propto p(x|y)p(y)
 \end{equation}
 
-也就是在求解$p(y=0|x)$或$p(y=1|x)$的时候，我们不直接求谁大谁小，而是转向求$p(x|y=0)p(y=0)$和$p(x|y=1)p(y=1)$。
+也就是在求解$p(y=0|x)$或$p(y=1|x)$的时候，我们不直接求谁大谁小，而是转向求$p(x|y=0)p(y=0)$和$p(x|y=1)p(y=1)$，即求联合概率。
 
 \section{总结}
 通过这节的学习，我们已经大体上建立了有关于统计学习方法的知识的框架，包括线性分类和线性回归的内容，并作出了一定的梳理。
