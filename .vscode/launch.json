@@ -11,12 +11,13 @@
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": [],
-            "cwd": "${workspaceFolder}",
+            // 设置当前文件为目录，可以通过相对地址引用库
+            "cwd": "${fileDirname}",
             "stopAtEntry": true, // if true then stop at the main entry (function)
             "environment": [],
             "externalConsole": true,
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: clang 生成活动文件"
+            "preLaunchTask": "C/C++: clang 生成活动文件",
         }
     ]
 }
