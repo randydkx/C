@@ -154,10 +154,52 @@ def gini(x, sample_weight=None):
     return gini_value
 
 
-def cond_gini(x, y, sample_weight=None):
-    """
-    计算条件gini系数:Gini(y,x)
-    """
+# def cond_gini(x, y, sample_weight=None):
+#     """
+#     计算条件gini系数:Gini(y,x)
+#     """
+#     x = np.asarray(x)
+#     y = np.asarray(y)
+#     # x中元素个数
+#     x_num = len(x)
+#     # 如果sample_weight为None设均设置一样
+#     if sample_weight is None:
+#         sample_weight = np.asarray([1.0] * x_num)
+#     # 计算
+#     gini_value = .0
+#     for x_value in set(x):
+#         x_index = np.where(x == x_value)
+#         new_x = x[x_index]
+#         new_y = y[x_index]
+#         new_sample_weight = sample_weight[x_index]
+#         p_i = 1.0 * len(new_x) / x_num
+#         gini_value += p_i * gini(new_y, new_sample_weight)
+#     return gini_value
+
+
+# def gini_gain(x, y, sample_weight=None):
+#     """
+#     gini值的增益
+#     """
+#     x_num = len(x)
+#     if sample_weight is None:
+#         sample_weight = np.asarray([1.0] * x_num)
+#     return gini(y, sample_weight) - cond_gini(x, y, sample_weight)
+
+
+# 计算Gini(D,A)
+def gini_D_conditioned_A(x,y,index_value,sample_weight):
+    """计算Gini(D,A)
+
+    Args:
+        x (ndarray): 数据矩阵
+        y (ndarray): 标签
+        index_value (int): 属性索引
+        sample_weight (list): 样本权重
+
+    Returns:
+        gini指数
+    """     
     x = np.asarray(x)
     y = np.asarray(y)
     # x中元素个数
@@ -166,26 +208,14 @@ def cond_gini(x, y, sample_weight=None):
     if sample_weight is None:
         sample_weight = np.asarray([1.0] * x_num)
     # 计算
-    gini_value = .0
-    for x_value in set(x):
-        x_index = np.where(x == x_value)
-        new_x = x[x_index]
-        new_y = y[x_index]
-        new_sample_weight = sample_weight[x_index]
-        p_i = 1.0 * len(new_x) / x_num
-        gini_value += p_i * gini(new_y, new_sample_weight)
+    indices1 = np.where(x == index_value)
+    indices2 = np.where(x != index_value)
+    D1 = x[indices1]
+    D2 = x[indices2]
+    y1 = y[indices1[0]]
+    y2 = y[indices2[0]]
+    gini_value = len(D1) / x_num * gini(y1,sample_weight[indices1[0]]) + len(D2) / x_num * gini(y2,sample_weight[indices2[0]])
     return gini_value
-
-
-def gini_gain(x, y, sample_weight=None):
-    """
-    gini值的增益
-    """
-    x_num = len(x)
-    if sample_weight is None:
-        sample_weight = np.asarray([1.0] * x_num)
-    return gini(y, sample_weight) - cond_gini(x, y, sample_weight)
-
 
 def square_error(x, sample_weight=None):
     """
@@ -368,3 +398,34 @@ if __name__=='__main__':
     b = np.array([[5,6],[7,8]])
     print(a*b)
     
+
+
+# 数据进行分箱操作，
+#  x < a -- 0
+#  a < x < b --- 1
+# 依次类推，将连续的属性取值离散化
+class DataBinWrapper(object):
+    def __init__(self,max_bin = 10):
+        super().__init__()
+        self.max_bin = max_bin
+        self.XrangeMap = None
+    
+    def fit(self,X):
+        _ , n_features = X.shape
+        self.XrangeMap = [[] for _ in range(n_features)]
+        for index in range(0,n_features):
+            # 找出对应的属性
+            tmp = sorted(X[:,index])
+            for percent in range(1,self.max_bin):
+                # 找到相应的分位数10%-90%分位数
+                percent_value = np.percentile(tmp,(1.0 * percent / self.max_bin) * 100 // 1)
+                self.XrangeMap[index].append(percent_value)
+            self.XrangeMap[index] = sorted(list(self.XrangeMap[index]))
+    
+    def transform(self,X):
+        # 如果只有一个样本，将x的每一维都进行分箱
+        # np.digitize返回的是给的元素在列表中的索引区间，从1开始
+        if X.ndim == 1:
+            return np.asarray([np.digitize(X[i],self.XrangeMap[i]) for i in range(X.shape[0])])
+        else:
+            return np.asarray([np.digitize(X[:,i],self.XrangeMap[i]) for i in range(X.shape[1])]).T
