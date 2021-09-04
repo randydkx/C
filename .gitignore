@@ -1,4 +1,5 @@
 .vscode
+.DS_Store
 build/
 Python/深度学习入门与实践/picture
 Python/深度学习入门与实践/model
