@@ -19,7 +19,7 @@ exec_name = os.path.basename(__file__)
 trace_file = trace_file_path + exec_name + ".data"
 
 # 训练数据
-path_minst_unpack = 'Your_MNIST_data_unpacked_Dir'
+path_minst_unpack = '/Users/wenshuiluo/coding/Python/深度学习入门与实践/picture/MNIST/raw'
 
 # General params
 class Params:

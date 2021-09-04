@@ -10,11 +10,11 @@ logging.config.fileConfig('../config/logging.conf')
 logger = logging.getLogger('main')
 
 # 持久化开关
-TRACE_FLAG = False
+TRACE_FLAG = True
 # loss曲线开关
-LOSS_CURVE_FLAG = False
+LOSS_CURVE_FLAG = True
 trace_file = '../traceData/tmp_data.txt'
-path_minst_unpack='YOUR_MNIST_data_unpack_DIR'
+path_minst_unpack='/Users/wenshuiluo/coding/Python/深度学习入门与实践/picture/MNIST/raw'
 
 INIT_W = 0.01 # 权值初始化参数
 LEARNING_BASE_RATE = 0.1 #基础学习率
@@ -81,8 +81,8 @@ def showCurves(idx ,x,ys, line_labels,colors,ax_labels):
 
 # 加载mnist
 def load_mnist_data(path,kind='train'):
-    labels_path = os.path.join(path,'%s-labels.idx1-ubyte' % kind)
-    images_path = os.path.join(path,'%s-images.idx3-ubyte' % kind)
+    labels_path = os.path.join(path,'%s-labels-idx1-ubyte' % kind)
+    images_path = os.path.join(path,'%s-images-idx3-ubyte' % kind)
 
     with open(labels_path,'rb') as labelfile:
         # 读取前8个bits

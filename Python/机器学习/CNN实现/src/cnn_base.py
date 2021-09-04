@@ -8,18 +8,19 @@ from matplotlib.ticker import MultipleLocator
 import numba
 
 # create logger
-exec_abs = os.getcwd()
-log_conf = exec_abs + '/config/logging.conf'
+# exec_abs = os.getcwd()
+log_conf = "../config/logging.conf"
 logging.config.fileConfig(log_conf)
 logger = logging.getLogger('main')
 
 # 持久化配置
-trace_file_path = 'D:/0tmp/'
+trace_file_path = '../'
 exec_name = os.path.basename(__file__)
 trace_file = trace_file_path + exec_name + ".data"
+# print(trace_file)
 
 # 训练数据
-path_minst_unpack = 'F:\cwork\Project\TF_py3.6\MNIST_data_unpack'
+path_minst_unpack = '/Users/wenshuiluo/coding/Python/深度学习入门与实践/picture/MNIST/raw'
 
 # General params
 class Params:

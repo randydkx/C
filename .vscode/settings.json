@@ -13,8 +13,10 @@
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-
-        "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && $dir$fileNameWithoutExt",
+        // c++执行设置，包括openmp配置
+        // "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && $dir$fileNameWithoutExt",
+        // c++执行设置，编译输出之后打印out文件
+        "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && $dir$fileNameWithoutExt.out",
     },
     "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
 }

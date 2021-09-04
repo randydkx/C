@@ -5,19 +5,47 @@
     // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        // {
+        //     "name": "(lldb) 启动",
+        //     "type": "cppdbg",
+        //     "request": "launch",
+        //     "program": "输入程序名称，例如 ${workspaceFolder}/a.out",
+        //     "args": [],
+        //     "stopAtEntry": false,
+        //     "cwd": "${fileDirname}",
+        //     "environment": [],
+        //     "externalConsole": false,
+        //     "MIMode": "lldb"
+        // },
+
+        // python调试器
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
         {
             "name": "(lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
+            "cwd": "${fileDirname}",
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": [],
             // 设置当前文件为目录，可以通过相对地址引用库
-            "cwd": "${fileDirname}",
             "stopAtEntry": true, // if true then stop at the main entry (function)
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false,
             "MIMode": "lldb",
-            "preLaunchTask": "C/C++: clang 生成活动文件",
+            "preLaunchTask": "g++ - Build and debug active file",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty -printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ]
 }
