@@ -9,7 +9,8 @@ import logging.config
 import random
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator, FuncFormatter
-logging.config.fileConfig('../config/logging.conf')
+# logging是线程不安全的，需要设定绝对路径才能成功调试
+logging.config.fileConfig('/Users/wenshuiluo/coding/Python/机器学习/CNN实现/config/logging.conf')
 # create logger
 logger = logging.getLogger('main')
 
@@ -17,12 +18,12 @@ logger = logging.getLogger('main')
 TRACE_FLAG = False
 # loss曲线开关
 LOSS_CURVE_FLAG = True
-trace_file = '../traceData/tmp_data.txt'
+trace_file = '/Users/wenshuiluo/temp/tmpdata/tmp_data.log'
 path_minst_unpack = '/Users/wenshuiluo/coding/Python/深度学习入门与实践/picture/MNIST/raw'
 
 LEARNING_RATE = 0.1  # 学习率
 EPOCH_NUM = 10  # EPOCH
-MINI_BATCH_SIZE = 1000  # batch_size
+MINI_BATCH_SIZE = 100  # batch_size
 ITERATION = 15  # 每batch训练轮数
 TYPE_K = 10  # 分类类别
 
@@ -111,22 +112,12 @@ def load_mnist_data(path, kind='train'):
 
 
 def softmax(y):
-    # 对每一行：所有元素减去该行的最大的元素,避免exp溢出,得到1*N矩阵,
-    max_y = np.max(y, axis=1)
-    # 极大值重构为N * 1 数组
-    max_y.shape = (-1, 1)
-    # 每列都减去该列最大值
-    y1 = y - max_y
+    # # 每列都减去该列最大值
+    y1 = y - np.max(y,axis=1,keepdims=True)
     # 计算exp
     exp_y = np.exp(y1)
-    # 按行求和，得1*N 累加和数组
-    sigma_y = np.sum(exp_y, axis=1)
-    # 累加和reshape为N*1 数组
-    sigma_y.shape = (-1, 1)
     # 计算softmax得到N*K矩阵
-    softmax_y = exp_y/sigma_y
-
-    return softmax_y
+    return exp_y/np.sum(exp_y, axis=1,keepdims=True)
 
 # 计算交叉熵
 # 输入为两个 N * K 矩阵,y_为正确答案
@@ -150,20 +141,24 @@ def main():
     # 初始化
 
     # 持久化参数初始化
-    try:
-        os.remove(trace_file)
-    except FileNotFoundError:
-        pass
+    # try:
+    #     os.remove(trace_file)
+    # except FileNotFoundError:
+    #     pass
 
     # 类别标签定义，用于构建输出层节点
     LABELS_NUMS = [i for i in range(TYPE_K)]
 
     # 加载训练数据
     images_ori, labels = load_mnist_data(path_minst_unpack, 'train')
+    # 用一部分数据进行训练
+    used_size = 1000
+    images_ori,labels = images_ori[:used_size],labels[:used_size]
     logger.info('train data loaded')
 
     # 加载验证数据
     images_v_ori, labels_v = load_mnist_data(path_minst_unpack, 't10k')
+    images_v_ori,labels_v = images_v_ori[:used_size],labels_v[:used_size]
     logger.info('10k data loaded')
 
     # 图像数据归一化
@@ -179,28 +174,27 @@ def main():
     # 样本类别 K
     n_class = TYPE_K
     # 样本范围
-    sample_range = [i for i in range(len(labels))]
-    valid_range = [i for i in range(len(labels_v))]
+    sample_range = list(range(len(labels)))
+    valid_range = list(range(len(labels_v)))
 
     if True == LOSS_CURVE_FLAG:
         cur_p_idx = 0
         curv_x = np.zeros(EPOCH_NUM*100, dtype=int)
         curv_ys = np.zeros((4, EPOCH_NUM*100), dtype=DTYPE_DEFAULT)
-
+    # 每个epoch中训练miniBatch的次数
     batches_per_epoch = int(np.ceil(len(labels) / MINI_BATCH_SIZE))
     for epoch in range(EPOCH_NUM):
-        rest_range = sample_range
+        indices = list(range(len(sample_range)))
+        np.random.shuffle(indices)
         for batch in range(batches_per_epoch):
             # 无放回抽样每次随机抽一个mini-batch进行I轮训练，遍历全部训练sample
-            curr_batch_size = min(MINI_BATCH_SIZE, len(rest_range))
-            samples = random.sample(rest_range, curr_batch_size)
-            rest_range = list(set(rest_range).difference(set(samples)))
+            samples = indices[MINI_BATCH_SIZE * batch: min(MINI_BATCH_SIZE * (batch + 1),len(indices))]
+            curr_batch_size = len(samples)
 
             #   输入 N*D
-            x = np.array([images[sample]
-                          for sample in samples], dtype=DTYPE_DEFAULT)
+            x = np.array(images[samples], dtype=DTYPE_DEFAULT)
             #   正确类别 1*K
-            values = np.array([labels[sample] for sample in samples])
+            values = np.array(labels[samples])
             # 正确标准编码为onehot encod   N * K
             y_ = np.eye(n_class)[values]
 
@@ -213,17 +207,18 @@ def main():
                 softmax_y = softmax(y)
 
                 # 每个epoch结果验证
-                # if   (batches_per_epoch -1 ==batch) and (ITERATION -1 == i):
                 # 每个mini-batch验证及结果
                 if ITERATION - 1 == i:
 
-                    # train_loss
+                    # 训练误差，使用交叉熵损失函数，取出每个样本对应正确标签的预测结果
+                    # 对所有样本的交叉熵取平均值
                     corect_logprobs = - \
                         np.log(softmax_y[range(curr_batch_size), values])
                     data_loss = np.sum(corect_logprobs) / curr_batch_size
                     loss = data_loss
 
-                    # 测试集acc
+                    # 测试集acc，在验证集上测试正确率
+                    # 测试正确率时因为不需要损失函数，所以不需要计算经过softmax层之后的结果
                     y_v = np.matmul(images_v, w) + b  # 和np.dot作用一样 N * K
                     # 预测结果 1 * 100
                     labels_pre = np.argmax(y_v, axis=1)
@@ -234,7 +229,7 @@ def main():
                         softmax_y_v = softmax(y_v)
                         corect_logprobs_v = - \
                             np.log(softmax_y_v[range(len(labels_v)), labels_v])
-                        data_loss_v = np.sum(corect_logprobs_v) / len(labels_v)
+                        data_loss_v = np.mean(corect_logprobs_v)
                         loss_v = data_loss_v
 
                         # train_acc
@@ -263,12 +258,12 @@ def main():
 
                 # 反向传播处理
                 softmax_y[range(curr_batch_size), values] -= 1
-                delta_y_mean = softmax_y / curr_batch_size
+                doutput = softmax_y / curr_batch_size
 
-                delta_w = np.dot(x.T, delta_y_mean)
+                delta_w = x.T @ doutput
                 w = w - LEARNING_RATE * delta_w  # 更新w
 
-                delta_b = np.sum(delta_y_mean, axis=0)
+                delta_b = np.sum(doutput, axis=0)
                 b = b - LEARNING_RATE * delta_b  # 更新b
 
     # 持久化训练结果
