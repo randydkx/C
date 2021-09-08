@@ -9,8 +9,7 @@ import numba
 
 # create logger
 # exec_abs = os.getcwd()
-log_conf = "../config/logging.conf"
-logging.config.fileConfig(log_conf)
+logging.config.fileConfig('/Users/wenshuiluo/coding/Python/机器学习/CNN实现/config/logging.conf')
 logger = logging.getLogger('main')
 
 # 持久化配置
@@ -40,7 +39,7 @@ class Params:
     EPS2 = 1e-10
     REG_PARA = 0.5  # 正则化乘数
     LAMDA = 1e-4  # 正则化系数lamda
-    EPOCH_NUM = 10  # EPOCH
+    EPOCH_NUM = 1  # EPOCH
     MINI_BATCH_SIZE = 200  # batch_size
     ITERATION = 1  # 每batch训练轮数
     TYPE_K = 10  # 分类类别
@@ -64,6 +63,7 @@ class Params:
 
     CONV2_F_SIZE = 5
     CONV2_STRIDES = 1
+    CONV2_I_SIZE = 14 #第二层卷积的输入尺寸，是第一层卷积之后得到 28 * 28 图片之后进行pooling得到14 * 14的图片
     CONV2_O_SIZE = 14
     CONV2_O_DEPTH = 64
 
@@ -102,7 +102,7 @@ class Tools:
     # 否则使用jit后的np.matmul方法
     @numba.jit
     def matmul(a, b):
-        return np.matmul(a, b)
+        return a @ b
 
     # 输出层结果转换为标准化概率分布，
     # 入参为原始线性模型输出y ，N*K矩阵，
@@ -110,19 +110,11 @@ class Tools:
     @staticmethod
     def softmax(y):
         # 对每一行：所有元素减去该行的最大的元素,避免exp溢出,得到1*N矩阵,
-        max_y = np.max(y, axis=1)
-        # 极大值重构为N * 1 数组
-        max_y.shape = (-1, 1)
-        # 每列都减去该列最大值
-        y1 = y - max_y
+        max_y = np.max(y, axis=1,keepdims=True)
         # 计算exp
-        exp_y = np.exp(y1)
-        # 按行求和，得1*N 累加和数组
-        sigma_y = np.sum(exp_y, axis=1)
-        # 累加和reshape为N*1 数组
-        sigma_y.shape = (-1, 1)
+        exp_y = np.exp(y - max_y)
         # 计算softmax得到N*K矩阵
-        softmax_y = exp_y / sigma_y
+        softmax_y = exp_y / np.sum(exp_y, axis=1,keepdims=True)
 
         return softmax_y
 
@@ -135,7 +127,7 @@ class Tools:
     # 持久化训练参数
     def traceMatrix(M, epoch, name):
 
-        if TRACE_FLAG == False:
+        if Params.TRACE_FLAG == False:
             return 0
         row = len(M)
         try:
@@ -161,8 +153,8 @@ class MnistData(object):
 
     # 加载mnist
     def _load_mnist_data(self, kind='train'):
-        labels_path = os.path.join(self.absPath, '%s-labels.idx1-ubyte' % kind)
-        images_path = os.path.join(self.absPath, '%s-images.idx3-ubyte' % kind)
+        labels_path = os.path.join(self.absPath, '%s-labels-idx1-ubyte' % kind)
+        images_path = os.path.join(self.absPath, '%s-images-idx3-ubyte' % kind)
 
         with open(labels_path, 'rb') as labelfile:
             # 读取前8个bits
@@ -236,14 +228,17 @@ class FCLayer(object):
 
     # 反向传播方法(误差和权参)
     def bp(self, input, delta, lrt):
+        # delta是误差对于当前网络输出的梯度，也就是error_h
         self.deltaOri = self.activator.bp(delta, self.out)
-
+        # 计算error_h-1
         self.bpDelta()
+        # 更新当前层级的w 和 b
         self.bpWeights(input, lrt)
 
         return self.deltaPrev
 
     # 输出误差反向传播至上一层
+    # 计算对于当前层的w的偏导
     def bpDelta(self):
         self.deltaPrev = Tools.matmul(self.deltaOri, self.w.T)
         return self.deltaPrev
@@ -284,7 +279,7 @@ class ConvLayer(object):
 
     # 前向传播,激活后输出
     def inference(self, input):
-
+        
         self.out = self.activator.activate(self.conv_efficient(input,
                                                                self.w, self.b,
                                                                self.o_size, self.name,
@@ -292,9 +287,10 @@ class ConvLayer(object):
         return self.out
 
     # 反向传播(误差和权参),先对输出误差求导再反向传播至上一层
+    # 传入的delta是激活之后的误差(误差E关于输出张量的误差张量），计算的deltaOri是激活之前的误差
     def bp(self, input, delta, lrt):
         self.deltaOri = self.activator.bp(delta, self.out)
-
+        # 计算对于输入层来说(激活之后的值）的误差张量以及权重更新张量
         self.deltaPrev, dw, db = self.bp4conv(self.deltaOri, self.w, input,
                                               self.strides, 'd' + self.name)
 
@@ -327,7 +323,7 @@ class ConvLayer(object):
     # 返回: 卷积层加权输出(co-relation)
     #       conv : batch * depth_o * depth_i * output_size * output_size
     def conv4dw(self, x, w, output_size, b=0, strides=1, x_v=False):
-        batches = x.shape[0]
+        batches = x.shape[0] # 此时w是卷积输出层的误差矩阵，shape[0]同样代表的是batchsize
         depth_i = x.shape[1]
         filter_size = w.shape[2]  # 过滤器尺寸,对应卷积层误差矩阵尺寸
         x_per_filter = filter_size * filter_size
@@ -335,12 +331,13 @@ class ConvLayer(object):
 
         if False == x_v:  # 原始规格:
             input_size = x.shape[2]  #
-            p = int(((output_size - 1) * strides + filter_size - input_size) / 2)  # padding尺寸
+            p = ((output_size - 1) * strides + filter_size - input_size) // 2  # padding尺寸
             if p > 0:  # 需要padding处理
                 x_pad = Tools.padding(x, p)
             else:
                 x_pad = x
             logger.debug("vec4dw begin..")
+            # x_col: batches *channel* (filter_size * filter_size) * ( conv_o_size * conv_o_size)
             x_col = self.vectorize4convdw_batches(x_pad, filter_size, output_size, strides)
             logger.debug("vec4dw end..")
         else:  # x_col规格
@@ -349,12 +346,17 @@ class ConvLayer(object):
         w_row = w.reshape(batches, depth_o, x_per_filter)
         conv = np.zeros((batches, depth_i, depth_o, (output_size * output_size)), dtype=self.dataType)
         logger.debug("conv4dw matmul begin..")
+        # 对每个depth_i，计算得到对应的depth_o个卷积结果
+        # 也就是depth_o个卷积组中每组取第一个卷积核得到的结果
         for batch in range(batches):
             for col in range(depth_i):
+                # 对每个batch中的卷积输入张量的每一个矩阵，都计算depth_o 个卷积核的梯度
                 conv[batch, col] = Tools.matmul(w_row[batch], x_col[batch, col])
 
+        # 对batch中的所有样本的dw求和
         conv_sum = np.sum(conv, axis=0)
         # transpose而不是直接reshape避免错位
+        # 计算完成之后的卷积大小是depth_i * depth_o * (output_size * output_size)
         conv = conv_sum.transpose(1, 0, 2).reshape(depth_o, depth_i, output_size, output_size)
 
         logger.debug("conv4dw matmul end..")
@@ -368,7 +370,7 @@ class ConvLayer(object):
     #           x.ndim=3:x_col规格,已padding
     #                   batch * (depth_i * filter_size * filter_size) * (out_size*out_size)
     #     w规格: depth_o * depth_i * filter_size * filter_size ， ，
-    #           depth_o为过滤器个数或输出矩阵深度，depth_i和 x的 depth一致
+    #           depth_o为过滤器个数或输出矩阵深度（也就是filters的组数），depth_i和 x的 depth一致
     #           w_row: depth_o * (depth_i * filter_size * filter_size)
     #     b规格: 长度为 depth_o*1 的数组,b的长度即为过滤器个数或节点深度,和w的depth_o一致，可以增加校验。
     #     output_size:卷积输出尺寸
@@ -392,20 +394,18 @@ class ConvLayer(object):
                 x_pad = x
             st = time.time()
             logger.debug("vecting begin..")
-            # 可以根据自己的硬件环境，在三种优化方式中选择较快的一种
+            # x_col: batches *(channel* filter_size * filter_size) * ( conv_o_size * conv_o_size)
             x_col = self.vectorize4conv_batches(x_pad, filter_size, output_size, strides)
-            #x_col = spd.vectorize4conv_batches(x_pad, filter_size, output_size, strides)
-            #x_col = vec_by_idx(x_pad, filter_size, filter_size,vec_idx_key,0, strides)
 
             logger.debug("vecting end.. %f s" % (time.time() - st))
         else:  # x_col规格
             x_col = x
-
+        # 将卷积核展开，便于和向量化的x进行卷积运算
         w_row = w.reshape(depth_o, x_col.shape[1])
         conv = np.zeros((batches, depth_o, (output_size * output_size)), dtype=self.dataType)
         st1 = time.time()
         logger.debug("matmul begin..")
-        #不广播，提高处理效率
+        #不广播，提高处理效率，对每个batch中的每个output都计算卷积，
         for batch in range(batches):
             conv[batch] = Tools.matmul(w_row, x_col[batch]) + b
 
@@ -429,6 +429,7 @@ class ConvLayer(object):
         channels = x.shape[1]
         x_per_filter = filter_size * filter_size
         x_col = np.zeros((batches, channels, x_per_filter, conv_o_size * conv_o_size), dtype=self.dataType)
+        # 对应于conv_o_size上的每个点都计算原图中的卷积区域并向量化
         for j in range(x_col.shape[3]):
             b = int(j / conv_o_size) * strides
             c = (j % conv_o_size) * strides
@@ -436,7 +437,7 @@ class ConvLayer(object):
 
         return x_col
 
-    # cross-correlation向量化优化
+    # cross-correlation向量化优化,对于输入x得到x_col
     # x_col = (depth_i * filter_size * filter_size) * (conv_o_size * conv_o_size)
     # w: depth_o * （ depth_i/channel * conv_i_size * conv_o_size） =  2*3*3*3
     # reshape 为 w_row =  depth_o * (depth_i/channel * (conv_i_size * conv_o_size)) = 2 * 27
@@ -462,6 +463,7 @@ class ConvLayer(object):
         for j in range(x_col.shape[2]):
             b = int(j / conv_o_size) * strides
             c = (j % conv_o_size) * strides
+            # 每个batch中每一个输出点对应的卷积区域
             x_col[:, :, j] = x[:, :, b:b + filter_size, c:c + filter_size].reshape(batches, shape_t)
 
         return x_col
@@ -508,6 +510,10 @@ class ConvLayer(object):
         logger.debug("d_i ready..")
 
         # 每个d_o上的误差矩阵相加
+        # 对一个batch内的所有样本产生的db求平均
+        # 由于在传递的最开始就已经对每个元素乘了1/N，所以不需要对误差进行平均
+        # 在误差方向传递的时候不存在一层的误差和另一层的误差求积的情况
+        # axis=-1表示的是对最后一个维度求和
         db = np.sum(np.sum(np.sum(d_o, axis=-1), axis=-1), axis=0).reshape(-1, 1)
         logger.debug("db ready.. %f s" % (time.time() - st))
 
@@ -542,6 +548,7 @@ class MaxPoolLayer(object):
 
         pooling, self.poolIdx = self.pool(input, self.f_size, self.strides, 'MAX')
         self.shapeOfOriOut = pooling.shape
+        # 需要进入全连接层时将每个batch中的数据都展开变成 o_size * o_size * o_depth
         if True == self.needReshape:
             self.out = pooling.reshape(pooling.shape[0], -1)
         else:
@@ -592,8 +599,9 @@ class MaxPoolLayer(object):
             c = (j % output_size) * strides
             x_vec[:, :, j, 0:x_per_filter] = x[:, :, b:b + strides, c:c + strides].reshape(batches, depth_i,
                                                                                            x_per_filter)
-
+        # 对第三个维度进行最大池化，
         pooling = np.max(x_vec, axis=3).reshape(batches, depth_i, output_size, output_size)
+        # 保存最大池化后保留的数据单元对应的索引，按照x_vec的最后一维度对应的索引选择单位矩阵的行
         pooling_idx = np.eye(x_vec.shape[3], dtype=int)[x_vec.argmax(3)]
         logger.debug("pooling end..")
 
@@ -625,6 +633,7 @@ class MaxPoolLayer(object):
         dpool_i_tmp = np.zeros((batches, depth_i, input_size, input_size), dtype=self.dataType)
         pool_idx_reshape = np.zeros(dpool_i_tmp.shape, dtype=self.dataType)
         for j in range(y_per_o):
+            # 得到(b,c)是在input图中每个channel对应的索引
             b = int(j / pool_o_size) * pool_strides
             c = (j % pool_o_size) * pool_strides
             # pool_idx_reshape规格同池化层输入，每个block的max value位置值为1，其余位置值为0
@@ -657,7 +666,7 @@ class AdmOptimizer(object):
         self.v_b = []
         self.Iter = 0
 
-    # lazy init
+    # 初始化一阶和二阶动量矩
     def initMV(self, shapeW, shapeB):
         if (False == self.isInited):
             self.m_w = np.zeros(shapeW, dtype=self.dataType)
@@ -676,8 +685,6 @@ class AdmOptimizer(object):
         return wNew, bNew
 
     def OptimzAdam(self, x, dx, m, v, lr, t):
-        beta1 = self.beta1
-        beta2 = self.beta2
         m = self.beta1 * m + (1 - self.beta1) * dx
         mt = m / (1 - self.beta1 ** t)
         v = self.beta2 * v + (1 - self.beta2) * (dx ** 2)
@@ -693,8 +700,8 @@ class ReLU(object):
         return np.maximum(0, x)
 
     @staticmethod
-    def bp(delta, x):
-        delta[x <= 0] = 0
+    def bp(delta, h_output):
+        delta[h_output <= 0] = 0
         return delta
 
 # Pass Activator
@@ -769,14 +776,16 @@ class Session(object):
         self.input = []
 
     # 前向传播和验证
+    # 返回值delta计算的是损失E关于最后一层输出的梯度（一共curr_batch_size个样本的梯度）
     def inference(self, train_data, y_):
         curr_batch_size = len(y_)
         self.input = train_data
-        dataLayer = train_data
+        dataLayer = self.input
         for layer in self.layers:
             dataLayer = layer.inference(dataLayer)
 
         ## acc
+        # 通过上面的计算完成之后得到的是最后一层输出的值
         y = np.argmax(dataLayer, axis=1)
         acc_t = np.mean(y == y_)
         # 最后做softmax
@@ -796,12 +805,14 @@ class Session(object):
     def bp(self, delta, lrt):
         deltaLayer = delta
         for i in reversed(range(1, len(self.layers))):
+            # 上一层输出作为输入，当前层的误差项deltaLayer作为层级误差
             deltaLayer = self.layers[i].bp(self.layers[i - 1].out, deltaLayer, lrt)
 
-        # 第一层，以输入作为输出,误差不再反向传播
+        # 第1层一网络的input作为输入，计算input层和第一层之间的权重
         self.layers[0].bp(self.input, deltaLayer, lrt)
 
     # 实现训练步骤
+    # 一个train_steps实现的是前向传播和反向传播
     def train_steps(self, train_data, y_, lrt):
         acc, loss, delta = self.inference(train_data, y_)
         self.bp(delta, lrt)
@@ -843,7 +854,7 @@ def main():
                          Params.POOL1_STRIDES, False, Params.DTYPE_DEFAULT)
 
     conv2Optimizer = AdmOptimizer(Params.BETA1, Params.BETA2, Params.EPS, Params.DTYPE_DEFAULT)
-    conv2 = ConvLayer('conv2', Params.MINI_BATCH_SIZE, Params.IMAGE_SIZE, Params.CONV1_O_DEPTH,
+    conv2 = ConvLayer('conv2', Params.MINI_BATCH_SIZE, Params.CONV2_I_SIZE, Params.CONV1_O_DEPTH,
                       Params.CONV2_F_SIZE, Params.CONV2_O_DEPTH,
                       Params.CONV2_O_SIZE, Params.CONV2_STRIDES,
                       ReLU, conv2Optimizer, Params.DTYPE_DEFAULT)
@@ -866,6 +877,7 @@ def main():
     # 开始训练过程
     for epoch in range(Params.EPOCH_NUM):
         # 获取当前epoch使用的learing rate
+        # 小于key的最后一个learning rate作为学习率
         for key in Params.DIC_L_RATE.keys():
             if (epoch + 1) < key:
                 break
@@ -878,11 +890,12 @@ def main():
         # 开始训练
         for batch in range(len(dataRngs)):
             start = time.time()
+            # 获得一个batch的数据
             x, y_ = mnist.getTrainDataByRng(dataRngs[batch])
             acc_t, loss_t = sess.train_steps(x, y_, lrt)
 
-            if (batch % 10 == 0):  # 10个batch show一次日志
-                logger.info("epoch %2d-%3d, loss= %.8f,acc_t= %.3f st[%.1f]" % (
+            
+            logger.info("epoch %2d-%3d, loss= %.8f,acc_t= %.3f st[%.1f]" % (
                     epoch, batch, loss_t, acc_t, s_t))
 
             # 使用随机验证样本验证结果
@@ -897,7 +910,6 @@ def main():
                     view.addData(fc1Optimizer.Iter,
                                  loss_t, loss_v, acc_t, acc_v)
 
-            s_t = time.time() - start
             s_t = time.time() - start
 
 
