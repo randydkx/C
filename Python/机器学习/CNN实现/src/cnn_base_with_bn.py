@@ -9,12 +9,11 @@ import numba
 
 # create logger
 exec_abs = os.getcwd()
-log_conf = exec_abs + '/config/logging.conf'
-logging.config.fileConfig(log_conf)
+logging.config.fileConfig('/Users/wenshuiluo/coding/Python/机器学习/CNN实现/config/logging.conf')
 logger = logging.getLogger('main')
 
 # 持久化配置
-trace_file_path = 'Your_trace_file_dir'
+trace_file_path = '../'
 exec_name = os.path.basename(__file__)
 trace_file = trace_file_path + exec_name + ".data"
 
@@ -41,11 +40,11 @@ class Params:
     EPS2 = 1e-10
     REG_PARA = 0.5  # 正则化乘数
     LAMDA = 1e-4  # 正则化系数lamda
-    EPOCH_NUM = 6  # EPOCH
+    EPOCH_NUM = 1  # EPOCH
     MINI_BATCH_SIZE = 200  # batch_size
     ITERATION = 1  # 每batch训练轮数
     TYPE_K = 10  # 分类类别
-    DROPOUT_RATE = 0.5  # dropout%
+    # DROPOUT_RATE = 0.5  # dropout%
     VALIDATION_CAPACITY = 2000  # 验证集大小
     VAL_FREQ = 30  # val per how many batches
     IMAGE_SIZE = 28
@@ -66,6 +65,7 @@ class Params:
 
     CONV2_F_SIZE = 5
     CONV2_STRIDES = 1
+    CONV2_I_SIZE = 14
     CONV2_O_SIZE = 14
     CONV2_O_DEPTH = 64
 
@@ -137,7 +137,7 @@ class Tools:
     # 持久化训练参数
     def traceMatrix(M, epoch, name):
 
-        if TRACE_FLAG == False:
+        if Params.TRACE_FLAG == False:
             return 0
         row = len(M)
         try:
@@ -163,8 +163,8 @@ class MnistData(object):
 
     # 加载mnist
     def _load_mnist_data(self, kind='train'):
-        labels_path = os.path.join(self.absPath, '%s-labels.idx1-ubyte' % kind)
-        images_path = os.path.join(self.absPath, '%s-images.idx3-ubyte' % kind)
+        labels_path = os.path.join(self.absPath, '%s-labels-idx1-ubyte' % kind)
+        images_path = os.path.join(self.absPath, '%s-images-idx3-ubyte' % kind)
 
         with open(labels_path, 'rb') as labelfile:
             # 读取前8个bits
@@ -983,7 +983,7 @@ def main():
     conv2Optimizer = AdmOptimizer(Params.BETA1, Params.BETA2, Params.EPS, Params.DTYPE_DEFAULT)
 
     # 在Conv2和relu/pool2之间加入bn2,conv2的输出不再激活
-    conv2 = ConvLayer('conv2', Params.MINI_BATCH_SIZE, Params.IMAGE_SIZE, Params.CONV1_O_DEPTH,
+    conv2 = ConvLayer('conv2', Params.MINI_BATCH_SIZE, Params.CONV2_I_SIZE, Params.CONV1_O_DEPTH,
                       Params.CONV2_F_SIZE, Params.CONV2_O_DEPTH,
                       Params.CONV2_O_SIZE, Params.CONV2_STRIDES,
                       NoAct, conv2Optimizer, Params.DTYPE_DEFAULT)

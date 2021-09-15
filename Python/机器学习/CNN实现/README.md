@@ -1,22 +1,54 @@
-# nn_base
-说明：
+# 从感知机到卷积神经网络
 
-[知乎专栏 机器学习笔记 ](https://zhuanlan.zhihu.com/p/38540816)的实现源码。
-**不借助深度学习框架**，从原理、到工程级应用的实践过程。
+### 推导感知机+全连接神经网络+卷积神经网络的inference+backpropagation过程（提供基于numpy的实现代码，LeNet对手写数字进行识别，其中CNN对识别在一个epoch内精确度就能达到98%以上）
 
-[数据集->感知机->神经网络基本结构->隐藏层->卷积神经网络->Batch Norm]
-
-nn_base/src/nn_sample.py	**神经网络基本结构**
-
-nn_base/src/nn_sample_hiddenLayer.py	**隐藏层去线性化**
-
-nn_base/src/cnn_base.py		**卷积神经网络基础构件**（面向对象）
-
-nn_base/src/cnn_base_with_bn.py		**增加BN处理逻辑**（面向对象）		
+![avatar](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142623813-757725636.jpg)
 
 
 
-可以从[知乎专栏](https://zhuanlan.zhihu.com/p/38540816) 或者公众号 **JerryX007Srv** 获得更新。
+![2](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142631994-948702170.jpg)
 
-![wechatSrv](https://ws1.sinaimg.cn/large/840c5815ly1ft85ikph1xj2076076jrv.jpg '获得更新')
+
+
+![3](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142636206-1240401119.jpg)
+
+
+
+![4](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142640524-1477464128.jpg)
+
+
+
+
+
+![5](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142646345-1084816271.jpg)
+
+
+
+![6](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142651192-1280446345.jpg)
+
+
+
+![7](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142655099-263153844.jpg)
+
+
+
+![8](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142704016-1402449274.jpg)
+
+
+
+![9](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142708523-279102601.jpg)
+
+
+
+![10](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142712197-1020367717.jpg)
+
+
+
+![11](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142716261-1978252124.jpg)
+
+
+
+![12](https://img2020.cnblogs.com/blog/1777627/202109/1777627-20210908142719776-1322304110.jpg)
+
+
 

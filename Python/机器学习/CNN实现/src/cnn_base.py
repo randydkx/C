@@ -645,6 +645,7 @@ class MaxPoolLayer(object):
             # dpool_i_tmp规格规格同池化层输入，每个block的值均以对应dpool元素填充
             for row in range(pool_f_size):  # 只需要循环 x_per-filter 次得到 填充扩展后的delta
                 for col in range(pool_f_size):
+                    # 对应池化区域每个位置都设置成最大池化之后对应的误差项
                     dpool_i_tmp[:, :, b + row, c + col] = dpool_reshape[:, :, j]
         # 相乘后，max value位置delta向上传播，其余位置为delta为0
         dpool_i = dpool_i_tmp * pool_idx_reshape

@@ -1,9 +1,10 @@
-.DS_Store
-build/
+# 匹配所有文件夹下对应名称的文件
+**/.DS_Store
+**/build/
 Python/深度学习入门与实践/picture
 Python/深度学习入门与实践/model
 Python/深度学习入门与实践/data
-*.out
+**/*.out
 
 # CMake files
 CMakeLists.txt.user
@@ -17,7 +18,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 _deps
-*.a
+**/*.a
 Demo
 
 # Build results
