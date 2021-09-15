@@ -702,7 +702,7 @@ class BNLayer(object):
         self.out = self.activator.activate(oriOut)
         return self.out
 
-    # for training
+    # 训练阶段的前向传导
     def bnForward_tr(self, x, gamma, beta, eps):
 
       mu = np.mean(x, axis=0)
@@ -741,7 +741,7 @@ class BNLayer(object):
       return dx, dgamma, dbeta
 
 
-    # for predict, Unbiased Estimation
+    # 推断阶段的前向传导，使用的是整个数据集的无偏估计量
     def bnForward_inf(self, x, gamma, beta, eps):
 
       N = self.miniBatchesSize
