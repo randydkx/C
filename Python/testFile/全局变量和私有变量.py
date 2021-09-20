@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class Person(object):
     def __init__(self, name, age):
         self.__name = name
@@ -16,6 +19,11 @@ class Person(object):
 
     def print_info(self):
         print('%s: %s' % (self.__name, self._age))
+    
+    # 将该类的变量可以作为函数进行调用
+    def __call__(self):
+        print('callable')
+
 
 
 p = Person('balala', 20)
@@ -27,3 +35,4 @@ p.set_age_fun(35)
 print(p.get_age_fun())  # 35
 
 print(p.print_info())  # balala: 35
+p()
