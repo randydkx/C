@@ -1,4 +1,3 @@
-# %%
 # code by Tae Hwan Jung(Jeff Jung) @graykode, Derek Miller @dmmiller612
 # Reference : https://github.com/jadore801120/attention-is-all-you-need-pytorch
 #           https://github.com/JayParks/transformer
@@ -7,6 +6,8 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import matplotlib.pyplot as plt
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True';
 
 # S: Symbol that shows starting of decoding input
 # E: Symbol that shows starting of decoding output

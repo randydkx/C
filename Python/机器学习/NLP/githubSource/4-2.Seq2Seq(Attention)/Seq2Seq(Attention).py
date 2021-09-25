@@ -5,6 +5,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True';
 
 # S: Symbol that shows starting of decoding input
 # E: Symbol that shows starting of decoding output
