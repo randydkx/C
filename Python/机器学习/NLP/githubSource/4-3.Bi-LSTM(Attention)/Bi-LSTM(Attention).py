@@ -1,12 +1,14 @@
-# %%
 # code by Tae Hwan Jung(Jeff Jung) @graykode
 # Reference : https://github.com/prakashpandey9/Text-Classification-Pytorch/blob/master/models/LSTM_Attn.py
+# Bi-LSTM for classification using Attention Machenism
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True';
 
 class BiLSTM_Attention(nn.Module):
     def __init__(self):
@@ -17,12 +19,13 @@ class BiLSTM_Attention(nn.Module):
         self.out = nn.Linear(n_hidden * 2, num_classes)
 
     # lstm_output : [batch_size, n_step, n_hidden * num_directions(=2)], F matrix
+    # compute attention vector(context vector) w.r.t lstm's hidden vectors
     def attention_net(self, lstm_output, final_state):
-        hidden = final_state.view(-1, n_hidden * 2, 1)   # hidden : [batch_size, n_hidden * num_directions(=2), 1(=n_layer)]
+        hidden = final_state.contiguous().view(-1, n_hidden * 2, 1)   # hidden : [batch_size, n_hidden * num_directions(=2), 1(=n_layer)]
         attn_weights = torch.bmm(lstm_output, hidden).squeeze(2) # attn_weights : [batch_size, n_step]
         soft_attn_weights = F.softmax(attn_weights, 1)
         # [batch_size, n_hidden * num_directions(=2), n_step] * [batch_size, n_step, 1] = [batch_size, n_hidden * num_directions(=2), 1]
-        context = torch.bmm(lstm_output.transpose(1, 2), soft_attn_weights.unsqueeze(2)).squeeze(2)
+        context = torch.bmm(soft_attn_weights.unsqueeze(1),lstm_output).squeeze(1)
         return context, soft_attn_weights.data.numpy() # context : [batch_size, n_hidden * num_directions(=2)]
 
     def forward(self, X):
@@ -34,7 +37,8 @@ class BiLSTM_Attention(nn.Module):
 
         # final_hidden_state, final_cell_state : [num_layers(=1) * num_directions(=2), batch_size, n_hidden]
         output, (final_hidden_state, final_cell_state) = self.lstm(input, (hidden_state, cell_state))
-        output = output.permute(1, 0, 2) # output : [batch_size, len_seq, n_hidden]
+        output = output.permute(1, 0, 2) # output : [batch_size, len_seq, n_hidden * 2]
+        final_hidden_state = final_hidden_state.permute(1, 0, 2)
         attn_output, attention = self.attention_net(output, final_hidden_state)
         return self.out(attn_output), attention # model : [batch_size, num_classes], attention : [batch_size, n_step]
 
@@ -90,3 +94,5 @@ if __name__ == '__main__':
     ax.set_xticklabels(['']+['first_word', 'second_word', 'third_word'], fontdict={'fontsize': 14}, rotation=90)
     ax.set_yticklabels(['']+['batch_1', 'batch_2', 'batch_3', 'batch_4', 'batch_5', 'batch_6'], fontdict={'fontsize': 14})
     plt.show()
+    # show the attention similarity of every sentences
+    print(attention)

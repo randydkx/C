@@ -13,6 +13,9 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True';
 # P: Symbol that will fill in blank sequence if current batch data size is short than time steps
 
 def make_batch():
+    # input_batch: the input of encoder 
+    # output_batch: the input of decoder 
+    # target_batch: the desired ouput of decoder(without one-hot encoding)
     input_batch = [np.eye(n_class)[[word_dict[n] for n in sentences[0].split()]]]
     output_batch = [np.eye(n_class)[[word_dict[n] for n in sentences[1].split()]]]
     target_batch = [[word_dict[n] for n in sentences[2].split()]]
@@ -27,6 +30,7 @@ class Attention(nn.Module):
         self.dec_cell = nn.RNN(input_size=n_class, hidden_size=n_hidden, dropout=0.5)
 
         # Linear for attention
+        # attention layer (FC) is used to map encoder state to the same space as decoder hidden state
         self.attn = nn.Linear(n_hidden, n_hidden)
         self.out = nn.Linear(n_hidden * 2, n_class)
 
@@ -71,6 +75,7 @@ class Attention(nn.Module):
 
     def get_att_score(self, dec_output, enc_output):  # enc_outputs [batch_size, num_directions(=1) * n_hidden]
         score = self.attn(enc_output)  # score : [batch_size, n_hidden]
+        # the similarity score is enc_output.T @ W.T dec_output
         return torch.dot(dec_output.view(-1), score.view(-1))  # inner product make scalar value
 
 if __name__ == '__main__':
