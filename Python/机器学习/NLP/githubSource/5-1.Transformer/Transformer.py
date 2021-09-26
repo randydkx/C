@@ -108,7 +108,10 @@ class PoswiseFeedForwardNet(nn.Module):
     def forward(self, inputs):
         residual = inputs 
         # inputs : [batch_size, len_q, d_model]
+        # transpose(1,2) so the inputs has size batch_size x d_model x len_q (to do convolution operations
         output = nn.ReLU()(self.conv1(inputs.transpose(1, 2)))
+        # using Conv1d to do position wise full connected
+        # conv1d(kernel = 1): input: N x C_in x L,output  :N x C_out x L ,share the same weight C_in x C_out
         output = self.conv2(output).transpose(1, 2)
         return self.layer_norm(output + residual)
 
