@@ -1,8 +1,9 @@
-# %%
 # code by Tae Hwan Jung @graykode
 import numpy as np
 import torch
 import torch.nn as nn
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 # S: Symbol that shows starting of decoding input
 # E: Symbol that shows starting of decoding output
@@ -10,7 +11,7 @@ import torch.nn as nn
 
 def make_batch():
     input_batch, output_batch, target_batch = [], [], []
-
+    # padding every word in original and translated word list (to reach max-length=n_step)
     for seq in seq_data:
         for i in range(2):
             seq[i] = seq[i] + 'P' * (n_step - len(seq[i]))
@@ -29,7 +30,7 @@ def make_batch():
 # make test batch
 def make_testbatch(input_word):
     input_batch, output_batch = [], []
-
+    # ensure that len(input_w)=n_step
     input_w = input_word + 'P' * (n_step - len(input_word))
     input = [num_dic[n] for n in input_w]
     output = [num_dic[n] for n in 'S' + 'P' * n_step]
@@ -89,10 +90,7 @@ if __name__ == '__main__':
         output = model(input_batch, hidden, output_batch)
         # output : [max_len+1, batch_size, n_class]
         output = output.transpose(0, 1) # [batch_size, max_len+1(=6), n_class]
-        loss = 0
-        for i in range(0, len(target_batch)):
-            # output[i] : [max_len+1, n_class, target_batch[i] : max_len+1]
-            loss += criterion(output[i], target_batch[i])
+        loss = criterion(output.contiguous().view(-1,n_class),target_batch.view(-1))
         if (epoch + 1) % 1000 == 0:
             print('Epoch:', '%04d' % (epoch + 1), 'cost =', '{:.6f}'.format(loss))
         loss.backward()
@@ -108,7 +106,8 @@ if __name__ == '__main__':
         # output : [max_len+1(=6), batch_size(=1), n_class]
 
         predict = output.data.max(2, keepdim=True)[1] # select n_class dimension
-        decoded = [char_arr[i] for i in predict]
+        decoded = [char_arr[i] for i in predict[:,0,0]]
+        # find the end position and truncate the squential
         end = decoded.index('E')
         translated = ''.join(decoded[:end])
 
