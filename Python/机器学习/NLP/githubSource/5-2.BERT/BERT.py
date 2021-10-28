@@ -1,4 +1,3 @@
-# %%
 # code by Tae Hwan Jung(Jeff Jung) @graykode
 # Reference : https://github.com/jadore801120/attention-is-all-you-need-pytorch
 #           https://github.com/JayParks/transformer, https://github.com/dhlee347/pytorchic-bert
@@ -9,7 +8,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True';
 # sample IsNext and NotNext to be same in small batch size
 def make_batch():
     batch = []
