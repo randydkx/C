@@ -1,5 +1,9 @@
 {
     "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
         "iosfwd": "cpp",
         "ostream": "cpp",
         "iostream": "cpp",
@@ -9,7 +13,12 @@
         "vector": "cpp",
         "set": "cpp",
         "queue": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "iterator": "cpp",
+        "atomic": "cpp",
+        "bitset": "cpp",
+        "__functional_03": "cpp",
+        "functional": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",

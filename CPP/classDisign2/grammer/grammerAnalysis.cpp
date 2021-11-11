@@ -636,7 +636,7 @@ bool ItemSet::operator==(const ItemSet &other) const {
             // item的比较包括对前向搜索符号集合的比较
             assert(this->itemList[i].frontSet.size()==1);
             assert(other.itemList[j].frontSet.size()==1);
-            if(Item::isEqual(itemList[i],other.itemList[j],true)){
+            if(Item::isEqualWithPosition(itemList[i],other.itemList[j],true)){
                 total++;
                 break;
             }
@@ -661,7 +661,7 @@ vector<int>  Processor::findAccpetState(){
     for(int i=0;i<this->DFA.size();i++){
         ItemSet &state = this->DFA[i];
         for(auto item: state.itemList){
-            if(Item::isEqual(item,final,true))ret.push_back(i);
+            if(Item::isEqualWithPosition(item,final,true))ret.push_back(i);
         }
     }
     // cout<<"acc状态:";
@@ -745,7 +745,7 @@ Item::Item(production pro){
 }
 
 // 判断两个item是否相等，in表示是否将前向搜索符号集合一起比较
-bool Item::isEqual(Item item1,Item item2,bool in){
+bool Item::isEqualWithPosition(Item item1,Item item2,bool in){
     // ① 比较产生式左边字符
     if((item1.left.str != item2.left.str))return false;
     // ② 左边字符相等，比较产生式右边字符
@@ -777,7 +777,7 @@ bool ItemSet::checkCanInsert(Item item){
     for(int i=0;i<this->itemList.size();i++){
         assert(itemList[i].frontSet.size() == 1);
         // item存在则返回false，无法进行插入
-        if(Item::isEqual(itemList[i],item,true)){
+        if(Item::isEqualWithPosition(itemList[i],item,true)){
             return false;
         }
     }
@@ -859,7 +859,7 @@ ItemSet Processor::merge(ItemSet itemSet){
             if(checked[j])continue;
             // 不比较frontSet部分，如果相等，则j的frontset中必然只有一个元素，并且不同
             // i的first集合中包括更多的元素，因为在不断添加元素
-            if(Item::isEqual(itemList[j],itemList[i],false)){
+            if(Item::isEqualWithPosition(itemList[j],itemList[i],false)){
                 assert(itemList[j].frontSet.size() == 1);
                 assert(*(itemList[j].frontSet.begin()) != *(itemList[i].frontSet.begin()));
                 itemList[i].frontSet.insert(*(itemList[j].frontSet.begin()));
