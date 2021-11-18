@@ -18,7 +18,10 @@
         "atomic": "cpp",
         "bitset": "cpp",
         "__functional_03": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
@@ -28,4 +31,5 @@
         "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && $dir$fileNameWithoutExt.out",
     },
     "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
+    "jupyter.jupyterServerType": "local",
 }

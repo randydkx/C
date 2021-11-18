@@ -9,7 +9,7 @@ using namespace std;
 // 棋盘宽度
 #define WIDTH 5
 // 对于任意一方的搜索深度
-#define DEPTH_OF_SEARCH 2
+#define DEPTH_OF_SEARCH 4
 // 无穷数
 #define INFINITY 0x00ffffff
 
@@ -316,7 +316,7 @@ int DFS(Node &current,Node father,int& count,Type type,bool judge){
                     nextNode.Evalue = nextNode.getEvalue(type);
                 else{
                     // 与节点保证Evalue是上界，因为需要子节点最小的Evalue作为估值
-                    // 或节点保证Evalue是下届，以你为需要子节点中最大的额Evalue作为估值，保证存在子节点指向
+                    // 或节点保证Evalue是下界，因为需要子节点中最大的Evalue作为估值，保证存在可以指向的子节点
                     if(nextNode.type == NodeType::MAX_OR)nextNode.Evalue = -INFINITY;
                     else nextNode.Evalue = INFINITY;
                 }
@@ -335,7 +335,7 @@ int DFS(Node &current,Node father,int& count,Type type,bool judge){
                 // 搜索子节点，返回子节点nextNode的估值，通过该估值改变当前节点的相关属性，搜索次数+=1
                 count++;
                 int ret = DFS(nextNode,current,count,type,judge);
-                // 是一个max节点，则取子节点中估价最大的一个值作为扩展
+                // 是一个或节点，则取子节点中估价最大的一个值作为扩展，并且更新alpha值
                 if(current.type == NodeType::MAX_OR && (ret > current.Evalue)){
                     current.Evalue = ret;
                     current.alpha = max(ret,current.alpha);
@@ -371,6 +371,7 @@ int DFS(Node &current,Node father,int& count,Type type,bool judge){
 void printBestInOneGame(Node current){
     cout<<"============================="<<endl;
     for(int i=0;i<=DEPTH_OF_SEARCH;i++){
+        // if(i!=1){current = *(current.Next);continue;}
         if(i & 1)cout<<"depth"<<i<<": 与节点"<<endl;
         else cout<<"depth"<<i<<": 或节点"<<endl;
         if(i != 0)cout<<"落子位置： ("<<current.p.first<<","<<current.p.second<<")"<<endl;
@@ -403,7 +404,7 @@ void run(){
     vector<Chess> Path=vector<Chess>();
 
     // 是否对棋局判重，判重则搜索深度最多4，不判重深度可以很高
-    bool judge = true;
+    bool judge = false;
     // 初始棋局
     Path.push_back(node.chess);
     for(int i=0;i<20;i++){
@@ -503,7 +504,7 @@ void test2(){
 
 
 int main(){
-    // freopen("output.txt","w",stdout);
+    freopen("output.txt","w",stdout);
     run();
     // printDepth();
     // test2();

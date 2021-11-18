@@ -1,0 +1,122 @@
+find an answer
+o                                                 |
+ o x                                            x |
+  o   xxx       x                       xxx       |
+   o  xxx          x                    xxx       |
+    o xxx                               xxx       |
+    xo         xxxx             x       xxx       |
+      o        xxxx                     xxx       |
+       o       xxxx                              x|
+        o                                   x     |
+       x oooo                                     |
+          xxxo                   x                |
+          xxx o                                   |
+          xxx  o x                 xxxxxxx        |
+                o                  xxxxxxx        |
+                 oo                xxxxxxx        |
+              xxxxxo               xxxxxxx  x     |
+               xxxx o              x x            |
+               xxxx  ox                      x    |
+               xxxx   o                 x         |
+                       o                          |
+     xxxxx              o               xxxxxxx   |
+     xxxxx               oooo           xxxxxxx   |
+     xxxxx      x         xxxo          xxxxxxx   |
+     xxxxx                xxx o         xxxxxxx   |
+     xxxxx                xxx  o              x   |
+                   x            o                 |
+                                 o                |
+        x                    x    o               |
+                    xxx          x o     x        |
+ x                  xxx             o            x|
+   x                xxx              o            |
+                                      o           |
+                                       o          |
+                                        o         |
+                                         ooooo    |
+             x            xxxxxxxx      xxxxxxo   |
+                          xxxxxxxx      xxxxx  o  |
+   x                      xxxxxxxx      xxxxx   o |
+                       x  xxxxxxxx      xxxxx    o|
+                          xxxxxxxx      xxxxx    o|
+  xxxxxxx   x  x                                 o|
+  xxxxxxx                                        o|
+  xxxxxxx                                 x      o|
+  xxxxxxx                           x            o|
+  xxxxxxx                   x                    o|
+  xxxxxxx                                        o|
+                                                 o|
+                          x                      o|
+                               x                 o|
+                        x   x                    o|
+曲率小-车速快的模糊矩阵：
+0.1 0.1 0.1 0.1 0.1 
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.3 0.3 0.3 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.5 0.5 0.5 
+距离远-车速快的模糊矩阵：
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.6 0.6 0.6 
+0.1 0.2 0.6 0.8 0.8 
+0.1 0.2 0.6 0.8 1 
+0 : point(0,0)	distance:3.16228	ratio:1.11022e-16	speed:48
+1 : point(1,1)	distance:2	ratio:1.11022e-16	speed:36
+2 : point(2,2)	distance:1.41421	ratio:1.11022e-16	speed:24
+3 : point(3,3)	distance:2	ratio:1.11022e-16	speed:36
+4 : point(4,4)	distance:1	ratio:1.11022e-16	speed:24
+5 : point(5,5)	distance:1	ratio:1.11022e-16	speed:24
+6 : point(6,6)	distance:2	ratio:1.11022e-16	speed:36
+7 : point(7,7)	distance:2	ratio:1.11022e-16	speed:36
+8 : point(8,8)	distance:1.41421	ratio:0.146447	speed:24
+9 : point(9,9)	distance:1.41421	ratio:0	speed:24
+10 : point(9,10)	distance:1	ratio:0	speed:24
+11 : point(9,11)	distance:1	ratio:0.146447	speed:24
+12 : point(9,12)	distance:1	ratio:1.11022e-16	speed:24
+13 : point(10,13)	distance:1	ratio:1.11022e-16	speed:24
+14 : point(11,14)	distance:2	ratio:1.11022e-16	speed:36
+15 : point(12,15)	distance:2	ratio:1.11022e-16	speed:36
+16 : point(13,16)	distance:1.41421	ratio:0.146447	speed:24
+17 : point(14,17)	distance:1	ratio:0.146447	speed:24
+18 : point(14,18)	distance:1	ratio:1.11022e-16	speed:24
+19 : point(15,19)	distance:1	ratio:1.11022e-16	speed:24
+20 : point(16,20)	distance:2	ratio:1.11022e-16	speed:36
+21 : point(17,21)	distance:1	ratio:1.11022e-16	speed:24
+22 : point(18,22)	distance:1	ratio:1.11022e-16	speed:24
+23 : point(19,23)	distance:2.23607	ratio:1.11022e-16	speed:36
+24 : point(20,24)	distance:2.82843	ratio:0.146447	speed:36
+25 : point(21,25)	distance:1.41421	ratio:0	speed:24
+26 : point(21,26)	distance:1	ratio:0	speed:24
+27 : point(21,27)	distance:1	ratio:0.146447	speed:24
+28 : point(21,28)	distance:1	ratio:1.11022e-16	speed:24
+29 : point(22,29)	distance:1	ratio:1.11022e-16	speed:24
+30 : point(23,30)	distance:2	ratio:1.11022e-16	speed:36
+31 : point(24,31)	distance:3	ratio:1.11022e-16	speed:48
+32 : point(25,32)	distance:3.16228	ratio:1.11022e-16	speed:48
+33 : point(26,33)	distance:2	ratio:1.11022e-16	speed:36
+34 : point(27,34)	distance:1.41421	ratio:1.11022e-16	speed:24
+35 : point(28,35)	distance:2	ratio:1.11022e-16	speed:36
+36 : point(29,36)	distance:3.16228	ratio:1.11022e-16	speed:48
+37 : point(30,37)	distance:4.47214	ratio:1.11022e-16	speed:60
+38 : point(31,38)	distance:4.24264	ratio:1.11022e-16	speed:60
+39 : point(32,39)	distance:3.16228	ratio:1.11022e-16	speed:48
+40 : point(33,40)	distance:2	ratio:0.146447	speed:36
+41 : point(34,41)	distance:1	ratio:0	speed:24
+42 : point(34,42)	distance:1	ratio:0	speed:24
+43 : point(34,43)	distance:1	ratio:0	speed:24
+44 : point(34,44)	distance:1	ratio:0.146447	speed:24
+45 : point(34,45)	distance:1	ratio:1.11022e-16	speed:24
+46 : point(35,46)	distance:1	ratio:1.11022e-16	speed:24
+47 : point(36,47)	distance:2.23607	ratio:1.11022e-16	speed:36
+48 : point(37,48)	distance:3.60555	ratio:0.146447	speed:48
+49 : point(38,49)	distance:5	ratio:0	speed:60
+50 : point(39,49)	distance:5	ratio:0	speed:60
+51 : point(40,49)	distance:5.09902	ratio:0	speed:60
+52 : point(41,49)	distance:5.38516	ratio:0	speed:60
+53 : point(42,49)	distance:5.83095	ratio:0	speed:60
+54 : point(43,49)	distance:6.40312	ratio:0	speed:60
+55 : point(44,49)	distance:7.07107	ratio:0	speed:60
+56 : point(45,49)	distance:7.61577	ratio:0	speed:60
+57 : point(46,49)	distance:8.06226	ratio:0	speed:60
+58 : point(47,49)	distance:8.60233	ratio:0	speed:60

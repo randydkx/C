@@ -1,0 +1,216 @@
+find an answer
+o                   x     x                 x           x                                x          |
+ o                                x                  x                                           x  |
+  o   xxx                               xxx                                                         |
+   o  xxx            x  x      xx       xxx         x    x           x      x                     x |
+   xo xxx                               xxx                 x                    x                  |
+    xo         xxxx       x  x          xxxx                             x  x   x x                 |
+      o        xxxx           x         xxx       x           x                                     |
+       o       xxxx                   x  x       x                                                  |
+        o                           x       x     x                          x                   x  |
+         ox                  x x                         x                      x                   |
+x        oxxx   x                x      x      x          x                    xx  x     x   x      |
+    x    oxxx   x              x            x       x          x                                    |
+         oxxx                      xxxxxxx                     x   x             x xx               |
+          o   x               x    xxxxxxxx                  x        x                             |
+           o             x         xxxxxxx            x                                             |
+            o  xxxx                xxxxxxx     x                          x                 x x     |
+             oxxxxx                x x          x                                         x       x |
+x             oxxxx      x                 x                                                   x    |
+             oxxxxx                                                       x                     x   |
+              ox            x  x     x            x                x   x   x                    x   |
+     xxxxx x   ox        x              xxxxxxx             x x x                                   |
+     xxxxx  x   o                       xxxxxxx       x                                             |
+     xxxxx       o        xxx           xxxxxxx                   x                                 |
+     xxxxx        o x     xxx           xxxxxxxx                     x        x                     |
+xx   xxxxx         o      xxx   x          x                     x                             xx   |
+          x       x o             x                                  x              x    x          |
+                     o                                                                     x  x     |
+                      o    x x                    x                      x                          |
+     x              xxxo     x   x                                     x     x             x        |
+ x             x  x xxxxo                                       x                            x      |
+   x                xxx  o                                        x     x                           |
+ x            x           o                                                             x           |
+                           o    x        x  x                             x                         |
+                            o                             x                                x     x  |
+                         x x ooooo                                 x                                |
+      x      x x     x    xxxxxxxxox    xxxxx            x          x              x              x |
+         x          xx    xxxxxxxx o    xxxxx                             x                x        |
+                          xxxxxxxx  o   xxxxxx            x           x    x   x     x             x|
+                          xxxxxxxx   o  xxxxx            x                        x           x     |
+        x     x           xxxxxxxx    o xxxxx         x               x             x               |
+  xxxxxxx   x          x               o              x          x             x                x   |
+  xxxxxxx        x         x            o      x                                                    |
+  xxxxxxx  x   xx                        o                       x                                 x|
+  xxxxxxx                        x    x   o         x  x                                            |
+  xxxxxxx         x         x         xx   o              x         x         x           x    x    |
+  xxxxxxx x                                 o                xx          x xx                       |
+                                      x      o                                                     x|
+       x       x      x                       o                      x       x       x  x           |
+    x         x                           x    o                 x         x         x              |
+             x    x     x      x          x     o                      x                            |
+ x        x                    x  x              ox        x        x  x                            |
+ x                        x   x                  xo        x                                      x |
+        x                              x           o    x    x    x                         x       |
+                        x                      x    o            x     x           x     x         x|
+        x         x    x                             o     xx                x                   x  |
+      x                       x  x            x       o                                  x          |
+ x                                                 x   o                                            |
+          xx           x         x                      o                   x        x          x   |
+x                                x                   x   o x                                        |
+                   x                                    x o                            x            |
+                                 x        x              x o       x                                |
+                         x                   x      x       o                    x     x            |
+          xx                 x                        x      o x                                    |
+  x                                 x x    x   x          x   o                                     |
+                                                            x  o            x             x   x  x  |
+  x           x            x                                    o                                   |
+                     x      x     x                     x        o x                                |
+                    xx            x    x         x                o     x                x          |
+            x                                                      o                      x         |
+                                                                    o                     x     xx  |
+   x             x                                                   oo              x x            |
+ x                          x                                         xo               x            |
+                            x          x                    x           o                         x |
+   x                  x              x                    x              o                          |
+                               x                                          o                         |
+                  x  x                                                     o                        |
+        x   x           x                     x                   x         o       x    x          |
+    x   x                                x                                   o                   x  |
+x             x                                                   x           o     x              x|
+ x               x   x        x                  x  x   x        x             o    x               |
+x  x                          x                        x          xx          xxo                   |
+               x    x                               x                            o             x    |
+                                                    x                             o                 |
+              x                                                       x   x        o                |
+             x                                                                      o      x        |
+                 x                x          x                                       o              |
+                   x           x                                                      o             |
+   x                                                                                   o         x  |
+                 x     x                    x                  x                        o           |
+                                              x   x         x    x       x          x    o          |
+           x          x        x                    x  x          x                       o         |
+       x                         xx                                  x x                   o      x |
+               xx                         x                                                 o       |
+                           x        x                       x        x     x   x             o      |
+    x  xx                        x                     x x                          x         o     |
+   x        x      x x         x                                    x       x                  o    |
+                                               x                       x             x x        o   |
+                    x     x                                  x                                   o  |
+xx            x                        x           x                  x          x          x     o |
+            x              x                                      x    x      x                    o|
+曲率小-车速快的模糊矩阵：
+0.1 0.1 0.1 0.1 0.1 
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.3 0.3 0.3 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.5 0.5 0.5 
+距离远-车速快的模糊矩阵：
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.6 0.6 0.6 
+0.1 0.2 0.6 0.8 0.8 
+0.1 0.2 0.6 0.8 1 
+0 : point(0,0)	distance:5	ratio:1.11022e-16	speed:60
+1 : point(1,1)	distance:3.60555	ratio:1.11022e-16	speed:48
+2 : point(2,2)	distance:2.23607	ratio:1.11022e-16	speed:36
+3 : point(3,3)	distance:1	ratio:1.11022e-16	speed:24
+4 : point(4,4)	distance:1	ratio:1.11022e-16	speed:24
+5 : point(5,5)	distance:1	ratio:1.11022e-16	speed:24
+6 : point(6,6)	distance:2	ratio:1.11022e-16	speed:36
+7 : point(7,7)	distance:3	ratio:1.11022e-16	speed:48
+8 : point(8,8)	distance:2.23607	ratio:0.146447	speed:36
+9 : point(9,9)	distance:1	ratio:0	speed:24
+10 : point(10,9)	distance:1	ratio:0	speed:24
+11 : point(11,9)	distance:1	ratio:0.146447	speed:24
+12 : point(12,9)	distance:1	ratio:1.11022e-16	speed:24
+13 : point(13,10)	distance:1	ratio:1.11022e-16	speed:24
+14 : point(14,11)	distance:2	ratio:1.11022e-16	speed:36
+15 : point(15,12)	distance:2.23607	ratio:1.11022e-16	speed:36
+16 : point(16,13)	distance:1	ratio:0.5	speed:60
+17 : point(17,14)	distance:1	ratio:0.5	speed:60
+18 : point(18,13)	distance:1	ratio:1.11022e-16	speed:24
+19 : point(19,14)	distance:1	ratio:1.11022e-16	speed:24
+20 : point(20,15)	distance:1	ratio:1.11022e-16	speed:24
+21 : point(21,16)	distance:1	ratio:1.11022e-16	speed:24
+22 : point(22,17)	distance:2.23607	ratio:1.11022e-16	speed:36
+23 : point(23,18)	distance:2	ratio:1.11022e-16	speed:36
+24 : point(24,19)	distance:1.41421	ratio:1.11022e-16	speed:24
+25 : point(25,20)	distance:2	ratio:1.11022e-16	speed:36
+26 : point(26,21)	distance:2	ratio:1.11022e-16	speed:36
+27 : point(27,22)	distance:1	ratio:1.11022e-16	speed:24
+28 : point(28,23)	distance:1	ratio:1.11022e-16	speed:24
+29 : point(29,24)	distance:1	ratio:1.11022e-16	speed:24
+30 : point(30,25)	distance:2.23607	ratio:1.11022e-16	speed:36
+31 : point(31,26)	distance:3.16228	ratio:1.11022e-16	speed:48
+32 : point(32,27)	distance:2	ratio:1.11022e-16	speed:36
+33 : point(33,28)	distance:1.41421	ratio:0.146447	speed:24
+34 : point(34,29)	distance:1	ratio:0	speed:24
+35 : point(34,30)	distance:1	ratio:0	speed:24
+36 : point(34,31)	distance:1	ratio:0	speed:24
+37 : point(34,32)	distance:1	ratio:0.146447	speed:24
+38 : point(34,33)	distance:1	ratio:1.11022e-16	speed:24
+39 : point(35,34)	distance:1	ratio:1.11022e-16	speed:24
+40 : point(36,35)	distance:1	ratio:1.11022e-16	speed:24
+41 : point(37,36)	distance:2.23607	ratio:1.11022e-16	speed:36
+42 : point(38,37)	distance:3	ratio:1.11022e-16	speed:48
+43 : point(39,38)	distance:2	ratio:1.11022e-16	speed:36
+44 : point(40,39)	distance:1.41421	ratio:1.11022e-16	speed:24
+45 : point(41,40)	distance:2	ratio:1.11022e-16	speed:36
+46 : point(42,41)	distance:2.82843	ratio:1.11022e-16	speed:36
+47 : point(43,42)	distance:3.16228	ratio:1.11022e-16	speed:48
+48 : point(44,43)	distance:4	ratio:1.11022e-16	speed:60
+49 : point(45,44)	distance:3.60555	ratio:1.11022e-16	speed:48
+50 : point(46,45)	distance:3.60555	ratio:1.11022e-16	speed:48
+51 : point(47,46)	distance:4.12311	ratio:1.11022e-16	speed:60
+52 : point(48,47)	distance:3.60555	ratio:1.11022e-16	speed:48
+53 : point(49,48)	distance:2.23607	ratio:1.11022e-16	speed:36
+54 : point(50,49)	distance:1	ratio:1.11022e-16	speed:24
+55 : point(51,50)	distance:1	ratio:1.11022e-16	speed:24
+56 : point(52,51)	distance:2.23607	ratio:1.11022e-16	speed:36
+57 : point(53,52)	distance:3.16228	ratio:1.11022e-16	speed:48
+58 : point(54,53)	distance:2.82843	ratio:1.11022e-16	speed:36
+59 : point(55,54)	distance:3.16228	ratio:1.11022e-16	speed:48
+60 : point(56,55)	distance:2.82843	ratio:1.11022e-16	speed:36
+61 : point(57,56)	distance:2	ratio:1.11022e-16	speed:36
+62 : point(58,57)	distance:1.41421	ratio:1.11022e-16	speed:24
+63 : point(59,58)	distance:1.41421	ratio:1.11022e-16	speed:24
+64 : point(60,59)	distance:2	ratio:1.11022e-16	speed:36
+65 : point(61,60)	distance:2.82843	ratio:1.11022e-16	speed:36
+66 : point(62,61)	distance:2	ratio:1.11022e-16	speed:36
+67 : point(63,62)	distance:1.41421	ratio:1.11022e-16	speed:24
+68 : point(64,63)	distance:2	ratio:1.11022e-16	speed:36
+69 : point(65,64)	distance:3.16228	ratio:1.11022e-16	speed:48
+70 : point(66,65)	distance:2	ratio:1.11022e-16	speed:36
+71 : point(67,66)	distance:1.41421	ratio:1.11022e-16	speed:24
+72 : point(68,67)	distance:2	ratio:1.11022e-16	speed:36
+73 : point(69,68)	distance:2.82843	ratio:0.146447	speed:36
+74 : point(70,69)	distance:1.41421	ratio:0.146447	speed:24
+75 : point(70,70)	distance:1	ratio:1.11022e-16	speed:24
+76 : point(71,71)	distance:1	ratio:1.11022e-16	speed:24
+77 : point(72,72)	distance:2.23607	ratio:1.11022e-16	speed:36
+78 : point(73,73)	distance:3.60555	ratio:1.11022e-16	speed:48
+79 : point(74,74)	distance:5	ratio:1.11022e-16	speed:60
+80 : point(75,75)	distance:5.83095	ratio:1.11022e-16	speed:60
+81 : point(76,76)	distance:4.47214	ratio:1.11022e-16	speed:60
+82 : point(77,77)	distance:3.16228	ratio:1.11022e-16	speed:48
+83 : point(78,78)	distance:2	ratio:1.11022e-16	speed:36
+84 : point(79,79)	distance:1	ratio:1.11022e-16	speed:24
+85 : point(80,80)	distance:1	ratio:1.11022e-16	speed:24
+86 : point(81,81)	distance:2.23607	ratio:1.11022e-16	speed:36
+87 : point(82,82)	distance:3.60555	ratio:1.11022e-16	speed:48
+88 : point(83,83)	distance:4.12311	ratio:1.11022e-16	speed:60
+89 : point(84,84)	distance:5	ratio:1.11022e-16	speed:60
+90 : point(85,85)	distance:4.12311	ratio:1.11022e-16	speed:60
+91 : point(86,86)	distance:3.60555	ratio:1.11022e-16	speed:48
+92 : point(87,87)	distance:3.60555	ratio:1.11022e-16	speed:48
+93 : point(88,88)	distance:4.12311	ratio:1.11022e-16	speed:60
+94 : point(89,89)	distance:5	ratio:1.11022e-16	speed:60
+95 : point(90,90)	distance:6.08276	ratio:1.11022e-16	speed:60
+96 : point(91,91)	distance:6.40312	ratio:1.11022e-16	speed:60
+97 : point(92,92)	distance:6	ratio:1.11022e-16	speed:60
+98 : point(93,93)	distance:5.09902	ratio:1.11022e-16	speed:60
+99 : point(94,94)	distance:4.47214	ratio:1.11022e-16	speed:60
+100 : point(95,95)	distance:4.24264	ratio:1.11022e-16	speed:60
+101 : point(96,96)	distance:4.47214	ratio:1.11022e-16	speed:60
+102 : point(97,97)	distance:5.09902	ratio:1.11022e-16	speed:60

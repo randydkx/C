@@ -1,0 +1,120 @@
+find an answer
+ox    x  xx       x xx    x    x  x    x    x     |
+ox x     x                x   x   x            xxx|
+ oo   xxx  x    x                      xxxx       |
+  xo  xxx      x   x x  x x    xxx     xxxx    xxx|
+   xo xxxxx       x    x   x   x        xxx    x  |
+    xox        xxxx    x  x  xx xx     xxxxx  x   |
+xx    o     x  xxxx           x         xxx       |
+       o  xx   xxxx    x  x      x x  x  x    x  x|
+x  x    ox                 x     x  x       x  x  |
+      xx ox        x         xxx     x            |
+x      xxoxxx   xx           xx  x     xx xx   x  |
+  x x    oxxxx  x        x     x     x      xx    |
+    x    oxxxx   x           x x xxxxxxxxx        |
+  x     x ox  x     x         x    xxxxxxxxx   x  |
+    x     xo             xx        xxxxxxx  x  x  |
+  x         o xxxxx     x  x       xxxxxxxx x  x  |
+      x      oxxxxx  x      x     xx x  x       x |
+x             oxxxx xxx  x        x    x   x x   x|
+            xoxxxxx     x               x     x   |
+x             ox x   x   x  x  x     x  x     xx  |
+   x xxxxxxxx xoxx       x         x x  xxxxxxx   |
+ x  xxxxxx  x   o   x       x        x  xxxxxxx   |
+     xxxxxx     xo        xxx          xxxxxxxx x |
+   x xxxxx        oxx x   xxx        x  xxxxxxxx  |
+xx   xxxxx     x   o      xxx  xx          x xx   |
+          x       xxox            x    x          |
+        x   x   x    o  x         x    x x  x x   |
+x   x   x             ox   x x           x     x  |
+x    x        x x   xxxo   x x   xx      x       x|
+ xx   x       xx xx xxxxo     x   x        x     x|
+x  x x          xx  xxx  o  xxx                   |
+ xx           xx    x     o           x      x    |
+  x                     x  o    x        x  x     |
+        x     x     x   x   o            x     x  |
+             x   x       x x ooooooo     x        |
+      xx     x x xx  x    xxxxxxxxxxo   xxxxxx  x |
+         x         xxx  x xxxxxxxx   o  xxxxx     |
+   x    x           x    xxxxxxxxx x  o xxxxxx x x|
+       x     x   x     x  xxxxxxxx     oxxxxx     |
+x   x   x x   xx    x  x  xxxxxxxxx    oxxxxx x   |
+  xxxxxxx  xx  xx     xx     x x        o     x   |
+  xxxxxxx        x x x     x     xx      oo    xx |
+  xxxxxxx  x   xx                         xo     x|
+  xxxxxxx x        x     x x x   x  x x     oo    |
+  xxxxxxx         x         x    xx   xxx    xo   |
+  xxxxxxx xxx     xx x x xx    x               o  |
+                     x             x xx        xox|
+       x   x   x   xx x   xx       x  x          o|
+xx  x         xx    x    x     x   x   x  x      o|
+            xx  x x  x  x  xx  x          x      o|
+曲率小-车速快的模糊矩阵：
+0.1 0.1 0.1 0.1 0.1 
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.3 0.3 0.3 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.5 0.5 0.5 
+距离远-车速快的模糊矩阵：
+0.1 0.2 0.2 0.2 0.2 
+0.1 0.2 0.4 0.4 0.4 
+0.1 0.2 0.6 0.6 0.6 
+0.1 0.2 0.6 0.8 0.8 
+0.1 0.2 0.6 0.8 1 
+0 : point(0,0)	distance:0	ratio:0.146447	speed:24
+1 : point(1,0)	distance:1	ratio:0.146447	speed:24
+2 : point(2,1)	distance:1	ratio:0.146447	speed:24
+3 : point(2,2)	distance:1	ratio:1.11022e-16	speed:24
+4 : point(3,3)	distance:1	ratio:1.11022e-16	speed:24
+5 : point(4,4)	distance:1	ratio:1.11022e-16	speed:24
+6 : point(5,5)	distance:1	ratio:1.11022e-16	speed:24
+7 : point(6,6)	distance:1	ratio:1.11022e-16	speed:24
+8 : point(7,7)	distance:2	ratio:1.11022e-16	speed:36
+9 : point(8,8)	distance:1	ratio:0.146447	speed:24
+10 : point(9,9)	distance:1	ratio:0	speed:24
+11 : point(10,9)	distance:1	ratio:0	speed:24
+12 : point(11,9)	distance:1	ratio:0.146447	speed:24
+13 : point(12,9)	distance:1	ratio:1.11022e-16	speed:24
+14 : point(13,10)	distance:1	ratio:1.11022e-16	speed:24
+15 : point(14,11)	distance:1	ratio:1.11022e-16	speed:24
+16 : point(15,12)	distance:2	ratio:1.11022e-16	speed:36
+17 : point(16,13)	distance:1	ratio:0.5	speed:60
+18 : point(17,14)	distance:1	ratio:0.5	speed:60
+19 : point(18,13)	distance:1	ratio:1.11022e-16	speed:24
+20 : point(19,14)	distance:1	ratio:1.11022e-16	speed:24
+21 : point(20,15)	distance:1	ratio:1.11022e-16	speed:24
+22 : point(21,16)	distance:1	ratio:1.11022e-16	speed:24
+23 : point(22,17)	distance:1	ratio:1.11022e-16	speed:24
+24 : point(23,18)	distance:1	ratio:1.11022e-16	speed:24
+25 : point(24,19)	distance:1	ratio:1.11022e-16	speed:24
+26 : point(25,20)	distance:1	ratio:1.11022e-16	speed:24
+27 : point(26,21)	distance:1	ratio:1.11022e-16	speed:24
+28 : point(27,22)	distance:1	ratio:1.11022e-16	speed:24
+29 : point(28,23)	distance:1	ratio:1.11022e-16	speed:24
+30 : point(29,24)	distance:1	ratio:1.11022e-16	speed:24
+31 : point(30,25)	distance:2.23607	ratio:1.11022e-16	speed:36
+32 : point(31,26)	distance:2.23607	ratio:1.11022e-16	speed:36
+33 : point(32,27)	distance:2	ratio:1.11022e-16	speed:36
+34 : point(33,28)	distance:1.41421	ratio:0.146447	speed:24
+35 : point(34,29)	distance:1	ratio:0	speed:24
+36 : point(34,30)	distance:1	ratio:0	speed:24
+37 : point(34,31)	distance:1	ratio:0	speed:24
+38 : point(34,32)	distance:1	ratio:0	speed:24
+39 : point(34,33)	distance:1	ratio:0	speed:24
+40 : point(34,34)	distance:1	ratio:0.146447	speed:24
+41 : point(34,35)	distance:1	ratio:1.11022e-16	speed:24
+42 : point(35,36)	distance:1	ratio:1.11022e-16	speed:24
+43 : point(36,37)	distance:2.23607	ratio:1.11022e-16	speed:36
+44 : point(37,38)	distance:2	ratio:0.146447	speed:36
+45 : point(38,39)	distance:1	ratio:0.146447	speed:24
+46 : point(39,39)	distance:1	ratio:1.11022e-16	speed:24
+47 : point(40,40)	distance:1	ratio:0.146447	speed:24
+48 : point(41,41)	distance:1.41421	ratio:0.146447	speed:24
+49 : point(41,42)	distance:1	ratio:1.11022e-16	speed:24
+50 : point(42,43)	distance:1	ratio:0.146447	speed:24
+51 : point(43,44)	distance:1.41421	ratio:0.146447	speed:24
+52 : point(43,45)	distance:1	ratio:1.11022e-16	speed:24
+53 : point(44,46)	distance:1	ratio:1.11022e-16	speed:24
+54 : point(45,47)	distance:1	ratio:1.11022e-16	speed:24
+55 : point(46,48)	distance:1	ratio:0.146447	speed:24
+56 : point(47,49)	distance:1	ratio:0	speed:24
