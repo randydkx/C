@@ -2,20 +2,63 @@
 <html>
 
 <head>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-    
+    <meta charset="utf-8">
+    <title></title>
 </head>
 
 <body>
-    <div id="data" name="data" style="height: 400px; width: 600px;"></div>
+    <input type="text" id="input">
 </body>
-<script>
-    $(document).ready(function () {
-        setInterval("startRequest()", 1000);
-    });
 
-    function startRequest() {
-        $("#date").text((new Date()).toString());
-    }
-</script>
 </html>
+<script>
+    //创建初始列表
+    var u = document.createElement("ul"); //创建一个ul元素节点
+    //var l = document.createElement("li"); //创建一个li元素节点
+    var total = new Array();
+    var resultIdx = new Array();
+    //u.appendChild(l); //把li放到ul里面去
+    var text = document.createElement("area")
+    document.body.append(text)
+    //创建按钮
+    var b = document.createElement("button"); //创建一个button元素
+    var txt1 = document.createTextNode("添加"); //创建文本
+    var selectButton = document.createElement("button");
+    selectButton.appendChild(document.createTextNode("抽签"));
+    b.appendChild(txt1); //将文本内容放入button里
+    document.body.appendChild(b);
+    document.body.appendChild(selectButton);
+    //展示结果
+    var resultList = document.createElement("ul");
+    //绑定事件
+    b.onclick = function () { //即每点击一次按钮,调用一次函数
+        var u = document.createElement("ul");
+        var l = document.createElement("li");
+        var content = document.getElementById("input").value;
+        u.appendChild(l);
+        var txt = document.createTextNode(content);
+        total.push(content);
+        document.getElementById("input").value = "";
+        l.appendChild(txt);
+        document.body.appendChild(l);
+    }
+
+    function hasitem(idx){
+        for(var i=0;i<resultIdx.length;i++){
+            if(resultIdx[i] == idx)return 1;
+        }
+        return 0;
+    }
+
+    selectButton.onclick = function(){
+        var rand_ = Math.floor(Math.random() * total.length);
+        while(hasitem(rand_)){rand_ = Math.floor(Math.random() * total.length);}
+        resultIdx.push(rand_);
+        resultList = document.createElement("ul");
+        var l = document.createElement("li");
+        l.appendChild(document.createTextNode("<抽签>"+total[rand_]));
+        resultList.appendChild(l);
+        document.body.appendChild(l);
+    }
+
+</script>
