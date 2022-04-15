@@ -29,7 +29,11 @@
         "array": "cpp",
         "filesystem": "cpp",
         "initializer_list": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "exception": "cpp",
+        "typeinfo": "cpp",
+        "memory": "cpp",
+        "stdexcept": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
@@ -38,6 +42,6 @@
         // c++执行设置，编译输出之后打印out文件
         "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && $dir$fileNameWithoutExt.out",
     },
-    "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
+    // "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
     "jupyter.jupyterServerType": "local",
 }

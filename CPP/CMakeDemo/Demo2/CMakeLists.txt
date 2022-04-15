@@ -6,6 +6,7 @@ project (Demo2)
 
 # 查找目录下的所有源文件
 # 并将名称保存到 DIR_SRCS 变量
+# 格式是 <dir>  <variable>
 aux_source_directory(. DIR_SRCS)
 
 # 指定生成目标

@@ -1,0 +1,52 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\HyPL@Entry{0<</S/D>>}
+\providecommand \oddpage@label [2]{}
+\@writefile{toc}{\contentsline {section}{\numberline {1}介绍}{2}{section.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces wolf-vs-dog二元分类器数据的搜索引擎查询结果。这里使用的搜索关键字是 “狼”。由一个橙色边框包围的图像是开集噪声样本 (即既不是狼也不是狗)，被蓝色边框包围的是闭集噪声样本(即标签是狼，但实际上是狗)。\relax }}{3}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig1}{{1}{3}{wolf-vs-dog二元分类器数据的搜索引擎查询结果。这里使用的搜索关键字是 “狼”。由一个橙色边框包围的图像是开集噪声样本 (即既不是狼也不是狗)，被蓝色边框包围的是闭集噪声样本(即标签是狼，但实际上是狗)。\relax }{figure.caption.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}先前的研究}{3}{section.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 我们提出的方法EvidentialMix依赖于两个 网络，NetD和NetS。这两种模型最初都是使用一个简单的训练机制 进行几个epoch(见(1)WarmUp)的训练，该机制不包含任何处理标签噪声的方法。接下来在 (2)中，我们在NetS的样本损失上拟合一个$\psi $-分量高斯混合模型(GMM)，以便将 训练集分离为干净的、闭集和开集样本。在 这之后，使用SSL学习机制[14]训练NetD，但只使用 预测的干净和闭集样本。最后，NetS在整个训练集上进行 训练，以使用NetD估计的标签最小化主观逻辑损失[21]，并且 (2)中的过程重复。\relax }}{4}{figure.caption.2}\protected@file@percent }
+\newlabel{fig2}{{2}{4}{我们提出的方法EvidentialMix依赖于两个 网络，NetD和NetS。这两种模型最初都是使用一个简单的训练机制 进行几个epoch(见(1)WarmUp)的训练，该机制不包含任何处理标签噪声的方法。接下来在 (2)中，我们在NetS的样本损失上拟合一个$\psi $-分量高斯混合模型(GMM)，以便将 训练集分离为干净的、闭集和开集样本。在 这之后，使用SSL学习机制[14]训练NetD，但只使用 预测的干净和闭集样本。最后，NetS在整个训练集上进行 训练，以使用NetD估计的标签最小化主观逻辑损失[21]，并且 (2)中的过程重复。\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}方法}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}问题定义}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}噪声分类}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 预热阶段过后，使用SL损失函数时逐样本的损失分布。其中全部噪声比率$\rho = 0.6$，闭合噪声比率$\omega = 0.25$（也就是开集噪声比率为$1-\omega = 0.75$）。$\mathcal  {D}$为CIFAR-10，$\mathcal  {D}'$为ImageNet32。\relax }}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig3}{{3}{5}{预热阶段过后，使用SL损失函数时逐样本的损失分布。其中全部噪声比率$\rho = 0.6$，闭合噪声比率$\omega = 0.25$（也就是开集噪声比率为$1-\omega = 0.75$）。$\mathcal {D}$为CIFAR-10，$\mathcal {D}'$为ImageNet32。\relax }{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}EvidentialMix}{6}{subsection.3.3}\protected@file@percent }
+\newlabel{eq:S_loss}{{1}{6}{EvidentialMix}{equation.3.1}{}}
+\newlabel{eq:S_loss_sample}{{2}{6}{EvidentialMix}{equation.3.2}{}}
+\newlabel{alg:EDM}{{1}{7}{EvidentialMix}{algocfline.1}{}}
+\@writefile{loa}{\contentsline {algocf}{\numberline {1}{\ignorespaces EvidentialMix(EDM)\relax }}{7}{algocf.1}\protected@file@percent }
+\newlabel{eq:D_loss_full}{{3}{8}{EvidentialMix}{equation.3.3}{}}
+\newlabel{eq:L_reg}{{4}{8}{EvidentialMix}{equation.3.4}{}}
+\newlabel{eq:L_X_L_U}{{5}{8}{EvidentialMix}{equation.3.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}实现}{8}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}实验}{9}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}混合的开集和闭集标签噪声基准}{9}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}相关的对比方法}{9}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}结果和讨论}{10}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 所有竞争方法和我们提出的EDM方法的基准评估结果。干净数据是从CIFAR-10中 采样的，开集噪声样本是从ImageNet32和CIFAR-100中获得的。训练集中全部的噪声是通过$\rho \in \{0.3,0.6\}$ 表示的，闭集标签噪声比率为$\omega \in \{0,0.25,0.5,0.75,1\}$，开集标签 噪声比率为$1 - \omega $。\relax }}{11}{table.caption.4}\protected@file@percent }
+\newlabel{tab:results}{{1}{11}{所有竞争方法和我们提出的EDM方法的基准评估结果。干净数据是从CIFAR-10中 采样的，开集噪声样本是从ImageNet32和CIFAR-100中获得的。训练集中全部的噪声是通过$\rho \in \{0.3,0.6\}$ 表示的，闭集标签噪声比率为$\omega \in \{0,0.25,0.5,0.75,1\}$，开集标签 噪声比率为$1 - \omega $。\relax }{table.caption.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}结论}{11}{section.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 相关方法和我们提出的EDM方法的TSNE图，其中整体的噪声率是$\rho = 0.6$， 开集噪声的比率是$\omega = 0.5$，CIFAR-100和ImageNet32表示开集数据集。其中\textbf  {棕色} 样本表示开集噪声样本，其他颜色表示真实的CIFAR-10类别。 \relax }}{12}{figure.caption.5}\protected@file@percent }
+\newlabel{fig4}{{4}{12}{相关方法和我们提出的EDM方法的TSNE图，其中整体的噪声率是$\rho = 0.6$， 开集噪声的比率是$\omega = 0.5$，CIFAR-100和ImageNet32表示开集数据集。其中\textbf {棕色} 样本表示开集噪声样本，其他颜色表示真实的CIFAR-10类别。 \relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}参考文献}{12}{section.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 对开集样本（橙色）、闭集样本（蓝色）、干净样本（绿色）的逐样本的loss分布。左边 由EDM产生，右边由DivideMix产生。周期数为$e=100$，并且$\rho = 0.6$和$\omega = 0.3$。 开集噪声样本$\in $\{CIFAR-100,ImageNet32\}。我们同时展示了估计的对干净样本， 开集样本、闭集样本的GMM后验概率（对于EDM），并展示了使用DivideMix模型时干净样本和噪声 样本的后验概率分布。\relax }}{13}{figure.caption.6}\protected@file@percent }
+\newlabel{fig5}{{5}{13}{对开集样本（橙色）、闭集样本（蓝色）、干净样本（绿色）的逐样本的loss分布。左边 由EDM产生，右边由DivideMix产生。周期数为$e=100$，并且$\rho = 0.6$和$\omega = 0.3$。 开集噪声样本$\in $\{CIFAR-100,ImageNet32\}。我们同时展示了估计的对干净样本， 开集样本、闭集样本的GMM后验概率（对于EDM），并展示了使用DivideMix模型时干净样本和噪声 样本的后验概率分布。\relax }{figure.caption.6}{}}

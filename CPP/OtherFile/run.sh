@@ -1,0 +1,1 @@
+g++ -shared -std=c++11 -fPIC `python3 -m pybind11 --includes` pybindtest.cpp -o pybindtest.o`python3-config --extension-suffix` -I /usr/bin/python3

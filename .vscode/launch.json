@@ -34,7 +34,7 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}.out",
             "args": [],
             // 设置当前文件为目录，可以通过相对地址引用库
-            "stopAtEntry": true, // if true then stop at the main entry (function)
+            "stopAtEntry": false, // if true then stop at the main entry (function)
             "environment": [],
             "externalConsole": false,
             "MIMode": "lldb",
