@@ -289,6 +289,7 @@ class MyCNN(nn.Module):
             large_batch_loss += (1.0 / number_batch) * self.partial_grad(inputs, labels, loss_function).item() #data[0]
 
         # calculate the norm of the large-batch gradient
+        # 累积全部数据的梯度信息
         for param in self.parameters():
             large_batch_norm += param.grad.data.norm(2) ** 2
 
@@ -312,6 +313,7 @@ class MyCNN(nn.Module):
         iter_net_aux_1 = copy.deepcopy(self)
         # construct the auxiliary point z_2
         iter_net_aux_2 = copy.deepcopy(self)
+        
         # generate random vector y_0 with unit norm
         norm_iter = 0.0
         for param_iter in iter_net.parameters():
@@ -497,6 +499,8 @@ timer = MyTimer()
 data, train_loader, test_loader, train_loader_power = load_data(DATASET_NAME, normalize=normalize_flag) # load_data("CIFAR")  # "MNIST"
 network = MyCNN(data.dim, data.n_class, data.dim_final)
 print(network)
+
+# 定义优化器
 nesterov = algorithm in ["AGD", "ANCM", "combined"]
 if optimizer_choice == "SGD" or nesterov:
     optimizer = optim.SGD(network.parameters(), lr=learning_rate,

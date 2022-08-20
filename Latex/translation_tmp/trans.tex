@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper, left=3.17cm, right=3.17cm, top=2.54cm, bottom=2.54cm]{geometry}
+\usepackage[fontset=mac]{ctex}
+\usepackage[T1]{fontenc}
+% \usepackage{mathtime}
+% \usepackage{mathptmx}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumerate}
+% 超链接
+\usepackage{graphics}
+% 算法描述的宏包
+\usepackage[ruled]{algorithm2e}
+\usepackage{algpseudocode,float}
+\usepackage{lipsum}
+\usepackage{chemformula}
+\usepackage{cite}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+% 超链接
+\usepackage[colorlinks, linkcolor=black, anchorcolor=black, citecolor=black]{hyperref}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{cite}
+\makeatletter
+\newenvironment{breakablealgorithm}
+  {% \begin{breakablealgorithm}
+   \begin{center}
+     \refstepcounter{algorithm}% New algorithm
+     \hrule height.8pt depth0pt \kern2pt% \@fs@pre for \@fs@ruled
+     \renewcommand{\caption}[2][\relax]{% Make a new \caption
+       {\raggedright\textbf{\ALG@name~\thealgorithm} ##2\par}%
+       \ifx\relax##1\relax % #1 is \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##2}%
+       \else % #1 is not \relax
+         \addcontentsline{loa}{algorithm}{\protect\numberline{\thealgorithm}##1}%
+       \fi
+       \kern2pt\hrule\kern2pt
+     }
+  }{% \end{breakablealgorithm}
+     \kern2pt\hrule\relax% \@fs@post for \@fs@ruled
+   \end{center}
+  }
+\makeatother
+
+\begin{document}
+\newpage
+\begin{algorithm}[H]
+    \caption{Selection2Sieve(S2S)}%算法名字
+    \LinesNumbered %要求显示行号
+    \KwIn{噪声数据 $\tilde{\mathcal{D}}=\{(\mathbf{x_i},\tilde{\mathbf{y}}_\mathbf{i})\}_{i=1}^n$ 
+    可学习的特征提取网络$\mathcal{V}(·;\Theta_1)$、分类网络$f(·;\Theta_2)$、OOD检测网络$F^j(·;\Theta_3^j)\;\forall\; j \in\mathcal{Y}$, 总体网络参数为$\theta$.权重
+    $\lambda_{con}$, $\lambda_{e}$, $\lambda_{id}$.训练周期数E. 预热网络周期数 selection\_epochs,筛选开始周期数sieve\_epochs.学习率$\eta$.
+    每个周期迭代次数iters.阈值$\tau_{clean}$, $\tau$.
+    }%输入参数
+
+    \KwOut{网络参数$\theta = (\Theta_1,\Theta_2,\Theta_3).$}%输出
+    \For{e \textbf{from} 1 \textbf{to} E}{
+      $step=0$\\
+      \tcp{预热网络}
+      \eIf{
+        e<selection\_epochs
+      }{
+        \While{step < iters}{
+          \textbf{采样}$\mathcal{B}\subseteq\tilde{\mathcal{D}}$\\
+        \textbf{计算}$\mathcal{L}(\mathcal{B};\theta)=\mathcal{L}_{CE}(\mathcal{B};\Theta_1,\Theta_2)$\\
+        $\theta = \theta - \eta \cdot\nabla_{\theta}\mathcal{L}(\mathcal{B};\theta) $\\
+        $step = step + 1$
+        }
+      }(){
+          \tcp{划分干净样本集和无标记样本集$\mathcal{D}_c, \mathcal{D}_u$}
+          \If{e=selection\_epochs}{
+            \textbf{划分}$\mathcal{D}_c\subseteq\tilde{\mathcal{D}};\;\mathcal{D}_u=\tilde{\mathcal{D}}-\mathcal{D}_c$
+          }
+          \tcp{筛选ID样本}
+          \If{e>sieve\_epochs}{
+            \textbf{筛选}$\mathcal{D}_{id}\subseteq\mathcal{D}_u;\;\mathcal{D}_{ood}=\mathcal{D}_u-\mathcal{D}_{id}$\\
+          }
+          \While{step < iters}{
+            \textbf{采样}$\mathcal{B}\subseteq\mathcal{D}_{c};\;\mathcal{U}\subseteq\mathcal{D}_{u}$\\
+            $\mathcal{L}(\mathcal{B},\mathcal{U};\theta)=\mathcal{L}_{sup}+\lambda_{con}\mathcal{L}_{con}+\lambda_e\mathcal{L}_e$\\
+            
+            \If{e>sieve\_epochs}{
+              \textbf{采样}$\mathcal{B}_{id}\subseteq\mathcal{D}_{id}$\\
+              $\mathcal{L}+=\lambda_{id}\mathcal{L}_{id}(\mathcal{B}_{id};\theta)$
+            }
+            $\theta = \theta - \eta \cdot\nabla_{\theta}\mathcal{L}(\mathcal{B},\mathcal{B}_{id},\mathcal{U};\theta) $\\
+            $step = step + 1$
+          }
+      }
+    }
+\end{algorithm}
+
+
+\end{document}
+
+
+

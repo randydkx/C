@@ -1,0 +1,1160 @@
+%%
+%% This is file `elsarticle-template-num.tex',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% elsarticle.dtx  (with options: `numtemplate')
+%%
+%% Copyright 2007, 2008 Elsevier Ltd.
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% -------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+
+
+%% given in the file `manifest.txt'.
+%%
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+
+%%\documentclass[preprint,12pt]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%\documentclass[authoryear,preprint,review,10pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+ \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+ \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+\usepackage{epsfig}
+
+\usepackage{subfigure}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+%\usepackage{array,graphicx,subfig}
+%\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{booktabs}
+%\usepackage{longtable}
+%\usepackage{tabularx}
+\usepackage{setspace}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+%% The amssymb package provides various useful mathematical symbols
+%\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{natbib}
+
+\usepackage{algorithm}
+
+\usepackage{algorithmic}
+
+\usepackage{multirow}
+
+\usepackage{amsmath}
+
+\usepackage{xcolor}
+
+\DeclareMathOperator*{\argmin}{argmin}
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+
+
+%\usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%\usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+% \usepackage{epsfig}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+%% The amssymb package provides various useful mathematical symbols
+%\usepackage{amssymb}
+\usepackage{rotating}
+\usepackage{lscape}
+\usepackage{natbib}
+%\usepackage{amsmath}
+
+
+\usepackage{indentfirst}
+
+
+
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{property}{Property}
+\newtheorem{Corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Remark}
+\newtheorem{notation}{Notation}
+\newproof{pf}{Proof}
+%\newproof{pot}{Proof of }
+\usepackage{caption2}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+%\journal{International Journal of Approximate Reasoning}
+%\linespread{1.6}
+\begin{document}
+
+\begin{frontmatter}
+
+
+
+\title{A novel multi-label learning approach for missing label and noisy label}
+
+
+\author[a]{Kai Liu}\ead{1011928646@qq.com}\vskip 2mm
+\author[a,b]{Anhui Tan\corref{cor1}}\cortext[cor1]{Corresponding author.}\ead{tananhui86@163.com}\vskip 2mm
+\author[b]{Shen-ming Gu}\ead{gsm@zjou.edu.cn}\vskip 2mm
+
+\address[a]{School of Information Engineering, Zhejiang Ocean University, Zhoushan, Zhejiang 316022, PR China}
+\address[b]{School of Computer and Information Technology, Shanxi University, Taiyuan, 030006, Shanxi, PR China}
+
+
+\begin{abstract}
+	
+Weakly-supervised multi-label learning has brought about the widespread attention recently. Most of the existing methods solve this problem by assuming that the label information is ideal. However, in some practical applications, partial labels of each instance can only be obtained. In addition the labels obtained may be noisy, which will reduce the robustness of the learning model. In this paper, we propose a novel approach named a novel multi-label learning approach for missing label and noisy label(MLNL) to overcome the above problems. On the one hand, we introduce a label correlation matrix to explicitly utilize the global structure information from multi-label data. On the other hand, we propose a new label manifold regularizer to capture noisy labels to further improve the performance of the method. Finally, the performance of the method is further improved by considering the positive and negative information between the feature similarity and label similarity. The extensive experimental results show that our algorithm MLNL has  comparable performance compared with some state-of-the-art methods when tested on bennhmark multi-label date sets.
+
+	
+
+
+
+\end{abstract}
+
+\begin{keyword}
+Multi-label; noisy label; feature collaboration; label collaboration; optimization objective
+\end{keyword}
+
+
+\end{frontmatter}
+
+\section{Introduction}
+With the rapid development of Internet technology, the traditional single label learning gradually shows its limitations. In traditional single-label learning, each instance is associated with a single label. However, in the real application scenario, most of the single instance is matched with multiple labels. Therefore, multi-label learning has aroused the interest of many researchers. At the same time, due to of the influence of technology and methods, the extracted database inevitably has default values and noise values. Aiming at such incomplete and inaccurate data, the traditional supervised multi-label learning model lacks the ability of accurate learning. Furthermore, some scholars put forward a weakly supervised multi-label learning model[\textbf{Cabral R , De l T F , Costeira J P , et al. Matrix Completion for Weakly-Supervised Multi-Label Image Classification[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2015, 37(1):121-35.}][\textbf{Sun L , Ye P , Lyu G , et al. Weakly-Supervised Multi-Label Learning with Noisy Features and Incomplete Labels[J]. Neurocomputing, 2020, 413.}][\textbf{Zhou Z H . A Brief Introduction to Weakly Supervised Learning[J]. National Science Review, 2018(1):1}], which provides an effective method to solve such problem with missing and noisy labels. So far, it has been applied in many fields, such as image classification, activity recognition and text classification[\textbf{Cabral R , Torre F , Costeira J P , et al. Matrix Completion for Weakly-Supervised Multi-Label Image Classification[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2014.}][\textbf{Adeli-Mosabbeb E , Cabral R , Torre F , et al. Multi-label Discriminative Weakly-Supervised Human Activity Recognition and Localization[J]. 2014.}][\textbf{Mercan C , Aksoy S , Mercan E , et al. Multi-Instance Multi-Label Learning for Multi-Class Classification of Whole Slide Breast Histopathology Images[J]. IEEE Trans Med Imaging, 2017, PP(99):1-1.}].
+
+
+In multi-label learning, the traditional multi label learning algorithm is designed on the premise that the label matrix of training data is complete and correct, such as [\textbf{Nie F , Huang H , Xiao C , et al. Efficient and Robust Feature Selection via Joint ?2, 1-Norms Minimization[C] International Conference on Neural Information Processing Systems. Curran Associates Inc. 2010.}] and MDFS[\textbf{Zhang J ,  Luo Z ,  Li C , et al. Manifold regularized discriminative feature selection for multi-label learning[J]. Pattern Recognition, 2019, 95:136-150.}]. However, humans may neglect some labels they don't know or aren't interested in, which will lead to missing labels in the training set. In order to overcome this problem, scholars try to recover missing labels by label correlation. For example, in the basic of label correlated, Some people assume that label correlation matrix and feature-lable mapping matrix put into a unified linear dependent structure and propose low rank hypothesis and sparse hypothesis[\textbf{Zhu Y , Kwok J T , Zhou Z H . Multi-Label Learning with Global and Local Label Correlation[J]. IEEE Transactions on Knowledge  Data Engineering, 2017:1-1}][\textbf{Hao-Chen Dong, Yu-Feng Li, Zhi-Hua Zhou:Learning From Semi-Supervised Weak-Label Data. AAAI 2018: 2926-2933}]. A common approach to use the low rank hypothesis is through the nuclear-norm regularization term. However, the above methods are based on the assumption that the obtained label information is ideal, and the problem of noise labels in the label information is not taken into account. Obviously, the presence of noise labels will participate in the multi-label training and seriously affect the final multi-label learning model. for noise label information, the existing strategies can be roughly divided into two types: some people adopt a unified learning structure, estimate the confidence of each label from multi-label learning, and then incorporate the estimated confidence matrix into the optimization process induced by the model[\textbf{ L. Sun, S. Feng, T. Wang, C. Lang, Y. Jin, Partial multi-label learning via low-rank and sparse decomposition, in: AAAI Conference on Artificial Intelligence, 2019, pp. 5016?5023}]; Another approach is to divide the training process into two steps: first, select labels with high confidence from the label set, and then use multi-label learning structure training from these labels with high confidence[\textbf{J. Fang, M. Zhang, Partial multi-label learning via credible label elicitation, in: AAAI Conference on Artificial Intelligence, 2019, pp. 3518-3525.}].Some scholars also proposed a multi-label learning algorithm aiming at incomplete data and noise feature information at the same time. such as, Sun[\textbf{Sun L , Lyu G , Feng S , et al. Beyond missing: weakly-supervised multi-label learning with incomplete and noisy labels[J]. Applied Intelligence, 2021, 51(3):1-13}] used low rank hypothesis and sparse constraints to sort sensitive labels by enrich the missing labels and remove the noisy labels simultaneously. sun[\textbf{Sun L , Ye P , Lyu G , et al. Weakly-Supervised Multi-Label Learning with Noisy Features and Incomplete Labels[J]. Neurocomputing, 2020, 413}]and Gengyu[\textbf{Gl A , Sf A , Yl A . Noisy label tolerance: A new perspective of Partial Multi-Label Learning[J]. Information Sciences, 2021, 543:454-466}] capture the desired feature information by decomposing the observed feature matrix into an ideal feature matrix and an outlier matrix. nevertheless, they didn't consider the possibility of noise labels when labels are missing, and paid attention to labels with high feature similarity and high label similarity when building models, but ignored the negative information between features and labels, that is, the situation of high (low) feature similarity and low (high) label similarity.
+To alleviate this problem, this paper proposes a new multi-label learning method based on missing and noisy labels, called"A novel multi-label learning approach for missing label and noisy label"(MLNL), which simultaneously recovers missing labels, excludes noisy labels, trains the linear model, expores and utilizes label correlation. Firstly, MLNL learns a linear predictor about the ground-truth label matrix, and limits the low rank of the ground-truth label matrix and the sparsity of the noise label in the prediction. At the same time, the label correlation matrix is introduced to explain the correlation of multi-label data. Then, using the feature similarity and label similarity of instances, the inner product similarity of potential label vector is calculated, so that the inner product similarity of potential label vector and the feature of samples are consistent with the semantic similarity of labels. Finally, the predictor and the above constraints are integrated into a unified linear model, and this paper develops an optimization procedure to solve the model. The motivation of this article is summarized as folllows.
+
+	\setlength{\parindent}{2em} \item We propose a new multi label learning method to deal with missing labels and noisy labels simultaneously.
+	\setlength{\parindent}{2em} \item We introduce MLNL to induce a credible multi label classifier by using the label and feature information of multi-label data. The existing multi-label learning methods utilize label and feature information separately, or ignore the utilization of negative information. Two candidate labels with high (low) feature similarity but low (high) semantic similarity are selected.
+	\setlength{\parindent}{2em} \item MLMN unifies the predictor training and potential label matrix exploration of multi label data in a unified linear model, and introduces an alternative optimization program to optimize the predictor and potential label matrix in a mutually beneficial way.
+\end{enumerate}
+The rest of this article is organized as follows. Firstly, we briefly discuss the related work of multi-label learning with incomplete label information and noise label information.Then, we give the technical details of the proposed algorithm and describe the corresponding optimization process. Then the comparative experiment is carried out and the further experimental analysis is carried out. Finally, we summarize the whole paper.
+
+
+\section{Related work}
+\subsection{Multi-label learning with missing label}
+
+It is not appropriate to assume that all labels are observed. Thus many scholars have proposed relevant algorithms for missing labels, such as Wu[\textbf{Wu B , Lyu S , Ghanem B . ML-MG: Multi-label Learning with Missing Labels Using a Mixed Graph[C] IEEE International Conference on Computer Vision (ICCV). IEEE, 2015.}]propose a unified model of label dependencies by constructing a mixed graph, which jointly incorporates instance-level similarity and class co-occurrence as undirected edges as well as semantic label hierarchy as directed edges . Ma[\textbf{Ma Z , Chen S . Expand globally, shrink locally: Discriminant multi-label learning with missing labels[J]. Pattern Recognition, 2021, 111:107675}]impose the low-rank structures on all the predictions of instances from the same labels, and a maximally separated structure on the predictions of instances from different labels. Huang[\textbf{J Huang, Qin F , Zheng X , et al. Improving Multi-Label Classification with Missing Labels by Learning Label-Specific Features[J]. Information Sciences, 2019}]propose a new supplementary label matrix is augmented from the in complete label matrix by learning high-order label correlations.
+
+In order to learn accurately from multi-label data with default values and noise labels, it is necessary to solve the problem of how to deal with incomplete label and noise information.On the one hand, for the problem of incomplete labels, the existing algorithms are mainly divided into four strategies: first, the correct labels are simply regarded as negative labels, such as[\textbf{Bucak S, Jin R, Jain A Multi-label learning with incomplete class assignments. In: IEEE Conference on computer vision and pattern recognition, 2011, pp. 2801-2808}];Secondly, missing tags are regarded as potential variables and embedded in probability models, such as [\textbf{Zhang J , Li S , Jiang M , et al. Learning From Weakly Labeled Data Based on Manifold Regularized Sparse Model[J]. IEEE Transactions on Cybernetics, 2020, PP(99)}] and Bayesian networks[\textbf{Kapoor A , Jain P , Viswanathan R . Multilabel Classification using Bayesian Compressed Sensing.[J]. Advances in Neural Information Processing Systems, 2012}][\textbf{Sucar L E , Bielza C , Morales E F , et al. Multi-label classification with Bayesian network-based chain classifiers[J]. Pattern Recognition Letters, 2014, 41(MAY 1):14-22}].Thirdly, the missing label is regarded as an independent state, and all the labels are divided into three categories: positive label, negative label and missing label[\textbf{Wu B, Jia F, Liu W, Ghanem B, Lyu S (2018) Multi-label learning with missing labels using mixed dependency graphs. Int J Comput Vis 126(8):875?896}].Fourthly, based on the method of matrix incompletion, the information matrix is used to restore the missing items of label matrix[\textbf{Chang X , Tao D , Chao X . Robust Extreme Multi-label Learning[C] Acm Sigkdd International Conference on Knowledge Discovery  Data Mining. ACM, 2016}][\textbf{Zhang J , Li S , Jiang M , et al. Learning From Weakly Labeled Data Based on Manifold Regularized Sparse Model[J]. IEEE Transactions on Cybernetics, 2020, PP(99)}].
+
+
+\subsection{Multi-label learning with noisy label}
+
+Multi label learning with noise label (also known as partial multi-label learning (PML) is a new learning framework, which deals with the scenario where multiple candidate labels are assigned to a case with only partial validity.Li[\textbf{Li Z , Gan Z , Zhang B , et al. Semi-Supervised Noisy Label Learning for Chinese Medical Named Entity Recognition[J]. Data Intelligence, 2021:1-10}]propose a semi-supervised hand segmentation framework based on the optimized noisy masks and a small number of labeled data. wang[\textbf{Wang Z , Jiang J , Han B , et al. SemiNLL: A Framework of Noisy-Label Learning by Semi-Supervised Learning[J]. 2020.}] propose a versatile framework that combines specific sample selection strategies and specific semi-supervised learning models in an end-to-end manner. Liu[\textbf{Liu T , Tao D . Classification with Noisy Labels by Importance Reweighting[J]. IEEE Transactions on Pattern Analysis Machine Intelligence, 2016, 38(3):447-461}] prove that any surrogate loss function can be used for classification with noisy labels by using importance reweighting, with consistency assurance that the label noise does not ultimately hinder the search for the optimal classifier of the noise-free sample. xie[\textbf{Xie M K , Huang S J . Partial Multi-Label Learning with Noisy Label Identification[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2021, PP(99).}]propose the MIPML method that the multi-label classifier and noisy label identifier are learned jointly under the supervision of the observed noise-corrupted label matrix.
+
+
+
+
+
+
+
+
+
+
+\section{The proposed model}
+\subsection{Notations}
+In order to formulize the learning of partial label data, some important use marks in this paper are explained as follows.In multi-label learning, given weakly multi-lable dataset $D=\left\{\left(x_{i},y_{i}\right)\right\}_{i=1}^{n}$ with n examples. we denote the feature matrix $X=\left[x_{1}, x_{2}, \ldots, x_{n}\right] \in R^{d \times n}$, where $x_{i}$ is $d$ dimension column. Let $Y=\left[y_{1}, y_{2}, \ldots, y_{n}\right]^{T} \in\{0,1\}^{n \times q}$ be the label matrix, and $y_{i}(1 \leq i \leq n) \in R^{q}$ is the ground-truth label vector of $x_{i}$. For $y_{ij} \in Y$, $y_{ij}=1$ represents the $j$th label is relevent to the $i$th instance, and $y_ij=0$ represents the $i$th instance is nothing to do with the $j$th label or the $j$th label is missing. The Frobenius norm of the matrix $A={(a_{ij})}_{d \times p}$ is defined as $\|A\|_{F}=\sqrt{\sum_{i=1}^{d} \sum_{j=1}^{q} a_{i j}^{2}}$. The nuclear norm of $A$ is defined as the sum of its singular values, which is also equivalent to the $tr\left(\sqrt{A^{T} A}\right)$. The $l_2,1$-norm of $A$ is defined as $\|W\|_{2,1}=\sum_{i=1}^{d} \sqrt{\sum_{j=1}^{q} w_{i j}^{2}}$. 
+
+
+\subsection{The basic framework}
+For gaining such a linear model for Weakly-supervised multi-label learning, we can generalize the learning problem as the following optimization formulation:
+
+
+\begin{equation}
+\min _{W} \Phi(W, b)+\lambda_{1}\Re(W)
+\end{equation}
+
+
+\noindent where $\Phi(W, b)$ is a loss function, $\Re(W)$ is the regularizad term to control the complexity of the model. $\lambda_{1}$ is the trading off parameters with non-negative value.
+
+The loss function $\Phi(W, b)$ can be applied in various ways. Here we choose the robust loss function for weakly multi-label learning considering implicity and efficiency, as follows:$\Phi(W, b)=\sum_{i=1}^{q} \sum_{i=1}^{n}\left(x_{i} w_{k}+b_{k}-y_{i j}\right)^{2}$. Therefore, the loss function can be rewrited as:
+
+
+\begin{equation}
+	\Phi(W, b)=\left\|X^{T} W-1_{n} b-Y\right\|_{F}^{2}
+\end{equation}
+
+
+\noindent where $W=\left[w_{1}, w_{2}, \ldots, w_{q}\right] \in R^{d \times q}$ is the coefficient matrix. $b \in R^{1 \times n}$ is the bias term, and $1_n$ is $n$ dimension column with all elements are one.
+
+In consideration that making $W$ sparse, we implement $l_2,1$-norm regularization into our linear model
+
+
+\begin{equation}
+	\Re(W)=\|W\|_{2,1}
+\end{equation}
+
+
+Thus,the $w_{ij}$ reflects that the $i$th feature associated with the $j$th label. When the value of $w_{ij}$ is large, the $i$th feature has strongly discriminability to the $j$th label, On the contrary, even if it tends to zero, which means they have nothing to do with each other.
+
+In our problem, we assume that there is a small amount of noise information in the label matrix. In order to make full use of the ideal information of the label, we decompose the label matrix into two parts to remove the influence of noise information, i.e. $Y=Q+N$, where $Q \in\{0,1\}^{n \times q}$ is the ideal label matrix and $N \in\{0,1\}^{n \times q}$ is the noise matrix with abnormal label values. Considering the label correlation, we limit the ideal label matrix $Q$ to low rank. Because the rank function is difficult to solve, the kernel norm is used to replace the rank function. In addition, we assume that the outliers are sparse relative to the observed label matrix $Y$, so We utilize $l_{1}$ norm to restrict noise matrix $N$ to be a sparse matrix. Therefore, the proposed model can be solved by the following objective functions:
+
+\begin{equation}
+	\begin{array}{l}
+		\min _{W,Q,N}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}+\lambda_{2}\|Q\|_{*}+\lambda_{3}\|N\|_{1} \\
+		\text { s.t. } Y=Q+N
+	\end{array}
+\end{equation}
+
+\noindent where $\lambda_{1}$, $\lambda_{2}$, $\lambda_{3}$ are tradeoff parameters to balance the model.
+
+As noted above, despite of the labels in the ideal label matrix $Q$ are correct, there still some label are missing in $Q$. Ling et al \cite{ling2016} proved that the multi label output space can be mathematically decomposed into the product of two low dimensional matrices, which encourages most of the structures in the original low dimensional output label matrix to be interpreted and restored. Therefore, we adopt a linear self recovery model $P=CQ$ to reconstruct $Q$. Here, $C \in R^{n \times n}$ is label coefficient matrix, and the element $C_{ij}$ represents the similarity between the $i-th$ label and the $j-th$ label. A meaningful matrix self recovery model should automatically complete the unknown labels in the ideal label matrix $Q$ without affecting the majority of observed labels. Finally, we propose the following objective function to learn the self recovery model:
+
+\begin{equation}
+\begin{array}{l}
+	\min _{P} \lambda_{4}\|P-C Q\|_{F}^{2}+\lambda_{5}\|C\|_{*} \\
+	\text { s.t. } \sum_{j=1}^{n} C_{i j}=1, C \geq 0, P \geq 0
+\end{array}
+\end{equation}
+
+\noindent where $\lambda_{4}$, $\lambda_{5}$ are tradeoff parameters to balance the model. Here we assume the label coefficient matrix $C$ be low-rank which exploit the latent label correlations among different labels. the first constraint restricts the value to be in the range of $[0,1]$, and the sum of them equal to 1.
+
+
+
+Most of the existing partial label learning (PML) problems are based on similar (different) samples with the same (different) label assignment in feature space. They use the similarity of feature space for Manifold Regularization label learning. Some scholars think that the label space is low rank based on the knowledge of latent label space, and the related lables of a sample are hidden in the latent lable space. Although these works use feature information to label training samples to some extent, they still consider high feature correlation and potential tag correlation. In the actual partial label learning (PML) problem, if the potential real labels of two samples do not overlap, then the two samples should also have no duplicate real labels. Therefore, the correlation between the two samples is not significant. In a word, the existing methods are not accurate enough for the samples with high feature correlation but low potential lable correlation. To solve this problem, we formulate the following formula:
+
+\begin{equation}
+	\begin{array}{l}
+		\lambda_{6}\sum_{i \neq j}^{n}\left(S_{i j} C_{i j}-p_{i,} p_{j_{r}}\right)^{2} \\
+	\end{array}
+\end{equation}
+
+\noindent where $\lambda_{6}$ are tradeoff parameters to balance the model. $S\in R^{n \times n}$ is the sample similarity matrix about the feature space, and each element $S_{ij}$ represents the sample similarity between sample $x_{i}$ and sample $x_{j}$. The calculation formula is as follows:
+
+\begin{equation}
+	S_{i j}=\left\{\begin{array}{c}
+		\exp \left(-\frac{\left\|x_{i}-x_{j}\right\|^{2}}{\sigma^{2}}\right) \quad \text { if } x_{i} \in \mathcal{N}_{k}\left(x_{j}\right) \text { or } x_{j} \in \mathcal{N}_{k}\left(x_{i}\right) \\
+		0 \text { otherwise }
+	\end{array}\right.
+\end{equation}
+
+\noindent where $\sigma$ is a parameter. $\mathcal{N}_{k}\left(x_{i}\right)$ denotes the set of $k$ largest nearest neighbors of $x_{i}$ in the feature space, and Euclidean distance is used to find $k$ nearest neighbors.
+
+From the above we can find that: If two samples have larger $S_{ij}$ and $C_{ij}$ at the same time, $p_{i}$ and $p_{j}$ should be close to each other; If the value of $S_{ij}$ is large but the value of $C_{ij}$ is small or or vice versa, then $p_{i}$ and $p_{j}$ may still have some repetitions; If two samples have small $S_{ij}$ and $C_{ij}$ at the same time,$p_{i}$ and $p_{j}$ should have little or no coincidence. 
+
+By combining problem (4),(5),(6), and equation (8), the final optimization problem can be further rewritten as follows:
+
+\begin{equation}
+\begin{array}{l}
+	\min _{W, Q, N, P, C, d}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}+\lambda_{2}\|Q\|_{*}+\lambda_{3}\|N\|_{1}+\lambda_{4}\|P-C Q\|_{F}^{2} \\
+	+\lambda_{5}\|C\|_{*}+\lambda_{6}\sum_{i \neq j}^{n}\left(S_{i j} C_{i j}-p_{i, p} p_{j,}\right)^{2} \\
+	\text { s.t. } Y=Q+N, \sum^{n} C_{i j}=1, C \geq 0, P \geq 0
+\end{array}
+\end{equation}
+
+\noindent where $\lambda_{l} (l=1,2,3,4,5,6)$ are tradeoff parameters to balance the model. 
+
+\section{Optimization and solution}
+
+For the convenience of calculation, the original objective function is optimized as follows:
+
+\begin{equation}
+	\begin{array}{l}
+		\min _{W, Q, N, P, C, d}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}+\lambda_{2}\|Q\|_{*}+\lambda_{3}\|N\|_{1}+\lambda_{4}\|P-C Q\|_{F}^{2} \\
+		+\lambda_{5}\|C\|_{*}+\lambda_{6}\left\|H \odot\left(S \odot C-P P^{T}\right)\right\|_{F}^{2}\\
+		\text { s.t. } Y=Q+N, C \mathrm{l}_{n}=1_{n}, C \geq 0, P \geq 0
+	\end{array}
+\end{equation}
+
+\noindent where $H \in R^{n \times n}$, if $i=j$, then $H_{ij}=0$, otherwise $H_{ij}=1$. $\odot$ is the Hadamard product. $1_{n}$ is the n-dimensional column vector whose elements are all $1$.
+
+By using Lagrange multiplier method[\textbf{Shimizu A . Lagrange-Multiplier Method[J]. Journal of the Japan Society of Mechanical Engineers, 2009, 112(5):987-992}], the above formula can be rewritten into the form of augmented Lagrange function as follows:
+
+\begin{equation}
+	\begin{array}{l}
+		\min _{W, Q, N, P, C, d}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}+\lambda_{2}\|Q\|_{*}+\lambda_{3}\|N\|_{1}+\lambda_{4}\|P-C Q\|_{F}^{2} \\
+		+\lambda_{5}\|C\|_{*}+\lambda_{6}\left\|H \odot\left(S \odot C-P P^{T}\right)\right\|_{F}^{2}\\
+		+<Z_{1}, Y-Q-N>+\frac{\mu_1}{2}\|Y-Q-N\|_{F}^{2} \\
+		+<Z_{2},\left.C\right|_{n}-1_{n}>+\frac{\mu_{2}}{2}\left\|C 1_{n}-1_{n}\right\|_{F}^{2}
+	\end{array}
+\end{equation}
+
+As the model is linear, the above formula can be further rewritten by LADMAP method[\textbf{ Z. Lin, R. Liu, Z. Su, Linearized alternating direction method with adaptive penalty for low-rank representation, in: Advances in Neural Information Processing Systems, 2011, pp. 612-620}] as follows:
+
+\begin{equation}
+	\begin{array}{l}
+		\min _{W, Q, N, P, C, d}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}+\lambda_{2}\|Q\|_{*}+\lambda_{3}\|N\|_{1}+\lambda_{4}\|P-C Q\|_{F}^{2} \\
+		+\lambda_{5}\|C\|_{*}+\lambda_{6}\left\|H \odot\left(S \odot C-P P^{T}\right)\right\|_{F}^{2}\\
+		+\frac{\mu_{1}}{2}\left\|Y-Q-N+\frac{\mathrm{Z}_1}{\mu_1}\right\|_{F}^{2}+\frac{\mu_{2}}{2}\left\|C 1_{n}-1_{n}+\frac{\mathrm{Z}_{2}}{\mu_{2}}\right\|_{F}^{2}
+	\end{array}
+\end{equation}
+
+\noindent where $Z_{1} \in R^{n \times q}$, $Z_{2} \in R^{n}$ represent the Lagrange multiplier matrix, and $\mu_{1}$, $\mu_{2}$ is the penalty parameter.
+
+\subsection{Update $b$}
+
+First, fixd $W$, $P$, $C$, $Q$, $N$ and updated $d$, $d$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{b}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}
+\end{equation}
+
+and we can get the closed form solution by setting its derivative to zero:
+
+\begin{equation}
+	b=\frac{1}{n}\left(1_{n}^{T} X^{T} W-1_{n}^{T} P\right)
+\end{equation}
+
+\subsection{Update $W$}
+
+Similarly, fixd $d$, $P$, $C$, $Q$, $N$ and updated $W$, $W$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{W}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{1}\|W\|_{2,1}
+\end{equation}
+
+Then the gradient of $W$ is
+
+\begin{equation}
+	\nabla W=2 X\left(X^{T} W-1_{n} b-P\right)+\lambda_{1} \Sigma W
+\end{equation}
+
+\noindent where $\Sigma$ is defined as
+$$
+\Sigma=\left(\begin{array}{cccc}
+	\frac{1}{\left\|w_{1}\right\|_{2}} & & & \\
+	& \frac{1}{\left\|w_{2}\right\|_{2}} & & \\
+	& & \ldots & \\
+	& & & \frac{1}{\left\|w_{d}\right\|_{2}}
+\end{array}\right)
+$$
+
+Let the equation(16) be equal to zero,
+
+\begin{equation}
+	W=\left(2 X X^{T}+\lambda_{1} \Sigma\right)^{-1} 2 X\left(1_{n} b+P\right)
+\end{equation}
+
+\subsection{Update $P$}
+
+Similarly, fixd $d$, $W$, $C$, $Q$, $N$ and updated $P$, $P$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{P}\left\|X^{T} W-1_{n} b-P\right\|_{F}^{2}+\lambda_{6}\left\|H \odot\left(S \odot C-P P^{T}\right)\right\|_{F}^{2}+\lambda_{4} \| P-\left.C Q\right|_{F} ^{2}
+\end{equation}
+
+Then the gradient of $P$ is
+
+\begin{equation}
+	\begin{array}{l}
+		\nabla P=\left(P-X^{T} W+1_{n} b\right)+\lambda_{6} H \odot\left((S \odot C)-P P^{T}\right) P \\
+		+\lambda_{6} H^{T} \odot\left(\left(S^{T} \odot C^{T}\right)-P P^{T}\right) P+\lambda_{4}(P-C Q)
+	\end{array}
+\end{equation}
+
+We can use the KKT condition for the nonnegativity of $P$ as:
+
+\begin{equation}
+	\begin{array}{l}
+		(((P-X^{T} W+1_{n} b)+\lambda_{6} (H\odot((S \odot C)-P P^{T}) P\\
+		+\lambda_{6} (H^{T} \odot(S^{T} \odot C^{T})-P P^{T}) P+\lambda_{4}(P-CQ))_{ij} P_{ij}=0
+	\end{array}
+\end{equation}
+
+let $(X^{T} W=(X^{T} W^{+}-X^{T} W^{-})$, then the above formula can be rewritten as
+
+\begin{equation}
+	\begin{array}{l}
+		((P-X^{T} W^{+}-X^{T} W^{-}+1_{n} b)+\lambda_{6} (H \odot((S \odot C)-P P^{T}) P\\
+		+\lambda_{6} (H^{T} \odot(S^{T} \odot C^{T})-P P^{T}) P+\lambda_{4}(P-CQ))_{ij} P_{ij}=0
+	\end{array}
+\end{equation}
+
+Furthermore, $P$ can be updated by the following formula:
+
+\begin{equation}
+	P_{i j}=P_{i j} \sqrt{\frac{(X^{T} W^{+}+\lambda_{7}\left(H \odot P P^{T}\right) P+\lambda_{7}\left(H^{T} \odot P P^{T}\right) P+\lambda_{4} C Q)_{ij}}{(P+X^{T} W^{-}+1_{n} b+\lambda_{7} H \odot S \odot C++\lambda_{7} H^{T} \odot S^{T} \odot C^{T} +\lambda_{4} P)_{ij}}}
+\end{equation}
+
+
+
+\subsection{Update $C$}
+
+Similarly, fixd $d$, $W$, $P$, $Q$, $N$ and updated $C$, $C$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{C} \lambda_{6}\left\|H \odot\left(S \odot C-P P^{T}\right)\right\|_{F}^{2}+\lambda_{4}|| P-\left.C Q\right|_{F} ^{2}+\frac{\mu_{2}}{2}\left\|C_{n}-1_{n}+\frac{z_{2}}{\mu_{2}}\right\|_{F}^{2}
+	+\lambda_{5}\|C\|_{*}
+\end{equation}
+
+Derivation of the first term and the second term with respect to $C$:
+
+\begin{equation}
+	\begin{array}{l}
+		\nabla C=2 \lambda_{6} H \odot S^{T} \odot \left(S \odot C-P P^{T}\right)+2 \lambda_{4}(C Q-P) Q^{T} +\mu_{2}\left(C 1_{n}-1_{n}\right) 1_{n}^{T}
+	\end{array}
+\end{equation}
+
+
+
+
+\begin{equation}
+	\begin{aligned}
+		&\left\|\nabla C_{1}-\nabla C_{2}\right\|_{F}^{2} \\ 
+		&=\left\|2 \lambda_{6} H \odot S^{T} \odot S \odot \Delta C+2 \lambda_{4} \Delta C Q Q^{T}+\mu_{2} \Delta C 1_n 1_{n}^{T}\right\|_{F}^{2} \\
+		&\leq 3\left\|2 \lambda_{6} H \odot S^{T} \odot S \odot \Delta C\right\|_{F}^{2}+3\left\|2 \lambda_{4} \Delta C QQ^{T}\right\|_{F}^{2}+\left\|\mu_{2} \Delta C 1_{n} 1_{n}^{T}\right\|_{F}^{2} \\
+		&\leq 12 \lambda_{6}^{2} \max \left\{s^{2}_{i j}\right\}\|\Delta C\|_{F}^{2}+12 \lambda_{4}^{2}\left\|QQ^{T}\right\|_{2}^{2}\|\Delta C\|_{F}^{2}+3\mu_{2}^{2}\left\|1_{n} 1_{n}^{T}\right\|_{2}^{2}\|\Delta C\|_{F}^{2} \\
+		&=\left(12 \lambda_{6}^{2} \max \left\{s^{2}_{i j}\right\}+12 \lambda_{4}^{2}\left\| QQ^{T}\right\|_{2}^{2}+3n \mu_{2}^{2}\right)\|\Delta C\|_{F}^{2}
+	\end{aligned}
+	\end{equation}
+
+So Lipschitz constant can be obtained by the following formula:
+
+\begin{equation}
+	L_{C}=12 \lambda_{7}^{2} \max \left\{s^{2}_{i j}\right\}+12 \lambda_{4}^{2}\left\| QQ^{T}\right\|_{2}^{2}+n \mu_{2}^{2}
+\end{equation}
+
+
+In the accelerated proximal gradient method[\textbf{Ji S, Ye J  An accelerated gradient method for trace norm minimization. In: International conference on machine learning, 2009, pp 457-464}], the accelerated proximal gradient iterates as follows:
+
+
+\begin{equation}
+	C^{k}=C^{k}+\frac{\alpha_{k-1}-1}{\alpha_{k}}\left(C_{k}-C_{k-1}\right)
+\end{equation}
+
+\begin{equation}
+	C^{t}=\mathcal{D}_\frac{\lambda_{5}}{L_C}(C^{k}-\frac{1}{L_C} \nabla C)
+\end{equation}
+
+\noindent where $\mathcal{D}$ is a singular value soft threshold operator[\textbf{Donoho D , Gavish M . Minimax risk of matrix denoising by singular value thresholding[J]. Annals of Statistics, 2014, 42(6):2413-2440}].
+
+\subsection{Update $Q$}
+
+Similarly, fixd $d$, $W$, $P$, $C$, $N$ and updated $Q$, $Q$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{Q} \lambda_{4}\left\|P-\left.C Q\right|_{F} ^{2}+\frac{\mu_1}{2}\right\| Y-Q-N+\left.\frac{\mathrm{Z}_1}{\mu_1}\left\|_{F}^{2}+\lambda_{2}\right\|Q\right\|_{*}
+\end{equation}
+
+Derivation of the first term and the second term with respect to $Q$:
+
+\begin{equation}
+	F_{Q}=\lambda_{4}C^{T}(P-C Q)-\mu_{1}(Q+N-Y)-Z_{1}
+\end{equation}
+
+Then, 
+
+\begin{equation}
+	Q^{k+1}=\mathcal{D}_{\frac{\lambda_{2}}{\beta}}\left(Z^{k}-F_{z^{k}} / \alpha\right)
+\end{equation}
+
+\noindent where $\mathcal{D}$ is a singular value soft threshold operator, $\beta=\frac{\left(2 \lambda_{4}+\mu_{1}\right) \tau_{Z}}{2}$, $\tau_{Z}>\rho\left(C C^{T}\right)$, and $\rho\left(C C^{T}\right)$ is the spectral radius of $C C^{T}$.
+
+\subsection{Update $N$}
+
+Similarly, fixd $d$, $W$, $P$, $C$, $Q$ and updated $N$, $N$ can be obtained by solving the following subproblems:
+
+\begin{equation}
+	\min _{N} \lambda_{3}\|N\|_{1}+\frac{\mu_{1}}{2}\left\|Y-Q-N+\frac{\mathrm{z}_{1}}{\mu_{1}}\right\|_{F}^{2}
+\end{equation}
+
+The above formula can be used to obtain the closed solution by the soft threshold operator. Therefore, $N$ can be updated by:
+
+\begin{equation}
+	N^{k+1}=\mathcal{S}_{\frac{\lambda_{3}}{\mu_{1}}}\left[Y-Q^{k}+\frac{Z_{1}^{k}}{\mu_{1}^{k}}\right]
+\end{equation}
+
+For any $x \in R$ and $\varepsilon >0$, the soft threshold operator[\textbf{Pal P , Vaidyanathan P P . Soft-thresholding for spectrum sensing with coprime samplers[J]. IEEE, 2014}] is defined as follows:
+
+\begin{equation}
+	\mathcal{S}_{\varepsilon}[x]=
+	\begin{cases}
+		x-\varepsilon &  x>\varepsilon\\
+		x+\varepsilon &  x<-\varepsilon\\
+		0 & else
+	\end{cases}
+\end{equation}
+
+
+Finally, we update the Lagrange multiplier matrix $Z_1$, $Z_2$ and penalty parameter $\mu_{1}$,$\mu_{2}$ by the following formula:
+
+$$ Z_1^{k+1}=Z_1^{k}+\mu_{1}^{k+1}(Y-Q-N)$$
+$$ Z_2^{k+1}=Z_2^{k}+\mu_{2}^{k+1}(C1_n-1_n)$$
+$$ \mu_1^{k+1}=min(\mu_{max},\rho\mu_{1}^{k+1})$$
+$$ \mu_2^{k+1}=min(\mu_{max},\rho\mu_{2}^{k+1})$$
+
+
+
+
+
+According to the above analysis, we present a detailed algorithm for A novel multi-label learning approach for missing label and noisy label as shown in Algorithm 1.
+
+
+\begin{algorithm}[htp]        
+
+\caption{An algorithm for computing the sample similarity matrix in the label space of a multi-label data set}            
+
+\label{alg:Framwork}                  
+
+\begin{algorithmic}[1]                
+
+\REQUIRE ~~                         
+    training instance set  $X \in R^{d \times n}$,  
+    training label set  $Y \in {0,1}^{n \times q}$, 
+    parameters $\lambda_{1}$, $\lambda_{2}$, $\lambda_{3}$, $\lambda_{4}$, $\lambda_{5}$, $\lambda_{6}$
+
+
+
+\ENSURE                           
+   The coefficient matrix $W \in R^{d \times q}$
+
+\STATE \textbf{Initialization}
+
+\STATE  Compute the sample similarity  matrix $S$ in Eq.(7);$W=\textbf{1}, P=\textbf{1},C=C_0=\textbf{1}, Q=\textbf{1}, N=\textbf{0}$, $Z_1=Z_2=\textbf{0}$, $\mu_{1}$, $\mu_{2}$ $>$ $0$
+
+\STATE \textbf{repeat}
+
+\STATE compute the diagonal matrix $\Sigma$ as:\\
+
+\begin{center}
+$
+\Sigma=\left(\begin{array}{cccc}
+	\frac{1}{\left\|w_{1}\right\|_{2}} & & & \\
+	& \frac{1}{\left\|w_{2}\right\|_{2}} & & \\
+	& & \ldots & \\
+	& & & \frac{1}{\left\|w_{d}\right\|_{2}}
+\end{array}\right)
+$;
+\end{center}
+
+
+\STATE compute $L_f$ according to Eq.(26);
+
+\STATE Update the optimal $b$  by Eq.(14);
+
+\STATE Update the optimal $W$  by Eq.(17);
+
+\STATE Update the optimal $P$  by Eq.(22);
+
+\STATE \qquad\textbf{repeat}
+
+\STATE \qquad\quad Update $ Z_2^{k+1}$ by $ Z_2^{k+1}=Z_2^{k}+\mu_{2}^{k+1}(C1_n-1_n)$;
+
+\STATE \qquad\quad Update $ \mu_2^{k+1}$ by $ \mu_2^{k+1}=min(\mu_{max},\rho\mu_{2}^{k+1})$;
+
+\STATE Update the optimal $C$  by Eq.(28);
+
+\STATE \qquad\textbf{repeat}
+
+\STATE \qquad\quad Update $ Z_1^{k+1}$ by $ Z_1^{k+1}=Z_1^{k}+\mu_{1}^{k+1}(Y-Q-N)$;
+
+\STATE \qquad\quad Update $ \mu_1^{k+1}$ by $ \mu_1^{k+1}=min(\mu_{max},\rho\mu_{1}^{k+1})$;
+
+\STATE Update the optimal $Q$  by Eq.(31);
+
+\STATE Update the optimal $N$  by Eq.(33);
+
+\STATE Update the optimal $\alpha_{k}$  by $\frac{1+\sqrt(4\alpha_{k-1}^2+1)}{2}$;
+
+\STATE  $k=k+1$  
+
+\STATE \textbf{until} Convergence;
+
+\STATE \textbf{Output} $W$.
+
+\STATE \textbf{End}
+\end{algorithmic}
+
+\end{algorithm}
+
+
+
+\subsection{Complexity analysis}
+
+
+In our proposed method, $X \in R^{d \times m}$, $Y \in \left\{ 0, 1 \right\}^{n \times q}$, and $W \in R^{d \times q}$, where $n$ is the number of instances, $d$ is is the ndimensionality and $q$ is is the number of labels. At each iteration of Algorithm 1, the main computational complexity includes matrix multiplication, matrix inversion and singular value decomposition operations. In step 5, the calculation of Lipshictz constants leads to a complexity of $\mathcal{O}\left( qn^2+n^3\right) $, In step 6, 7 and 8, the cost complexity of updating $b$ and $W$  is $\mathcal{O}\left( nd+nq+qd+ndq+nd^2+n^3\right) $ due to the matrix multiplication and matrix inversion.In step 8, the complexity of updating $P$ is $\mathcal{O}\left( qn^2+dn^2\right) $.  Moreover, the computational complexity of updating $C$, $Q$ and $N$ is $\mathcal{O}\left( qn^2+r_1n^2+r_2nq\right) $ owing to the matrix multiplication and SVD,, where $r_1$ and $r_2$ represent the rank of matrix $C$ and $Q$ respectively.Thus, The total complexity of Algorithm 1 is $\mathcal{O}\left( nd+nq+qd+ndq+nd^2+qn^2+r_1n^2+r_2nq+n^3\right) $.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Experiments}In the section,we choose five multi-label algorithms for comparative experiments on ten common multi-label datasets so as to demonstrate the effectiveness of the proposed algorithm.
+
+\subsection{Data sets}
+
+For comprehensive performance evaluation, we use eleven real world multi-label data sets in experiments, including Birds, CAL500, Corel5k, Education, Emotions, Genbase, Recreation, Scene, Science, Society, Yeast. For each data set, the detailed characteristics containing Instances (the number of instances), Training(the number of train instances), Test(the number of test instances), Features (the number of the features), Labels (the number of label classes) and Domain (the domain) are illustrated in Table 1.
+
+\begin{table}
+	\caption{Description of multi-label data sets.}
+	\label{tab:1}
+	\begin{center}
+		\begin{tabular}{ccccccccccccccccccccccccccccccccccccccccccccc}
+			\hline\noalign{\smallskip}
+			No.s & Data sets &  Instances  &  Training & Test & Features & Labels & Domain  \\
+			\noalign{\smallskip}\hline\noalign{\smallskip}
+			
+			1 & Birds     & 645  & 322  & 323  & 260 & 19 &  Audio\\
+			
+			2 & CAL500   & 502 & 251 & 251 & 68 & 174 &   Music\\
+			
+			3 & Corel5k   & 5000 & 4500 & 500 & 499 & 574 &   Image\\
+			
+			4 & Education & 5000 & 2000 & 3000 & 550 & 33 &   Text\\
+			
+			5 & Emotions  & 593  & 391  & 202  & 72  & 6  & Music \\
+			
+			6 & Genbase  & 662  & 463  & 199  & 1186  & 27  & Biology \\
+			
+			7 & Recreation & 5000 & 2000 & 3000 & 606 & 22 & Text\\
+			
+			8 &  Scene     & 2407 & 1211 & 1196 & 294 & 6 & Image\\
+			
+			9 & Science   & 5000 & 2000 & 3000 & 743 & 40 & Text\\
+			
+			10 & Society   & 5000 & 2000 & 3000 & 636 & 27 & Text\\
+			
+			11 & Yeast     & 2417 & 1499 & 918  & 103 & 14 & Biology\\
+			
+			
+						
+			\noalign{\smallskip}\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+
+
+
+
+
+\subsection{Comparison methods}
+
+
+For demonstrate the preponderance of the proposed method, we implemented seven comparative multi-label leanring methods. Detailed instructions of them are summarized as follows.
+
+
+
+
+\begin{spacing}{1.5}
+	
+	MLkNN: A lazy learning approach to multilabel learning.
+	
+	Glocal: It can simultaneously recover the missing labels, train the linear classifiers, explore and exploit both global and local label correlations.
+	
+	LLSF: Learning Label-Specific Features for multi-label learning.
+	
+	LSML:
+
+	
+\end{spacing}
+
+The configuration parameters of the seven algorithms for comparison are suggested by their original literature. 
+
+
+
+\subsection{Evaluation metrics}
+
+To evaluate the performance of multi-label learning, we employ some widely used multi-label evaluation metrics, including AUC, Ranking Loss, Coverage, Average Precision, Hamming Loss, One Error, MacroF1, MicroF1. Given a testing data set $D=\left\{\left(x_{i},y_{i}\right)\right\}_{i=1}^{n}$, where $y_{i} \in \left\{0, 1 \right\}_q$ indicates the ground truth labels of $i$th test instance, and ${\overline{y}_{i}}$ is its predicted labels.Let  $TE_{i}^{+}$ and $TE_{i}^{-}$ be the sets of ground-truth positive and negative labels, and $PE_{i}^{+}$, $PE_{i}^{-}$ be the sets of predicted positive and negative labels associated with the ith example associated with the ith example 
+
+\textbf{AUC} evaluates the average AUC of all the class labels.
+
+\begin{equation}
+	\text { AUC }=\frac{1}{l} \sum_{i=1}^{1} \frac{\left|\left\{\left(\mathbf{x}^{\prime}, \mathbf{x}^{\prime \prime}\right) \mid f\left(\mathbf{x}^{\prime}, y_{j}\right) \geq f\left(\mathbf{x}^{\prime \prime}, y_{j}\right),\left(\mathbf{x}^{\prime}, \mathbf{x}^{\prime \prime}\right) \in Z_{j} \times \bar{Z}_{j}\right\}\right|}{\left|Z_{j}\right|\left|\bar{Z}_{j}\right|}
+\end{equation}
+
+\noindent where $Z_{j}=\left\{\mathbf{x}_{i} \mid y_{j} \in y_{i}, 1 \leq i \leq l\right\}\left(\bar{Z}_{j}=\left\{\mathbf{x}_{i} \mid y_{j} \notin Y_{i}, 1 \leq i \leq l\right\}\right)$ indicates the set of test instances with(without) label $y_i$.
+
+
+\textbf{Ranking Loss} evaluates the fraction of reversely ordered label pairs, i.e. an irrelevant label is ranked higher than a relevant label.
+
+\begin{equation}
+	\mathrm{Ranking Loss}=\frac{1}{n_{t}} \sum_{i=1}^{n_{t}} \frac{\left|\operatorname{Set} R_{i}\right|}{\left|T E_{i}^{+}\right|\left|T E_{i}^{-}\right|}
+\end{equation}
+\noindent where $\operatorname{SetR}_{i}=\left\{(u, v) \mid f_{u}\left(\mathbf{x}_{i}\right) \leq f_{v}\left(\mathbf{x}_{i}\right),(u, v) \in T E_{i}^{+} \times T E_{i}^{-}\right\}$.
+
+\textbf{Coverage} It refers to the number of steps an algorithm needs to cover all relevant labels of an instance.
+
+
+\textbf{Average Precision} evaluates the average fraction of relevant labels ranked higher than a particular label $y \in y_{i}$.
+
+\begin{equation}
+	\mathrm{Ap}=\frac{1}{n_{t}} \sum_{i=1}^{n_{t}} \frac{1}{\left|T E_{i}^{+}\right|} \sum_{j \in T E_{i}^{+}} \frac{\left|\operatorname{Set} P_{i j}\right|}{\operatorname{rank}_{F}\left(\mathbf{x}_{i}, j\right)}
+\end{equation}
+\noindent where $\operatorname{SetP}_{i j}=\left\{k \in T E_{i}^{+} \mid \operatorname{rank}_{F}\left(\mathbf{x}_{i}, k\right) \leq \operatorname{rank}_{F}\left(\mathbf{x}_{i}, j\right)\right\}$.
+
+\textbf{Hamming Loss} valuates how many times an instance-label pair is misclassified, i.e., a label not belonging to the instance is predicted or a label belonging to the instance is not predicted.
+
+\begin{equation}
+	\left.\mathrm{Hamming Loss}=\frac{1}{n_{t} l} \sum_{i=1}^{n_{t}} \sum_{j=1}^{l} \llbracket h_{j}\left(\mathbf{x}_{i}\right) \neq y_{i j}\right]
+\end{equation}
+
+\textbf{One Error} evaluates the fraction of instances whose top-ranked label is not in the relevant label set,  is an indication function
+
+\begin{equation}
+	\text { One Error }=\frac{1}{n} \sum_{i=1}^{n} \llbracket\left[\arg \max _{y \in \mathcal{Y}} f\left(\mathbf{x}_{\mathbf{i}}, y\right)\right] \in y_{i} \rrbracket
+\end{equation}
+
+
+\textbf{MacroF1} 
+
+
+\textbf{MicroF1} 
+
+For AUC and Average Precision, the higher the value, the better the performance; whereas for the others, the lower the value, the better the performance.
+
+
+
+
+
+
+
+\subsection{Experimental results}
+In the section,we select top ranked attributes as feature substes to prove the performance of each comparable algorithm and the algorithm.Besides,considering that different data has various sizes ,we install 0.1 value for the proportion of the quantity of nearest neighbors in ML-KNN so as to avoid the loss of revelant information.The trade-off parameters are choosed by using "grid search" strategy from {10^-3、10^-2、10^-1、1、10、10^2}in the experiment.As shown in table 5-2,5-3,5-4,5-5,they respectively present comparative results of six algorithms for AUC、RankingLoss、Average_Precision、OneError on 10 datasets.Among them, the symbol "↑" means that the larger the value of the evaluated index, the better the performance is, and the sign "↓" denotes that the smaller the value of the estimated index, the better the performance is.Meanwhile,the best performance is highlighted in boldface type.In addition, the "average performance" and "average ranking" in the last two rows at the bottom of the table represent the average performance and average ranking of the method on all test data sets respectively.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{table5-1*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Hamming ~ Loss$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets    ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS & PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Birds &	    \textbf{0.0556 } &  0.0676  &  0.0674  &  0.0677  &  0.0621  &  0.0557   &  0.0688\\
+
+Business &    \textbf{0.0282}  &  0.0287  &  0.0287  &  0.0287  &  0.0285  &  0.0285  &  0.0284  \\
+
+Computers &     0.0413 &   0.0435 &   0.0436  &  0.0434 &   0.0430  &  0.0422  &  \textbf{0.0412} \\
+
+Education &	    0.0421 &   0.0438 &   0.0438  &  0.0438 &   0.0442 &   0.0438 &   \textbf{0.0417}  \\
+
+Emotions &	   \textbf{0.2336}  &  0.2402  &  0.2635  &  0.2384  &  0.3284 &   0.2452  &  0.2676   \\
+
+Entertainment &     \textbf{0.0613}  &  0.0662  &  0.0646  &  0.0667  &  0.0670  &  0.0639  &  0.0650   \\
+
+Health  &   0.0440   & 0.0491  &  0.0487  &  0.0495  &  0.0499   & 0.0480  &  \textbf{0.0439}  \\
+
+Recreation & \textbf{0.0611}  &  0.0649  &  0.0651  &  0.0648  &  0.0650  &  0.0636  &  0.0650  \\
+
+Reference &	   \textbf{0.0301}  &  0.0350  &  0.0347  &  0.0350  &  0.0339  &  0.0342  &  0.0302   \\
+
+Scene &    \textbf{0.1208}  &  0.1549  &  0.1753  &  0.1606  &  0.1552  &  0.1452 &   0.1238  \\
+
+Science &    \textbf{0.0347}  &  0.0356  &  0.0356  &  0.0356 &   0.0356  &  0.0354  &  0.0355   \\
+
+Society &   \textbf{0.0579}  &  0.0603  &  0.0604  &  0.0603 &   0.0601  &  0.0593  &  0.0586   \\
+
+Yeast &   \textbf{0.2064}  &  0.2233  &  0.2226  &  0.2226  &  0.2119  &  0.2122  &  0.2117   \\
+
+average &  \textbf{0.0797}  &  0.0874  &  0.0907  &  0.0877 &   0.0933  &  0.0845  &  0.0847  \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-1*}
+
+
+
+\begin{table5-2*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Ranking ~ Loss$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets   ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS ~~~& PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+
+Birds &	    0.1381  &  0.1421  &  0.1447  &  0.1453   & 0.1547  &  0.1467   & \textbf{0.1352}       \\
+
+Business &	  \textbf{0.0442}  &  0.0475  &  0.0472 &   0.0479  &  0.0458  &  0.0476  &  0.0463  \\
+
+Computers &    0.0981 &   0.1029 &   0.1039 &   0.1028  &  \textbf{0.0967}  &  0.1015 &   0.0994     \\
+
+Education &	   0.0965  &  0.1052  &  0.1044 &   0.1057  &  0.1083  &  0.1065  &  \textbf{0.0942}     \\
+
+Emotions &	  \textbf{0.1908 } &  0.2090 &   0.2310  &  0.2048  &  0.4147   & 0.2053  &  0.2563      \\
+
+Entertainment &  \textbf{0.1273} &   0.1425  &  0.1407 &   0.1477  &  0.1442  &  0.1344 &   0.1383  \\
+
+Health  &	   \textbf{0.0646}  &  0.0775  &  0.0765  &  0.0779  &  0.0780   & 0.0738   & 0.0657    \\
+
+Recreation &     \textbf{0.1912}  &  0.2119  &  0.2159   & 0.2121  &  0.2114   &   0.2057 &   0.2151 \\
+
+Reference &	    \textbf{0.0899}  &  0.1014  &  0.1022  &  0.1011  &  0.0954  &  0.0989  &  0.0952   \\
+
+
+ Scene &	   \textbf{0.1304}  &  0.2494  &  0.3058  &  0.2583   & 0.2115  &  0.1836   & 0.1444    \\
+
+Science &      \textbf{0.1423}  &  0.1543  &  0.1568  &  0.1544  &  0.1537  &  0.1489   & 0.1464      \\
+
+Society &	   \textbf{0.1526}  &  0.1609  &  0.1615  &  0.1608  &  0.1601  &  0.1581   & 0.1531   \\
+
+ Yeast &	   \textbf{0.1822}  &  0.2023  &  0.2003  &  0.1996  &  0.1853  &  0.1867   & 0.1843     \\
+
+average &     \textbf{0.1214}  &  0.1413  &  0.1479   & 0.1422   & 0.1540  &  0.1327   & 0.1299     \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-2*}
+
+
+
+\begin{table5-3*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Coverage$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets   ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS ~~~& PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Birds &	        3.6900 &   3.6856  &  3.7485  &  3.7427  &  4.0458  &  3.8904  &  \textbf{3.5343}  \\
+
+Business &	    \textbf{2.4213}  &  2.5315  &  2.5379  &  2.5457  &  2.5015  &  2.5465  &  2.5002 \\
+
+Computers &	    4.6556  &  4.8351  &  4.8650  &  4.8318  &  \textbf{4.5720}  &  4.7916  &  4.7008   \\
+
+Education &	    4.0887   & 4.3828  &  4.3524  &  4.4042  &  4.5027  &  4.4224  &  \textbf{3.9981}   \\
+
+Emotions &	    \textbf{2.0177}  &  2.1289  &  2.2365  &  2.0873  &  3.0691  &  2.1152  &  2.3276   \\
+
+Entertainment & \textbf{3.3890}  &  3.7111  &  3.6781  &  3.8267  &  3.7453  &  3.5297  &  3.6237   \\
+
+Health  &	    \textbf{3.4416}  &  3.9180  &  3.8930  &  3.9405  &  3.9149  &  3.7766  &  3.5095  \\
+
+Recreation &    \textbf{5.0805}   & 5.4935   & 5.5735  &  5.5013   & 5.4738  &  5.3753   & 5.5653   \\
+
+Reference &	    \textbf{3.4750}  &  3.8531  &  3.8756  &  3.8437  &  3.6573  &  3.7755  &  3.6472   \\
+
+
+Scene &	        \textbf{0.7576}  &  1.3505  &  1.6367  &  1.3952  &  1.1655  &  1.0264  &  0.8238  \\
+
+Science &	    \textbf{7.1232}  &  7.6388  &  7.7309  &  7.6447  &  7.5561  &  7.4041  &  7.3058   \\
+
+Society &	    \textbf{5.9426}  &  6.1928  &  6.2199  &  6.1942  &  6.1678  & 6.0986   & 5.9830    \\
+
+Yeast &	        \textbf{6.5610}  &  6.7942  &  6.6983  &  6.8061  &  6.6082  &  6.6346  &  6.5941  \\
+
+average &       \textbf{3.9636}  &  4.2519  &  4.2894  &  4.2719  &  4.2922  &  4.1676  &  4.0457  \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-3*}
+
+
+\begin{table5-4*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Average ~ Precision$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets    ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS ~~~& PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Birds &	    \textbf{0.6764}   & 0.6378  &  0.6338  &  0.6306 &   0.6375  &  0.6665  &  0.6274    \\
+
+Business &	    \textbf{0.8698}  &  0.8617  &  0.8625  &  0.8610  &  0.8640  &  0.8619  &  0.8658   \\
+
+Computers &    \textbf{0.6142}  &  0.6010  &  0.6001  &  0.6011  &  0.6112  &  0.6057  &  0.6113     \\
+
+Education &	   0.5327  &  0.4924  &  0.4957  &  0.4925  &  0.4802  &  0.4901  &  \textbf{0.5452}   \\
+
+Emotions &	   \textbf{0.7710}  &  0.7564  &  0.7332  &  0.7585  &  0.6022  &  0.7562  &  0.7185    \\
+
+Entertainment &    \textbf{0.5487}  &  0.5049 &   0.5116  &  0.4897  &  0.4969  &  0.5291 &   0.5138   \\
+
+Health  &	   0.6742   & 0.6298  &  0.6347  &  0.6265  &  0.6277  &  0.6440 &   \textbf{0.6763}    \\
+
+Recreation &	\textbf{0.4670}  &	 0.3946 &   0.3854 &   0.3934 &   0.3923   &    0.4197  &  0.3881  \\
+
+Reference &	    \textbf{0.6152}  &  0.5748 &   0.5731 &   0.5740  &  0.5915  &  0.5890 &   0.5988   \\
+
+
+ Scene &	   \textbf{0.7921}  &  0.6593  &  0.5932  &  0.6462  &  0.6874  &  0.7165  &  0.7791    \\
+
+Science &     \textbf{0.4450}   & 0.3980   & 0.3913  &  0.3975  &  0.3961  &  0.4158  &  0.4303      \\
+
+Society &	    \textbf{0.5717}  &  0.5501  &  0.5485  &  0.5497  &  0.5495 &   0.5589  &  0.5716    \\
+
+ Yeast &	   \textbf{0.7463}  &  0.7199   & 0.7214  &  0.7211  &  0.7400  &  0.7402   & 0.7417    \\
+
+average &     \textbf{0.6548}   & 0.6155   & 0.6083   & 0.6124  &  0.6070   & 0.6312  &  0.6400      \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-4*}
+
+
+\begin{table5-5*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Macro-F1$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets   ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS ~~~& PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Birds &	\textbf{0.1090}  &  0.0693   & 0.0802   & 0.0700  &  0.0718  &  0.0909   & 0.0890  \\
+
+Business &	\textbf{0.1353}  &  0.0997  &  0.1072  &  0.0987  &  0.1121  &  0.1165  &  0.0519   \\
+
+Computers &	0.0458 &   0.0224  &  0.0208  &  0.0238  &  \textbf{0.0521}  &  0.0312  &  0.0439   \\
+
+Education &	\textbf{0.1044}   & 0.0752  &  0.0775  &  0.0733  &  0.0640  &  0.0761  &  0.0573   \\
+
+Emotions &	\textbf{0.5601}   & 0.5477  &  0.4644  &  0.5338  &  0.1412  &  0.5130  &  0.4908   \\
+
+Entertainment & \textbf{0.0998} &   0.0293  &  0.0407  &  0.0139 &   0.0246  &  0.0640  &  0.0641   \\
+
+Health  &	\textbf{0.1965}  &  0.1223  &  0.1331  &  0.1208 &   0.1019  &  0.1263  &  0.1291  \\
+
+Recreation &  \textbf{0.0776}  &  0.0167 &   0.0051  &  0.0179  &  0.0132   &   0.0375  &  0.0073  \\
+
+Reference &	\textbf{0.1120}  &  0.0804  &  0.0815  &  0.0794  &  0.0931 &   0.0971  &  0.0399   \\
+
+Scene &	\textbf{0.5878}  &  0.3103  &  0.1516   & 0.2826   & 0.3611  &  0.4119  &  0.5778   \\
+
+Science &	\textbf{0.0393}  &  0.0046  &  0.0026  &  0.0048  &  0.0050  &  0.0201  &  0.0163   \\
+
+Society &	\textbf{0.0455}  &  0.0179  &  0.0176  &  0.0166  &  0.0172  &  0.0260  &  0.0365    \\
+
+Yeast &	\textbf{0.3258}  &  0.2410  &  0.2339  &  0.2386   & 0.3007   & 0.3014  &  0.3049    \\
+
+average &  \textbf{0.1968}  &  0.1350  &  0.1176  &  0.1297   & 0.1121 &   0.1562  &  0.1585 \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-5*}
+
+
+
+
+
+\begin{table5-6*}
+\begin{center}
+\caption{Comparison results of multi-label feature selection methods in terms of $Micro-F1$ (mean).}
+\label{tab:1}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+Data sets    ~~~~& FRD ~~~& MDDMproj ~~& MLNB  ~~& MDDMspc ~~~& MCLS & MIFS~~~& PMU \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+Birds &	\textbf{0.4798}  &  0.3439   & 0.3466  &  0.3503  &  0.3699  &  0.4545  &  0.3661  \\
+
+Business &	\textbf{0.6781}  &  0.6678  &  0.6691  &  0.6675   & 0.6705  &  0.6734  &  0.6757  \\
+
+Computers &	0.3559  &  0.3348  &  0.3421  &  0.3367  &  0.3495  &  0.3517  &  \textbf{0.3597}  \\
+
+Education & 0.1363  &  0.0361 &   0.0396   & 0.0324  &  0.0041  &  0.0397  &  \textbf{0.1731}   \\
+
+Emotions &	\textbf{0.5937}  &  0.5838  &  0.5126   & 0.5782  &  0.1967  &  0.5722  &  0.5178  \\
+
+Entertainment  & \textbf{0.2107}  &  0.0665  &  0.1086  &  0.0438  &  0.0424  &  0.1282  &  0.1085   \\
+
+Health  &	0.4155  &  0.3434  &  0.3546  &  0.3441  &  0.2775  &  0.3501  &  \textbf{0.4376}  \\
+
+Recreation &  \textbf{0.1441}  &  0.0228  &  0.0060  &  0.0251  &  0.0185  & 0.0666  &  0.0105  \\
+
+Reference &	\textbf{0.3304}  &  0.2682  &  0.2814  &  0.2607  &  0.2375  &  0.2584 &   0.3265  \\
+
+Scene &	\textbf{0.5980}  &	  0.3260  &	  0.1657 &	   0.2980  & 0.3829  &	  0.4472  &	  0.5833   \\
+
+Science &	\textbf{0.1056}  &  0.0158  &  0.0149  &  0.0167  &  0.0074  &  0.0419  &  0.0407   \\
+
+Society &	\textbf{0.2422}  &  0.1836  &  0.2048  &  0.1641 &   0.1749  &  0.1927  &  0.2150  \\
+
+Yeast &	\textbf{0.6116}  &  0.5631  &  0.5556  &  0.5588  &  0.5932  &  0.5900  &  0.5949   \\
+
+average &  \textbf{0.3965}  &  0.3111  &  0.2996  &  0.3043  &  0.2755  &  0.3417  &  0.3666   \\
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-6*}
+
+When the missing rate of labels is 30 percent and the top 60 percent of features are selected,the following results can be found observed in terms of the data in tables 5-2,5-3,5-4 and5-5.
+(1)As for the evaluated AUC and Rankingloss in tables 5-2 and 5-3,the MLML algorithm proposed in this paper has the best performance on 10 datasets (Arts, birds, computer, education, impressions, entertainment, recreation, science, Slashdot, yeast). And the performance of MLML has been significantly improved on more than half of the data sets.
+(2)About the estimated index Precision, One-error in tables 5-4 and 5-5, the algorithm (MLML) proposed in this paper has the best performance on seven data sets (Arts, computer, education, recreation, science, Slashdot, and yeast). MDDM_ spc and MDDM_ proj are superior to MLML on dataset:Birds, Impressions and entertainment.At the same time ,MLNB has better performance than MLML on entertainment while it is inferior to MLML on other datasets.
+Based on these observations, we can at least show that the algorithm proposed in this paper (MLML) is excel to other algorithms on the given 7 data sets.
+In order to further prove that the algorithm proposed in this paper (MLML) has better performance, we have compared the performance of four evaluated indexes of the first 180 features selected by this algorithm and the comparable algorithm in Arts and Science data sets in detail.The experimental results of each evaluated index in the two datasets are drawn into figures 5-1 and 5-2 so as to be intuitive .The horizontal axis denotes the number of selected features, and the vertical axis shows the performance of evaluated indicators.
+   \begin{figure5-1}
+   	\centering
+   	\includegraphics[width=0.7\linewidth]
+   	\caption{AUC、Rankingloss、Average precision、Oneerror}
+   \end{figure5-1}
+Fig 5.1 Comparative experimental results of six algorithms on Arts   
+    \begin{figure5-2}
+    	\centering
+    	\includegraphics[width=0.9\linewidth]
+    	\caption{AUC、Rankingloss、Average precision、Oneerror}
+    \end{figure5-2}
+Fig 5.2 Comparative experimental results of six algorithms on Science.
+
+ We can observe that the performance various with the number of features selected diversely from Figure 5-1 and 5-2.With respect to the evaluated indicators AUC, Average precision,the curve of this algorithm(MLML) is always above the curve of five comparative algorithms MDDM_proj、MDDM_spc、PMU、MLNB、SCLS while the curve of MLML is usually below them for RankingLoss and OneError.This result proves the superiority of the algorithm MLML compared with the other five algorithms. 
+% Finally,we examine significant divergences among the whole methods through Friedmen test.Here we continue to choose features with a label lossing of 30 pecent and top 60 percent for Friedman test.Therefore,we also conduct {r}_{j} is average rank ,N is the number of multi-label datasets and K is the quantity of multi-label feature selection algorithms.The formula of Friedman statistics is computed as follows：
+                   {F}_{F}=\frac{(N-1){χ}_{F}^2}{N(K-1)-{χ}_{F}^2}
+                       where{χ}_{F}^2}=\frac{12N}{K(k+1)}(\sum_{j=1}^{K} {r}_{j}^2}-\frac{K(K+1)^2}{4}
+ Table 5-7 shows that the Friedman statistics of every evaluated index with a critical value at α=0.05 significant level.Each evaluated index clearly rejects the zero assumption that all algorithms have the same performance according to table 5-7,that is,there are apparent differences in the performance of each algorithm.
+\begin{table5-7}
+\caption{Summary of the Friedman statistics $F_{F}$ ($K=7,~N=13$) and the critical value with different evaluation and the critical value at α=0.05 significance level }
+\label{tab:1}
+\begin{center}
+\begin{tabular}{ccccccccccccccc}
+\hline\noalign{\smallskip}
+ Metrics   & $F_{F}$ & Critical value ($\alpha=0.05$)   \\
+\noalign{\smallskip}\hline\noalign{\smallskip}
+ Hamming loss  &  14.94    &  2.4469   \\
+
+ Ranking Loss  &  11.49  &     \\
+
+ Coverage      &  13.21  &	  \\
+
+ Average precision & 14.36  &    \\
+
+ Macro-F1         & 12.65   &     \\
+
+ Micro-F1         &  15.94    &  \\
+
+\noalign{\smallskip}\hline
+\end{tabular}
+\end{center}
+\end{table5-7}
+Parameter sensitivity analysis
+     In the experiment of the algorithm,four trade-off parameters are involved:{λ}_{1}，{λ}_{2}，{λ}_{3} and {λ}_{4}.This paper chooses to use the grid search approach in the dataset Yeast to analyze the parameter sensitivity so as to study the influence of trade-off parameters on the performance of the algorithm.Meanwhile,every parameter has five alternative values:0.01、0.1、1、10、100.The experimental results are shown in Figure 5-3.We obviously reflect how the performance of this algorithm(MLML) changes with the altering of parameters by means of four evaluated index.As shown in Figure 5-3,{λ}_{1}=100、{λ}_{2}=0.1、{λ}_{3}=0.1 and {λ}_{4}=0.1,MLML achieves the best performance on the dataset Yeast.
+     	          \begin{figure}
+     	          	\centering
+     	          	\includegraphics[width=0.7\linewidth]{"figure 5-3"}
+     	          	\caption{changing the performance of {λ}_{1} on Yeast、changing the performance of {λ}_{2} on Yeast、changing the performance of {λ}_{3} on Yeast、changing the performance of {λ}_{4} on Yeast}
+     	          \end{figure}
+     	          
+\section{Conclusion}
+The approaches of discernibility matrix provide a mathematical foundation for fuzzy rough set-based data analysis. However,  a way how to
+effectively realize the superiority for dealing with multi-label data sets, which generate more than one groups of class label partitions, has not been systematically studied so far.
+In this paper, we introduced  a multi-label feature selection algorithm based on fuzzy rough discrimination. Note that different labels may provide different/repetitive sample distribution information. To make proper use of the label information, a weighting method of label significance was proposed based on label correlation. Then, a sample similarity matrix in the label space was computed via label weighting.
+The discernibility matrix of fuzzy rough set for discriminating related sample pairs was constructed.  Based on the fuzzy rough discrimination, the procedure was implemented to evaluate and select
+discriminative features in multi-label data. Moreover, the margin preservation for discriminating different classes' samples was also considered in our algorithm construction.
+
+There are still some problems that deserve further consideration. For example, 1) The relevance between candidate features and the selected feature subset was calculated by the proposed forward searching algorithm, which was the main step of time consuming. The selection process will be improved for dealing with large-scale data in our future study. 2) The intersection operation was adopted to generate the fuzzy relation w.r.t. a given subset of features. This method may cause a deviation when characterizing sample similarity over a subset of features. Hence, a generalized framework of fuzzy information system will be introduced to overcome this limitation. 3) The idea of fuzzy rough discrimination will be applied to the fields of multi-label classification learning.
+
+
+
+\section*{Reference
+
+         Ling J,Li J, Kai S, et al. Multi-label informed feature selection[C]. International Joint Conference on Artificial Intelligence. AAAI Press, 2016, pp. 1627-1633.
+         Cabral R，De l T F， Costeira J P , et al. Matrix Completion for Weakly-Supervised Multi-Label Image Classification[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2015. 37(1):121-35. 
+         Sun L,Ye P,Lyu G，et al. Weakly-Supervised Multi-Label Learning with Noisy Features and Incomplete Labels[J].Neurocomputing, 2020, 41.
+         Zhou Z H . A Brief Introduction to Weakly Supervised Learning[J]. National Science Review, 2018(1):1
+         Cabral R , Torre F , Costeira J P , et al. Matrix completion for Weakly Supervised Multi-Label Image Classification[J].IEEE Transactions on Pattern Analy-sis and Machine Intelligence，2014.
+         Adeli-Mosabbeb E,Cabral R,Torre F,et al.Multi-label Discriminative Weakly-supervised Humman Activity Recognition and Localization[J]. 2014.
+         Mercan C,Aksoy S,Mercan E,et，al.Multi-Instance Multi-label Learning for Multi-class Classication of whole Slide Breast Histopathology Images[J].IEEE Trans Med Imaging ,2017,PP(99):1-1.
+         Nie F,Huang H,Xiao C,et al.Efficient and Robust Feature Selection via joint ?2,1-Norms Minimization[C]International Conference on Neural Information Processing Systems. Curran Associates        2010. 
+         Zhang J , Luo Z , Li C , et al. Manifold regularized discriminative feature selection for multi-label learning[J]. Pattern Recognition, 2019, 95:136-150.
+         Zhu Y ,Kwork J T,Zhou z H. Multi-label Learning with Global and Local Label correlation [J]. IEEE Transactions on Konwledge Data Engineering,2017:1-1.
+         Hao-Chen Dong, Yu-Feng Li, Zhi-Hua Zhou:Learning From SemiSupervised Weak-Label Data. AAAI 2018: 2926-2933. 
+         L.Sun, S.Feng,T. Wang, C. Lang, Y.Jin, Partial multi-label Learning via low-rank and sparse decomposition,in:AAAI conference on Artificial Intelligence,2019,pp.
+         J.Fang, M. Zhang, Partial multi-label learning via credible label elicitation,in:AAAI Conference on Artifical Intelligence,2019,pp.3518-3525.
+         L,Lyu G , Feng S , et al.Beyond missing: weakly-supervised multi-label learning with incomplete and noisy labels[J]. Applied Intelligence,2021,51(3):1-13.
+         Sun L, Ye P , Lyu G , et al. Weakly-Supervised Multi-Label Learning with Noisy Features and Incomplete Labels[J]. Neurocomputing 2020, 413.
+         Gl A , Sf A , Yl A . Noisy label tolerance: A new perspective of Partial Multi-Label Learing[J]. Information Sciences,2021,543:454-466 
+         Wu B, Lyu S, Ghanem B . ML-MG: Multi-label Learning with Missing Labels using a Mixed Graph[C] IEEE International Conference on Computer Vision (ICCV). IEEE, 2015.
+         Ma Z,Chen S. Expand globally, shrink locally:Discriminant multi-label learning with missing labels[J]. Pattern Recognition, 2021, 111:107675
+         J Huang, Qin F, Zheng X, et al.Improving Multi-label Classification with Missing Labels by Learning Label-Specific Features[J]. Information Sciences, 2019
+         Bucak S, Jin R, Jain A Multi-label learning with incomplete class assignments. In:IEEE Conference on computer vision and pattern recognition,2011, pp. 2801-2808
+         Zhang J , Li S , Jiang M , et al.Learning From Weakly Labeled Data Based on Manifold Regularized Sparse Model[J]. IEEE Transactions on Cybernetics,2020, pp(99)
+         Kapoor A , Jain P , Viswanathan R . Multilabel Classification using Bayesian Compressed Sensing[J]. Advances in Neural Information Processing Systems, 2012 
+         Sucar L E, Bielza C, Morales E F ,et al.Multi-label classification with Bayesian network-based chain classifiers[J].Pattern Recognition Letters, 2014, 41(MAY 1):14-22
+         Wu B, Jia F, Liu W, Ghanem B, Lyu S Multi-label learning with missing labels using mixed dependency graphs. Int J Comput Vis,2018 126(8):875?896
+         Chang X , Tao D , Chao X . Robust Extreme Multi-label Learning[C] Acm Sigkdd International Conference on Knowledge Discovery Data Mining.ACM, 2016.
+         Zhang J , Li S ,Jiang M, et al. Learning From Weakly Labeled Data Based on Manifold Regularized Sparse Model[J]. IEEE Transactions on Cybernetics,2020, PP(99).
+         Li Z , Gan Z , Zhang B , et al. Semi-Supervised Noisy Label Learning for Chinese Medical Named Entity Recognition[J]. Data Intelligence, 2021:1-10.
+         Wang Z , Jiang J , Han B , et al. SemiNLL: A Framework of Noise-label Learning by Semi-Supervised Learning[J]. 2020.
+         Liu T, Tao D.Classification with Noisy Labels by Importance Reweighting[J]. IEEE Transactions on Pattern Analysis Machine Intelligence,2016,38(3):447-461.
+         Xie M K , Huang S J . Partial Multi-Label Learning with Noisy Label Indentification[J]. IEEE Transactions on Pattern Analysis and Machine Intelligence,2021,PP(99).
+         Shimizu A . Lagrange-Multiplier Method[J]. Journal of the Japan Society of Mechanical Engineers, 2009,112(5):987-992.
+         Z. Lin, R. Liu, Z. Su,Linearized alternating direction method with adaptive penalty for low-rank representation, in: Advances Neural Information Processing Systems, 2011, pp. 612-620.
+         Ji S, Ye J An accelerated gradient method for trace norm minimization. In: International conference on machine learning, 2009, pp 457-464.
+         Donoho D , Gavish M . Minimax risk of matrix denoising by singular vaule thresholding[J]. Annals of Statistics,2014,42(6):2413-2440.
+         Pal P , Vaidyanathan P P . Soft-thresholding for spectrum sensing with coprime samplers[J]. IEEE, 2014.
+         Alalga A, Benabdeslem K, Taleb N. Soft-constrained Laplacian score for semi-supervised multi-label feature selection[J]. Knowledge & Information Systems, 2016, 47(1): 75-98.   
+         Menlo Park Multi-Label Dimensionality Reduction via Dependence Maximization[A]. Proceedings of the Twenty-Third AAAI Conference on Artificial Intelligence[C]: The Association for the           Advancement of Artificial Intelligence, 2008: 13-17.
+         Lee J, Kim D W. Feature selection for multi-label classification using multivariate mutual information[J]. Pattern Recognition Letters, 2013, 34(3): 349-357.
+         Zhang M L, Peña J M, Robles V. Feature selection for multi-label naive Bayes classification[J]. Information Sciences, 2009, 179(19): 3218-3229.
+         Gibaja E L, Ventura S. A Tutorial on Multi-Label Learning[J]. ACM Computing Surveys, 2015, 47(3): 1-38.
+         Zhou C. Joint Feature Selection Method Based on Relevance and Redundancy[J]. Computer Science, 2012, 39(4):181-184.
+         Ren W Y, Tang M, et al. Semi-supervised image classification via nonnegative least-squares regression[J]. Multimedia Systems,2017,23(6): 725-738.
+         Mgp A, Hz A, Mg B. Unsupervised feature selection based on adaptive similarity learning and subspace clustering-Science Direct[J].Engineering Applications of Artificial Intelligence,2020,95:103855. 
+         Dong H A, Cai X S, Wang C D. Unsupervised feature selection with multi-subspace randomization and collaboration[J]. Knowledge-Based Systems, 2019, 182: 104856.
+         Ferreira A J, Figueiredo M. An unsupervised approach to feature discretization and selection[J]. Pattern Recognition, 2012, 45(9): 3048-3060.
+         Zhao Z, Liu H, Semi-supervised Feature Selection via Spectral Analysis[A]. Proceedings of the 2007 SIAM International Conference Data Mining[C], SIAM, 2007: 641–646.
+         Cheng H, Wei D, Chong F, et al. Graph-Based Semi-supervised Feature Selection with Application to Automatic Spam Image Identification[A]. International Workshop on Computer Science for   Environmental Engineering and EcoInformatics[C]. Berlin: Springer, 2011, 159: 259–264.
+         Ren J, Qiu Z, Wei F, et al. Forward Semi-supervised Feature Selection[A]. Advances in Knowledge Discovery and Data Mining[C]. Berlin: Springer,2008,5012: 970-976.
+         Yang L, Wang L. Simultaneous Feature Selection and Classification via Semi-Supervised Models[J]. IEEE, 2007: 646-650.
+         Ang J C, Haron H, Nuzly H, et al. Semi-supervised SVM-based Feature Selection for Cancer Classification using Microarray Gene Expression Data[A]. Current Approaches in Applied Artificial Intelligence[C]. Berlin: Springer, 2015, 9101: 468-477.
+         Mccallum A K. Multi-Label Text Classification with a Mixture Model Trained by EM[A]. AAAI 99 Workshop on Text Learning[C]. Menlo Park: The Association for the Advancement of Artificial Intelligence, 1999: 1-7.
+         Montañes E, Senge R, Barranquero J, et al. Dependent binary relevance models for multi-label classification[J]. Pattern Recognition, 2014, 47(3): 1494-1508.
+         Zheng L, Idrissi K, Garcia C, et al. Logistic Similarity Metric Learning for Face Verification[A]. 2015 IEEE International Conference on Acoustics[C]. Piscataway: Institute of Electrical and Electronics Engineers, 2015: 1951-1955.
+         Han H, Huang M, Zhang Y, et al. Multi-Label Learning with Label Specific Features Using Correlation Information[J]. IEEE Access, 2019, 7: 11474-11484.
+         Yu T, Yu G, Wang J, et al. Partial Multi-label Learning with Label and Feature Collaboration[J]. Database Systems for Advanced Applications, 2020, 12112: 621–637.
+         Lee J, Kim D W. SCLS: Multi-label feature selection based on scalable criterion for large label set[J]. Pattern Recognition, 2017, 66: 342-352.
+         Zhang M L, Peña J M, Robles V. Feature selection for multi-label naive Bayes classification[J]. Information Sciences, 2009, 179(19): 3218-3229.
+         Huang J, Xu L, Qian K, et al. Multi-label learning with missing and completely unobserved labels[J]. Data Mining and Knowledge Discovery, 2021, 35(3): 1061–1086.
+         Ming-Ling,Zhang and Zhi-Hua zhou.A Review on Multi-label Learning Algorithms.Fellow,IEEE.
+         Kira K, Rendell L A. The feature selection problem: Traditional methods and a new algorithm[J]. Journal of Machine Learning Research, 1992, 3: 129-134.
+         A lazy learning approach to multilabel learning.
