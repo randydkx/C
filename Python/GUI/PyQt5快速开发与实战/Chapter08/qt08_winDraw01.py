@@ -26,7 +26,7 @@ class Winform(QWidget):
 		self.resize(600, 500)  
 		# 画布大小为400*400，背景为白色
 		self.pix = QPixmap(400, 400)
-		self.pix.fill(Qt.white)
+		self.pix.fill(Qt.GlobalColor.white)
          
 	def paintEvent(self,event):
 		pp = QPainter( self.pix)
@@ -40,20 +40,20 @@ class Winform(QWidget):
 
 	def mousePressEvent(self, event) :   
 		# 鼠标左键按下  
-		if event.button() == Qt.LeftButton :
+		if event.button() == Qt.MouseButton.LeftButton :
 			self.lastPoint = event.pos()   
 			self.endPoint = self.lastPoint
 	
 	def mouseMoveEvent(self, event):	
 		# 鼠标左键按下的同时移动鼠标
-		if event.buttons() and Qt.LeftButton :
+		if event.buttons() and Qt.MouseButton.LeftButton :
 			self.endPoint = event.pos()
 			#进行重新绘制
 			self.update()
 
 	def mouseReleaseEvent( self, event):
 		# 鼠标左键释放   
-		if event.button() == Qt.LeftButton :
+		if event.button() == Qt.MouseButton.LeftButton :
 			self.endPoint = event.pos()
 			#进行重新绘制
 			self.update()

@@ -11,6 +11,7 @@ import sys
 from PyQt5.QtWidgets import QApplication  ,QWidget 
 from PyQt5.QtGui import  QPixmap,   QPainter 
 
+# 使用一张可伸缩图片作为背景
 class Winform(QWidget):
 	def __init__(self,parent=None):
 		super(Winform,self).__init__(parent)

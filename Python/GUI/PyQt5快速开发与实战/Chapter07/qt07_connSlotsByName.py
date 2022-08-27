@@ -26,6 +26,7 @@ class CustWidget( QWidget ):
         
     @QtCore.pyqtSlot()    
     def on_okButton_clicked(self):
+        # on_名称_信号名称
         print( "点击了OK按钮")
         
         

@@ -16,7 +16,7 @@ class WinForm(QMainWindow):
 		self.setWindowTitle("信号和槽传递额外参数例子")
 		button1 = QPushButton('Button 1')  
 		button2 = QPushButton('Button 2')  
-        
+        # 使用lambda表达式传值
 		button1.clicked.connect(lambda: self.onButtonClick(1)) 
 		button2.clicked.connect(lambda: self.onButtonClick(2)) 		
 

@@ -14,14 +14,15 @@ import sys
 class WindowDemo(QWidget):  
     def __init__(self ):  
         super().__init__()
-        filename = r".\images\Cloudy_72px.png"
+        filename = './images/Cloudy_72px.png'
         img = QImage( filename )
                
         label1 = QLabel(self)
         label1.setFixedWidth(120)
         label1.setFixedHeight(120)
          
-        result = img.scaled(label1.width(), label1.height(),Qt.IgnoreAspectRatio, Qt.SmoothTransformation);
+        result = img.scaled(label1.width(), label1.height(),Qt.AspectRatioMode.IgnoreAspectRatio,\
+            Qt.TransformationMode.SmoothTransformation);
         label1.setPixmap(QPixmap.fromImage(result))
         
         #3

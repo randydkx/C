@@ -45,6 +45,7 @@ class Widget(QWidget):
 
     def two(self):
         self.message = "Menu option Two"
+        # 窗口更新函数，过程中会调用事件paintEvent
         self.update()
 
     def three(self):

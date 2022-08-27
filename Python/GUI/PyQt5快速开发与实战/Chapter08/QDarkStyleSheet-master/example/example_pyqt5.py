@@ -72,7 +72,7 @@ def main():
         ui.actionAction_C
     ])
     item = QtWidgets.QTableWidgetItem("Test")
-    item.setCheckState(QtCore.Qt.Checked)
+    item.setCheckState(QtCore.Qt.CheckState.Checked)
     ui.tableWidget.setItem(0, 0, item)
     window.setWindowTitle("QDarkStyle example")
 

@@ -15,7 +15,7 @@ app = QApplication(sys.argv)
 win = QMainWindow()
 win.setWindowTitle("界面背景图片设置") 
 palette	= QPalette()
-palette.setBrush(QPalette.Background,QBrush(QPixmap("./images/python.jpg")))
+palette.setBrush(QPalette.ColorRole.Background, QBrush(QPixmap("./images/python.jpg")))
 win.setPalette(palette)  
 #当背景图片的宽度和高度大于窗口的宽度和高度时
 #win.resize(460,  255 )  

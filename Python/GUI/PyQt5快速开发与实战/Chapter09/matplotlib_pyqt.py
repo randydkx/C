@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication
 from Ui_matplotlib_pyqt import Ui_MainWindow
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(Ui_MainWindow, QMainWindow):
     """
     Class documentation goes here.
     """

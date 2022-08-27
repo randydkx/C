@@ -34,7 +34,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.model = DataFrameModel() # 设置新的模型
         widget.setViewModel(self.model)
     
-        self.df = pd.read_excel(r'./data/fund_data.xlsx',encoding='gbk')
+        self.df = pd.read_excel(r'./data/fund_data.xlsx')
         self.df_original = self.df.copy() # 备份原始数据
         self.model.setDataFrame(self.df)
 

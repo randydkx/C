@@ -46,6 +46,8 @@ class MyThread(QThread):
 			self.times -= 1
 
 if __name__ == '__main__':  
+    # 主线程未关闭，使用子线程打印，
+    # 一般使用主线程接受结果，用子线程处理逻辑
 	app = QApplication(sys.argv)
 	main = Main()
 	main.show()

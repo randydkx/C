@@ -26,7 +26,7 @@ class CustSignal(QObject):
     # 声明带一个字典类型参数的信号
     signal5 = pyqtSignal(dict)
   
-    # 声明一个多重载版本的信号，包括了一个带int和str类型参数的信号或着带str参数的信号
+    ## 声明一个多重载版本的信号，包括了一个带int和str类型参数的信号或着带str参数的信号
     signal6 = pyqtSignal([int,str], [str])
       
     def __init__(self,parent=None):
@@ -38,6 +38,7 @@ class CustSignal(QObject):
         self.signal3.connect(self.signalCall3)
         self.signal4.connect(self.signalCall4)
         self.signal5.connect(self.signalCall5)
+        # 有信号触发重载的，需要分别指定每种参数类型情况下触发的槽函数
         self.signal6[int,str].connect(self.signalCall6)
         self.signal6[str].connect(self.signalCall6OverLoad)
   

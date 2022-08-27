@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication , QMainWindow
 from MainWinSignalSlog02 import Ui_Form
 from PyQt5.QtCore import pyqtSignal , Qt 
 
-class MyMainWindow(QMainWindow, Ui_Form):
+class MyMainWindow(Ui_Form, QMainWindow):
 	helpSignal = pyqtSignal(str)
 	printSignal = pyqtSignal(list)
 	# 声明一个多重载版本的信号，包括了一个带int和str类型参数的信号，以及带str参数的信号

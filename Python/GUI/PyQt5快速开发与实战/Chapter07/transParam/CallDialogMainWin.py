@@ -51,7 +51,7 @@ class WinForm(QWidget):
         print('date=%s' % str(date))
         print('time=%s' % str(time))
         print('result=%s' % result)
-        if result == QDialog.Accepted:
+        if result == QDialog.DialogCode.Accepted:
             print('点击确认按钮')
         else:
             print('点击取消按钮')

@@ -16,7 +16,7 @@ from Ui_combination import Ui_MainWindow
 from Plotly_PyQt5 import Plotly_PyQt5
 
 
-class MainWindow(QMainWindow, Ui_MainWindow):
+class MainWindow(Ui_MainWindow, QMainWindow):
     """
     Class documentation goes here.
     """

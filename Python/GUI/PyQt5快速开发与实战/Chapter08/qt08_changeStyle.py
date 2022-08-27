@@ -24,7 +24,7 @@ class AppWidget( QWidget):
 		# 选择当前界面风格
 		index = self.styleComboBox.findText(
 					 QApplication.style().objectName(),
-					QtCore.Qt.MatchFixedString)
+					QtCore.Qt.MatchFlag.MatchFixedString)
 		# 设置当前界面风格
 		self.styleComboBox.setCurrentIndex(index)
 		# 通过comboBox选择界面分割

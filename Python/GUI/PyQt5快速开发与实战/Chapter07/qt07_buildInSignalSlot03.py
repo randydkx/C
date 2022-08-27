@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSignal
 import sys
 
+# 自定义信号和槽函数
 class Winform(QWidget):
 	# 自定义信号，不带参数
 	button_clicked_signal = pyqtSignal()
