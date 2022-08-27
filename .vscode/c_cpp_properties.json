@@ -20,8 +20,14 @@
                 "databaseFilename": ""
             },
             "includePath": [
-                
-            ]
+                "/usr/local/bin",
+                // pybind11需要使用python.h等一些列python头文件，需要指定framework用于编辑时提示和不报错
+                "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/include/python3.9",
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+                "${workspaceFolder}/CPP/CMakeDemo/Demo4",
+                "${workspaceFolder}/CPP/CMakeDemo/Demo3/math"
+            ],
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4

@@ -33,15 +33,18 @@
         "exception": "cpp",
         "typeinfo": "cpp",
         "memory": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "__locale": "cpp",
+        "locale": "cpp",
+        "random": "cpp",
+        "cstdio": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         // c++执行设置，包括openmp配置
         // "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && $dir$fileNameWithoutExt",
         // c++执行设置，编译输出之后打印out文件
-        "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && $dir$fileNameWithoutExt.out",
+        "cpp":"cd $dir && g++ -std=c++11 -shared -undefined dynamic_lookup `python3.8 -m pybind11 --includes` $fileName  -o $fileNameWithoutExt`python3.8-config --extension-suffix`",
+        // "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && $dir$fileNameWithoutExt.out",
     },
-    // "python.pythonPath": "/Users/wenshuiluo/opt/anaconda3/bin/python",
-    "jupyter.jupyterServerType": "local",
 }
