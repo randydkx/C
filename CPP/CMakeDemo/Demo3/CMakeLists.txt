@@ -1,6 +1,10 @@
 # CMake 最低版本号要求
 cmake_minimum_required (VERSION 3.10)
 
+# 指定使用的C++版本
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 # 项目信息
 project (Demo3)
 
