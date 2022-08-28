@@ -1,0 +1,4 @@
+/Users/wenshuiluo/coding/CPP/CMakeTest/cmake-cookbook/chapter-01/recipe-10/cxx-example/build/CMakeFiles/rebuild_cache.dir
+/Users/wenshuiluo/coding/CPP/CMakeTest/cmake-cookbook/chapter-01/recipe-10/cxx-example/build/CMakeFiles/edit_cache.dir
+/Users/wenshuiluo/coding/CPP/CMakeTest/cmake-cookbook/chapter-01/recipe-10/cxx-example/build/CMakeFiles/compute-areas.dir
+/Users/wenshuiluo/coding/CPP/CMakeTest/cmake-cookbook/chapter-01/recipe-10/cxx-example/build/CMakeFiles/geometry.dir

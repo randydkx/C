@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libgeometry.a CMakeFiles/geometry.dir/geometry_circle.cpp.o CMakeFiles/geometry.dir/geometry_polygon.cpp.o CMakeFiles/geometry.dir/geometry_rhombus.cpp.o CMakeFiles/geometry.dir/geometry_square.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libgeometry.a
