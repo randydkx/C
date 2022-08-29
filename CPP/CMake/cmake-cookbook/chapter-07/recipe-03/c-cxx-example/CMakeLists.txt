@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 project(recipe-03 LANGUAGES C CXX)
-
+# 包含一个指定的cmake文件
 include(set_compiler_flag.cmake)
 
+# working_compile_flag是在set_compiler_flag.cmake文件夹中定义的
 set_compiler_flag(
   working_compile_flag C REQUIRED
   "-foo"             # this should fail

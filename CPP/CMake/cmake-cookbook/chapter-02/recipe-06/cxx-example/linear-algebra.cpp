@@ -1,7 +1,7 @@
 #include <chrono>
 #include <iostream>
 
-#include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 EIGEN_DONT_INLINE
 double simple_function(Eigen::VectorXd &va, Eigen::VectorXd &vb) {

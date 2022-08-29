@@ -4,30 +4,25 @@
             "name": "wenshuiluo",
             "defines": [],
             "macFrameworkPath": [
-                "/System/Library/Frameworks",
-                "/Library/Frameworks",
-                "${workspaceFolder}/**"
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks"
             ],
             "compilerPath": "/usr/bin/g++",
             "cStandard": "c11",
             "cppStandard": "c++11",
             "intelliSenseMode": "${default}",
             "browse": {
-                "path": [
-                    "${workspaceFolder}"
-                ],
+                "path": [],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
             },
             "includePath": [
-                "/usr/local/bin",
-                // pybind11需要使用python.h等一些列python头文件，需要指定framework用于编辑时提示和不报错
-                "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/include/python3.9",
-                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
-                "${workspaceFolder}/CPP/CMakeDemo/Demo4",
-                "${workspaceFolder}/CPP/CMakeDemo/Demo3/math"
-            ],
-            "configurationProvider": "ms-vscode.makefile-tools"
+                // 包含当前位置的所有子文件和文件夹
+                "${workspaceFolder}/**",
+                // MPI头文件的存放位置
+                "/Users/wenshuiluo/opt/MPI/include",
+                // python.h等头文件的存放位置
+                "/Users/wenshuiluo/opt/anaconda3/include/python3.8"
+            ]
         }
     ],
     "version": 4

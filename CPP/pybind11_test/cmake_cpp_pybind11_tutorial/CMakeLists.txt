@@ -10,29 +10,27 @@ endif()
 
 set(CMAKE_CXX_FLAGS "-O3")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-
+# project name
 project(automobile)
 
+# include source directories
 include_directories("${CMAKE_SOURCE_DIR}/cpp/include/automobile_bits")
 include_directories("${CMAKE_SOURCE_DIR}/python")
+
+# 配置python库的搜索路径以及python解释器的路径
+set(DPYTHON_LIBRARY_DIR /Users/wenshuiluo/opt/anaconda3/lib/python3.8/site-packages)
+set(DPYTHON_EXECUTABLE /Users/wenshuiluo/opt/anaconda3/bin/python)
 
 file (GLOB SOURCE_FILES "cpp/src/*.cpp")
 file (GLOB HEADER_FILES "cpp/include/automobile_bits/*.hpp")
 file (GLOB PYTHON_FILES "python/*.cpp" "python/*.hpp")
 
-# Set up such that XCode organizes the files
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCE_FILES} ${HEADER_FILES} ${PYTHON_FILES} )
+# 已经install过pybind11，通过指令查找即可
+find_package(pybind11 REQUIRED)
+pybind11_add_module(automobile ${SOURCE_FILES} ${HEADER_FILES} ${PYTHON_FILES})
 
-include(pybind11.cmake)
-pybind11_add_module(automobile 
-	${SOURCE_FILES}
-	${HEADER_FILES}
-	${PYTHON_FILES}
-)
-
+# 链接相关的库
 target_link_libraries(automobile PUBLIC)
 
-install(TARGETS automobile
-  COMPONENT python
-  LIBRARY DESTINATION "${PYTHON_LIBRARY_DIR}"
-  )
+# Library destination为.so库的安装路径，安装完成之后可以在任何位置使用import得到编译的so库
+install(TARGETS automobile LIBRARY DESTINATION ${DPYTHON_LIBRARY_DIR})

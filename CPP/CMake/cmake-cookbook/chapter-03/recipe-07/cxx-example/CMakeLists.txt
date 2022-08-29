@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenMP REQUIRED)
 
-find_package(Eigen3 3.3 REQUIRED CONFIG)
+find_package(Eigen3 3.4.0 REQUIRED CONFIG)
 
 if(TARGET Eigen3::Eigen)
   message(STATUS "Eigen3 v${EIGEN3_VERSION_STRING} found in ${EIGEN3_INCLUDE_DIR}")

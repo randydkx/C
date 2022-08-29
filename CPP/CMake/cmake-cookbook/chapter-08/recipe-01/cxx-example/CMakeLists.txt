@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set_property(DIRECTORY PROPERTY EP_BASE ${CMAKE_BINARY_DIR}/subprojects)
 
+# ExternalProject.cmake是一个通用库
 include(ExternalProject)
 
 ExternalProject_Add(${PROJECT_NAME}_core

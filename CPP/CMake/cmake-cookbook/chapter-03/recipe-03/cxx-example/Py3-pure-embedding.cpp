@@ -4,6 +4,10 @@
  */
 
 #include <Python.h>
+#include<iostream>
+#include<string>
+using std::cout;
+using std::endl;
 
 int main(int argc, char *argv[]) {
   PyObject *pName, *pModule, *pDict, *pFunc;
@@ -46,7 +50,9 @@ int main(int argc, char *argv[]) {
       pValue = PyObject_CallObject(pFunc, pArgs);
       Py_DECREF(pArgs);
       if (pValue != NULL) {
-        printf("Result of call: %ld\n", PyLong_AsLong(pValue));
+        long res =  PyLong_AsLong(pValue);
+        printf("Result of call: %ld\n", res);
+        printf("hello world");
         Py_DECREF(pValue);
       } else {
         Py_DECREF(pFunc);

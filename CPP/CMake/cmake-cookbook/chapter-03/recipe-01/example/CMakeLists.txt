@@ -5,7 +5,9 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(recipe-01 LANGUAGES NONE)
 
 # detect python
+# required 表示如果没找到对应的package就强制表示已经satisfied
 find_package(PythonInterp REQUIRED)
+# cmake -D PYTHON_EXECUTABLE=/custom/location/python .. 可以直接指定python解释器的位置
 
 # Execute a tiny Python script
 execute_process(

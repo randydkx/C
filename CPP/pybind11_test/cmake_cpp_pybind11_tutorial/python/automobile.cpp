@@ -4,12 +4,14 @@ namespace py = pybind11;
 
 void init_motorcycle(py::module &);
 
-namespace mcl {
+namespace mcl
+{
 
-PYBIND11_MODULE(automobile, m) {
-    // Optional docstring
-    m.doc() = "Automobile library";
-    
-    init_motorcycle(m);
-}
+    PYBIND11_MODULE(automobile, m)
+    {
+        // Optional docstring
+        m.doc() = "Automobile library";
+
+        init_motorcycle(m);
+    }
 }

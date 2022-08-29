@@ -53,6 +53,7 @@ function(set_compiler_flag _result _lang)
     if(_flag_works)
       set(${_result} "${flag}" PARENT_SCOPE)
       set(_flag_found TRUE)
+      # exit the foreach loop
       break()
     endif()
   endforeach()

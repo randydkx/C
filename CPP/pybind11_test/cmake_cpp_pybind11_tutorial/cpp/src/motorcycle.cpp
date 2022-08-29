@@ -2,18 +2,22 @@
 
 #include <iostream>
 
-namespace vehicles {
+namespace vehicles
+{
 
-Motorcycle::Motorcycle(std::string name) {
-    _name = name;
-}
+    Motorcycle::Motorcycle(std::string name)
+    {
+        _name = name;
+    }
 
-std::string Motorcycle::get_name() const {
-    return _name;
-}
+    std::string Motorcycle::get_name() const
+    {
+        return _name;
+    }
 
-void Motorcycle::ride(std::string road) const {
-    std::cout << "Zoom Zoom on road: " << road << std::endl;
-}
+    void Motorcycle::ride(std::string road) const
+    {
+        std::cout << "Zoom Zoom on road: " << road << std::endl;
+    }
 
 }

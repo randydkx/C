@@ -9,6 +9,9 @@ int main() {
     std::cout << "Made a car called: " << c.get_name() << std::endl;
 
     c.ride("mullholland");
+    c.ride("mullholland");
+    c.ride("mullholland");
+    c.ride("mullholland");
 
     return 0;
 }

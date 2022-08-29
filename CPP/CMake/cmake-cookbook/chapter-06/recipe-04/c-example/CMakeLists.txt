@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(recipe-04 VERSION 2.0.1 LANGUAGES C)
 
 # generate file version.h based on version.h.in
+# version.h.in is the input file & generated/version.h is the output config file
+# @only means not take into account ${variable} in version.h.in which is commonly used in version.h.in
 configure_file(
   version.h.in
   generated/version.h

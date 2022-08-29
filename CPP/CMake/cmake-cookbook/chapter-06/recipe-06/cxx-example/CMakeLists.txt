@@ -13,6 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(GIT_HASH "unknown")
 
 # find Git and if available set GIT_HASH variable
+# quiet disable the informational message
 find_package(Git QUIET)
 if(GIT_FOUND)
   execute_process(

@@ -6,7 +6,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(automobile VERSION 0.1.0)
 
-# Include dir
+# 头文件的搜索路径
 include_directories(/usr/local/include)
 
 # Src
@@ -23,19 +23,20 @@ set(SOURCE_FILES
 )
 
 # Set up such that XCode organizes the files correctly
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCE_FILES})
+# source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCE_FILES})
 
 # Add library
 add_library(automobile SHARED ${SOURCE_FILES})
 
 # Include directories
+# these cpp files 
 target_include_directories(automobile PRIVATE include/automobile_bits)
 
-# Install
+# Install the dylib automobile
 install(TARGETS automobile DESTINATION lib)
 
-# Install the headers
+# Install the header file 
 install(FILES include/automobile DESTINATION include)
 
-# Create base directory
+# Create base directory for header file above
 install(DIRECTORY include/automobile_bits DESTINATION include)

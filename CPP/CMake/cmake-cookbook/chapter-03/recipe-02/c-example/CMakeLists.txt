@@ -12,7 +12,8 @@ find_package(PythonInterp REQUIRED)
 find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
 
 add_executable(hello-embedded-python hello-embedded-python.c)
-
+message(STATUS "python include dirs : ${PYTHON_INCLUDE_DIRS}\n python librarys: ${PYTHON_LIBRARIES}")
+# ensure python.h can be find
 target_include_directories(hello-embedded-python
   PRIVATE
     ${PYTHON_INCLUDE_DIRS}
