@@ -13,7 +13,7 @@ public:
 
 private:
   std::string message_;
-  setter
+  
   std::ostream &printObject(std::ostream &os);
 };
 
