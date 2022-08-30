@@ -17,11 +17,13 @@
             },
             "includePath": [
                 // 包含当前位置的所有子文件和文件夹
-                "${workspaceFolder}/**",
+                // "${workspaceFolder}/**",
                 // MPI头文件的存放位置
-                "/Users/wenshuiluo/opt/MPI/include",
+                // "/Users/wenshuiluo/opt/MPI/include",
                 // python.h等头文件的存放位置
-                "/Users/wenshuiluo/opt/anaconda3/include/python3.8"
+                "/Users/wenshuiluo/opt/anaconda3/include/python3.8",
+                // for Eigen library
+                "/usr/local/include/eigen3"
             ]
         }
     ],
