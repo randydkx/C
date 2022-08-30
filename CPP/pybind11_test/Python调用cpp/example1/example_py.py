@@ -42,3 +42,5 @@ import example4
 print(dir(example4))
 print(example4.add_c(10,20))
 print(example4.add_c(np.arange(10).reshape(1,2,5),np.arange(10).reshape(1,2,5)))
+print(example4.utf8_test("🎂"))
+print()

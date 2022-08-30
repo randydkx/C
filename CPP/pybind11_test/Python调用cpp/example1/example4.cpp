@@ -28,6 +28,20 @@ py::array_t<double> add_c(py::array_t<double> arr1, py::array_t<double> arr2) {
 PYBIND11_MODULE(example4, m) {
     m.doc() = "pybind11 example-1 plugin"; // optional module docstring
 
-
     m.def("add_c", &add_c, "A function which adds two arrays with c type");
+    m.def("utf8_test",
+        [](const std::string &s) {
+            std::cout << "utf-8 is icing on the cake.\n";
+            std::cout << s;
+            std::cout << "-";
+            }
+    );
+    m.def("utf8_charptr",
+        [](const char *s) {
+            std::cout << "My favorite food is\n";
+            std::cout << s;
+        }
+    );
+
+    
 }
