@@ -1,7 +1,7 @@
-// tempparm.cpp � templates as parameters
 #include <iostream>
 #include "stacktp.h"
 
+// 模板的参数是一个模板类
 template <template <typename T> class Thing>
 class Crab
 {
@@ -13,6 +13,14 @@ public:
     // assumes the thing class has push() and pop() members
     bool push(int a, double x) { return s1.push(a) && s2.push(x); }
     bool pop(int & a, double & x){ return s1.pop(a) && s2.pop(x); }
+};
+
+// 在模板中使用多种类型：类模板和其他类型定义
+// 实例化的时候可以使用 myclass<Stack, int, double> instance;
+template < template <typename T> class C, typename U, typename V>
+class myclass{
+    C<U> value1;
+    C<V> value2;
 };
     
 int main()

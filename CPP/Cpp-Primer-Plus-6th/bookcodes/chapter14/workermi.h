@@ -67,6 +67,8 @@ protected:
     void Get();
 public:
     SingingWaiter()  {}
+    // 有虚基类的情况下必须显示调用虚基类的构造函数Worker，因为编译器不会允许自动传递参数
+    // 但对于非虚基类的情况，是非法的
     SingingWaiter(const std::string & s, long n, int p = 0,
                             int v = other)
             : Worker(s,n), Waiter(s, n, p), Singer(s, n, v) {}

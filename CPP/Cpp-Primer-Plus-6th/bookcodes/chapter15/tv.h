@@ -19,6 +19,7 @@ public:
     bool voldown();
     void chanup();
     void chandown();
+    // 在类内部声明并且定义的函数是inline函数
     void set_mode() {mode = (mode == Antenna)? Cable : Antenna;}
     void set_input() {input = (input == TV)? DVD : TV;}
     void settings() const; // display all settings

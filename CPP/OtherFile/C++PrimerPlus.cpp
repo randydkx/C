@@ -1,11 +1,8 @@
-// 防止头文件的两次引用
+
 /**
  * @author Wenshui Luo 
  * 
  */
-#ifndef PrimerPlus_H_
-#define PrimerPlus_H_
-
 #include<iostream>
 #include<vector>
 #include<exception>
@@ -19,7 +16,6 @@ using namespace std;
 
 void function1(const int (*Listp)[3]){
     cout<<Listp<<endl;
-    // Lisp中存放的是指向int*的指针，所以*Listp指向了int*的首地址
     cout << *(*(Listp + 1) + 1) << endl;
     // 第一个元素
     cout << **Listp<<endl;
@@ -66,6 +62,7 @@ struct node{
         cout<<this->x<<" : "<<this->y<<endl;
     }
     // 表达类接口的两种方式：友元函数+类成员函数
+    // const限定表示无法修改成员变量的值，表示函数对类成员是只读的
     node operator+(const node & other) const{
         node tmp = node();
         tmp.x = this->x + other.x ;
@@ -99,6 +96,7 @@ struct node{
     // 只要在类中有需要通过new申请动态内存的部分（比如有一个属性是int * p)，就需要重新定义赋值运算符、复制构造函数和显式析构函数
     node& operator=(const node & other);
     // 移动赋值函数
+    // 对象已经在内存中存在返回一个右值的引用
     // node& operator=(node && other);
     // 拷贝构造函数（复制构造函数）,没有返回值，将另一个类拷贝到当前类，在如下的情境中触发
     // node * p = new node(other_node)
@@ -151,11 +149,13 @@ void function5(T &a, T &b){
     b = tmp;
 }
 
-// 显式具体化，使得函数模板能够用该特定化函数处理node数据，下面两种是等价描述
+// 显式具体化explicit specialization，使得函数模板能够用该特定化函数处理node数据，下面两种是等价描述
+// 用于在特定的形参下重新定义函数的行为，即在该形参条件下不按照函数模板中定义的行为去执行函数
+// 告诉编译器不要通过函数模板生成下面函数的定义
 template< > void function5<node> (node & a, node & b);
 template< > void function5 (node & a, node & b);
-// 显式实例化，编译器通过该函数模板生成int类型的function5，
-// 告诉编译器不要使用function5来生成对于int的function5的功能定义，而是直接使用下面声明的函数
+// 显式实例化explicit instantiation，编译器通过该函数模板生成int类型的function5，
+// 告诉编译器要通过函数模板如下参数的函数定义
 template void function5<int>(int & a, int & b);
 
 // 使用函数模板声明多个类型，并自动判断表达式的结果类型
@@ -222,6 +222,8 @@ private:
     double x,y;
 public:
     BaseEllipse(double x0 = 0, double y0 = 0): x(x0), y(y0){};
+    // 虚的析构函数是为了保证能够按照正常的顺序调用析构函数
+    // 比如 如果基类指针指向派生类对象，基类中没有定义虚的析构函数则会导致调用基类的析构函数从而对派生类没有进行析构
     virtual ~BaseEllipse(){}
     void Move(int nx, int ny){x = nx, y = ny;}
     // 纯虚函数，末尾一定加上=0,包含该函数的类一定是抽象基类
@@ -246,7 +248,7 @@ void function9(){
 
 // 使用函数包装器
 template <typename T>
-T use_f(T v, std::function< T(T)> f){
+void use_f(T v, std::function< T(T)> f){
     cout<<"using function wrapper : "<<f(v)<<endl;
 }
 
@@ -265,7 +267,7 @@ int main(){
     char s[10] = "123123";
     cout<<strlen(s)<<endl;
 
-    int ar[3][3] = {{0,1,2},{3,4,5},{7,8,9}};
+    int ar[4][3] = {{0,1,2},{3,4,5},{7,8,9}};
     function1(ar);
     
     function4(function2, 1);
@@ -327,17 +329,28 @@ int main(){
     // 测试智能指针
     // 删除ap之后，ap的析构函数会自动释放ap指向的内存，从而自动回收内存
     // 所有的智能指针都有一个explicit构造函数，以及throw()设定，表示不会引发异常
-    // auto_ptr<double> ap(new double);
+    // 在C++11中已经弃用
+    // auto_ptr<double> ap = new double;
     // *ap = 23.23;
 
     shared_ptr<string> sp(new string("this is  a shared pointer test"));
     cout<< *sp <<endl;
+    cout << "shared_pointer 计数 : " << sp.use_count() << endl;
 
     unique_ptr<int> up(new int);
     *up = 10;
+    // unique_ptr可以被引用，因为不产生新的指向int内存的指针
+    unique_ptr<int>& up2 = up;
     cout<< *up<<endl;
     //使用所有权模式时，如果创建了临时对象unique pointer，则可以直接使用up指向，如果对象将存在一段时间，则赋值错误
     up = unique_ptr<int>(new int());
+    // unique_ptr指针通过move进行ownership的转交，转交完毕之后up指针将会失效
+    unique_ptr<int> to_get_ownship;
+    to_get_ownship = move(up);
+    cout << *to_get_ownship << endl;
+    // segmentation fault表示无法访问到对应的动态内存
+    // 内存操作不当会引起。空指针、野指针等
+    // cout << *up << endl;
 
     vector<int> vec = {1,2,3};
     vector<int> vec2({1,3,4});
@@ -375,5 +388,3 @@ int main(){
 
     return 0;
 }
-
-#endif

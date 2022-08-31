@@ -17,6 +17,7 @@ public:
     Student() : name("Null Student"), scores() {}
     explicit Student(const std::string & s)
         : name(s), scores() {}
+    // 防止将int数据赋值给Student从而造成隐式转换
     explicit Student(int n) : name("Nully"), scores(n) {}
     Student(const std::string & s, int n)
         : name(s), scores(n) {}

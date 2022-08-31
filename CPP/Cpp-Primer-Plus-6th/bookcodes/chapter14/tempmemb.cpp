@@ -26,6 +26,28 @@ public:
     void Show() const { q.show(); n.show();}
 };
 
+template <typename T>
+class beta2{
+private:
+    template <typename V>
+    class inbeta;
+public:
+    template <typename U>
+    // U show(U num){std::cout << num << std::endl; return U;}
+    U show(U num);
+};
+
+// 在类外定义类中声明的private class，模板嵌套，标注生成的是一个class
+template <typename T>
+    template <typename V>
+        class beta2<T>::inbeta{
+            
+        };
+
+template <typename T>
+    template <typename U>
+        U beta2<T>::show(U num){}
+        
 int main()
 {
     beta<double> guy(3.5, 3);

@@ -17,6 +17,7 @@ private:
 public:
     HasFriendT(const TT & i) : item(i) {ct++;}
     ~HasFriendT() { ct--; }
+    // 模板类的模板函数，特定模板实例获得响应的友元函数
     friend void counts<TT>();
     friend void report<>(HasFriendT<TT> &);
 };
@@ -38,9 +39,15 @@ void report(T & hf)
     cout << hf.item << endl;
 }
 
+class test{
+    int x;
+    static int y,z,m,n,fadf;
+};
+
 int main()
 {
     counts<int>();
+    counts<double>();
     HasFriendT<int> hfi1(10);
     HasFriendT<int> hfi2(20);
     HasFriendT<double> hfdb(10.5);
@@ -51,6 +58,8 @@ int main()
     counts<int>();
     cout << "counts<double>() output:\n";
     counts<double>();
+    // sizeof 运算符的计算不包括static全局分配的数据
+    cout << sizeof(test) << endl;
     // std::cin.get();
     return 0; 
 }

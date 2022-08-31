@@ -92,6 +92,7 @@ hasDMA::~hasDMA()
 
 hasDMA & hasDMA::operator=(const hasDMA & hs)
 {
+    // 在内存中的地址相同，返回当前对象
     if (this == &hs)
         return *this;
     baseDMA::operator=(hs);  // copy base portion
