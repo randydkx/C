@@ -14,6 +14,7 @@
 // 字符串输入输出流
 #include<sstream>
 #include<string>
+#include<vector>
 using namespace std;
 
 int main(){
@@ -36,7 +37,21 @@ int main(){
     cout << "字符流输出： " << n << " " << f << " " << strhello << endl;
 
     string str = "hello";
-    
+
+    // 需要include<vector>
+    std::vector<int> intv_{1,2,3,4};
+    auto pos = find(intv_.cbegin(),intv_.cend(),2);
+    intv_.insert(pos, -1);
+    for(const auto & ele : intv_){
+        cout << "intv_ (modified): " << ele << std::endl;
+    }
+    cout << "=========" << std::endl;
+    auto pos_2 = find(intv_.rbegin(), intv_.rend(), 2) - intv_.rbegin();
+    cout << pos_2 << std::endl;
+    for(const auto & ele : intv_){
+        cout << "intv_ (modified): " << ele << std::endl;
+    }
+    int x{0};
     /**
      * @brief 获取string的长度
      * 

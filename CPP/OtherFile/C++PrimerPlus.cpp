@@ -14,6 +14,26 @@
 #include<unordered_map>
 using namespace std;
 
+
+// 如果类已经有了用户声明的析构函数，则会隐藏拷贝构造函数、拷贝赋值函数、移动构造函数和移动赋值函数的自动生成
+// 一般是基类需要具有这些函数，
+class Base{
+public:
+    int x ;
+    Base(int x_): x(x_){};
+    virtual ~Base() = default;
+    // 使用默认的拷贝构造函数
+    Base(const Base& base) = default;
+    Base& operator=(const Base& rhs) = default;
+
+    // 使用默认的移动赋值函数和移动构造函数
+    Base(Base&& base) = default;
+    Base& operator=(Base && rhs) = default;
+};
+
+
+
+
 void function1(const int (*Listp)[3]){
     cout<<Listp<<endl;
     cout << *(*(Listp + 1) + 1) << endl;
@@ -261,6 +281,13 @@ void show_(T v, Args... args){
     show_(args...);
 }
 
+// 测试通用引用
+// 如果传入的是左值则为T&，如果传入的是右值则为T&&
+template<typename T>
+void func_test_(T&& t){
+
+}
+
 int main(){
     int *p_list = new int[10];
     delete [] p_list;
@@ -336,8 +363,14 @@ int main(){
     shared_ptr<string> sp(new string("this is  a shared pointer test"));
     cout<< *sp <<endl;
     cout << "shared_pointer 计数 : " << sp.use_count() << endl;
+    unique_ptr<string> up_string(new string("this is a string to be copied"));
+    // 只能使用一个右值的unique_ptr才能给shared_ptr赋值
+    shared_ptr<string> sp_2 = unique_ptr<string>(new string("s"));
+    std::cout << "shared_ptr指向unique_ptr，引用计数：" << sp_2.use_count() << std::endl;
+    // auto tmp_obj = unique_ptr<string>(new string("s"));
 
     unique_ptr<int> up(new int);
+    
     *up = 10;
     // unique_ptr可以被引用，因为不产生新的指向int内存的指针
     unique_ptr<int>& up2 = up;
@@ -353,8 +386,19 @@ int main(){
     // cout << *up << endl;
 
     vector<int> vec = {1,2,3};
+    // 通过lambda表达式传入一个匿名函数或者临时函数，语句完成之后即销毁
+    std::find_if(vec.cbegin(), vec.cend(), [](int val){ return 0 < val && val < 10;});
     vector<int> vec2({1,3,4});
     vector<int> vec3 {1,2,3};
+
+    int x = 1;
+    // 表示当前作用域中的对象x按值传递到函数中，函数接受一个参数y
+    // 默认是按值传递，类似于[=x](int y){return x * y > 55;}
+    // lambda表达式的生命周期取决于所依赖的变量，比如这里的x，如果x生命周期结束，则该函数失效
+    auto c1 = [x](int y){ return x * y > 55;};
+    bool res = c1(10);
+    std::cout << "res : " << res << std::endl;
+
 
     // 无须map，使用hash实现，map是用树形结构存储的，插入和查找都是O(log)复杂度，
     unordered_map<string,int> m;
@@ -378,6 +422,15 @@ int main(){
     auto fun4 = [=](int x){};
     auto fun5 = [&](int x){};
     cout << fun(13) << endl;
+    static int global_x = 1;
+    // lambda函数可以使用static声明的全局变量
+    auto fun_6 = [](int val){global_x = 10;};
+    // 声明一个闭包，其中定义了在闭包中可以使用的变量pi，=右侧表示使用当前作用域中的变量
+    // 如果不传递参数，可以省略()
+    auto fun_7 = [pi = std::make_unique<int>(int(10))]{
+                        std::cout << "pi : " << pi <<std::endl;
+                    };
+    fun_7();
 
     function<double(double)> fun6 = [](double x){return x * x;};
     function<double* (int* ,double, node)> f;
@@ -385,6 +438,48 @@ int main(){
     use_f(10.0, fun6);
 
     show_('1',"3213",12);
+
+    // int x = 0,y = 0;
+    // x = y = 10;
+    // std::cout << std::endl;
+    // std::cout << x <<" : " << y <<std::endl;
+
+    Base b1 = Base(10);
+    Base b2 = Base(20);
+    Base b3 = Base(30);
+
+    b1 = (b2 = b3);
+    std::cout << "右结合性：" << std::endl;
+    std::cout << b1.x << " : "<< b2.x <<" : " << b3.x << std::endl;
+
+    b1 = Base(10);
+    b2 = Base(20);
+    b3 = Base(30);
+
+    (b1 = b2) = b3;
+    std::cout << "左结合性：" << std::endl;
+    std::cout << b1.x << " : "<< b2.x <<" : " << b3.x << std::endl;
+
+    // 可以对左值使用取const，并且能够用一个右值对左值进行赋值
+    int int_to = 20;
+    const int&& int_c = std::move(int_to);
+    std::cout << int_c << std::endl;
+
+    // 在C++11中推荐使用nullptr，因为该类型不是0L(NULL)，是一种特殊的类型，可以判断指针是否是一个空指针
+    int * p_int = nullptr;
+    
+    std::cout << (p_int == nullptr) << std::endl;
+
+    // C++14中可以使用单引号作为数字分隔符
+    int a = 10'10'10;
+
+    std::vector<std::string> vec_str;
+    // 只会调用一次构造函数，
+    // 在模板内部的实现是用完美转发给string的构造函数直接绑定到元素中的
+    // 不需要像push_back那样产生一个临时对象
+    // push_back("fds")产生一个临时对象然后作为右值调用移动构造函数在内存中重新开辟位置并且完成复制
+    // 随后再销毁右值对象
+    vec_str.emplace_back("3212");
 
     return 0;
 }

@@ -91,7 +91,9 @@
         "__availability": "cpp",
         "*.inc": "cpp",
         "qmainwindow": "cpp",
-        "qapplication": "cpp"
+        "qapplication": "cpp",
+        "condition_variable": "cpp",
+        "future": "cpp"
     },
     "code-runner.executorMap": {
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && ./$fileNameWithoutExt",
@@ -99,7 +101,7 @@
         // "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt -Xpreprocessor -fopenmp -lomp && ./$fileNameWithoutExt",
         // pybind11 bash，编译输出之后打印out文件
         // "cpp":"cd $dir && g++ -std=c++11 -shared -undefined dynamic_lookup `python3.8 -m pybind11 --includes` $fileName  -o $fileNameWithoutExt`python3.8-config --extension-suffix`",
-        "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++11 && ./$fileNameWithoutExt.out",
+        "cpp":"cd $dir && g++ $fileName -o $fileNameWithoutExt.out -std=c++14 && ./$fileNameWithoutExt.out",
         
         "python": "cd $dir && python $fileName"
     },
