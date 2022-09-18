@@ -9,7 +9,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import os
-os.environ['KMP_DUPLICATE_LIB_OK']='True';
+# os.environ['KMP_DUPLICATE_LIB_OK']='True';
 # sample IsNext and NotNext to be same in small batch size
 def make_batch():
     batch = []
@@ -196,6 +196,8 @@ if __name__ == '__main__':
     word_dict = {'[PAD]': 0, '[CLS]': 1, '[SEP]': 2, '[MASK]': 3}
     for i, w in enumerate(word_list):
         word_dict[w] = i + 4
+    print("词元表：")
+    print(word_dict)
     number_dict = {i: w for i, w in enumerate(word_dict)}
     vocab_size = len(word_dict)
 
