@@ -5,6 +5,7 @@ Python/深度学习入门与实践/picture
 Python/深度学习入门与实践/model
 Python/深度学习入门与实践/data
 **/*.out
+Python/Object Detection/yolov3_detection_realtime/yolov3.weights
 
 # CMake files
 CMakeLists.txt.user
